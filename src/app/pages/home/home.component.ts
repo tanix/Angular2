@@ -13,13 +13,13 @@ import { TodoItem } from '../../core/entities';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	private todoServiceSubscription: Subscription;
-	private todoList: TodoItem[];
+	private courseList: TodoItem[];
 	private isLoading: boolean = false;
 
 	constructor(private todoService: TodoService) {
 		console.log('Home page constructor');
 
-		this.todoList = [];
+		this.courseList = [];
 	}
 
 	public ngOnInit() {
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.isLoading = true;
 		this.todoServiceSubscription = this.todoService.getTodoItems().subscribe((res: TodoItem[]) => {
-			this.todoList = res;
+			this.courseList = res;
 			this.isLoading = false;
 		});
 	}

@@ -1,10 +1,13 @@
 ﻿@import "../../styles/variables/colors.scss";
+@import "../../styles/mixin.scss";
 
 .home-page {
 	padding-top: 10px;
 
-	.todo-item {
+	.course-item {
 		padding: 10px;
 		margin-top: 5px;
+		border: 1px solid $c-tropaz;
+		@extend .margin-bottom;
 	}
 }
