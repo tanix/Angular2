@@ -1,0 +1,7 @@
+@import "../../../styles/variables/colors.scss";
+@import "../../../styles/mixin.scss";
+
+.control-panel {
+	@extend .margin-bottom;
+}
+
