@@ -11,6 +11,7 @@ import { TodoItem } from '../../core/entities';
 	styles: [require('./home.styles.scss')],
 	template: require('./home.template.html')
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
 	private todoServiceSubscription: Subscription;
 	private courseList: TodoItem[];

@@ -1,13 +1,5 @@
-@import "../../../styles/components/_base.scss";
-@import "../../../styles/variables/colors.scss";
-@import "../../../styles/mixin.scss";
-
-#cources {
-	margin-top: 20px;
-	color: $c-primary;
-}
-
 header {
-	@extend .margin-bottom;
+	padding-top: 30px;
+	margin-bottom: 30px;
 }
 

@@ -3,7 +3,15 @@ html {
 }
 
 body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;  /* высота веб-страницы больше или равна высоте окна браузера */
+	margin: 0;
 	font-size: 1.4rem;
+}
+
+main {
+	flex: 1;  /* если содержимое body меньше высоты окна, то main будет растянут до нужной величины */
 }
 
 h1, h2, h3, h4, h5 {
@@ -13,4 +21,8 @@ h1, h2, h3, h4, h5 {
 a:hover,
 button:hover {
 	cursor:pointer;
+}
+
+.full-width {
+	width: 100%;
 }
