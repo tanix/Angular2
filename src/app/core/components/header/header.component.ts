@@ -8,6 +8,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
+	public logoSrc: string = 'assets/icon/android-icon-72x72.png';
+
 	constructor() {
 
 	}

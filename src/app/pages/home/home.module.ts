@@ -8,13 +8,13 @@ import { routes } from './home.routes';
 
 // custom components
 import { HomeComponent } from './home.component';
-import { CourseComponent } from './course-item/course-item.component';
+import { CourseItemComponent } from './course-item/course-item.component';
 import { CourseControlPanelComponent } from './course-control-panel/course-control-panel.component';
 
 @NgModule({
 	declarations: [
 		HomeComponent,
-		CourseComponent,
+		CourseItemComponent,
 		CourseControlPanelComponent
 	],
 	imports: [

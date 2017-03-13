@@ -10,7 +10,13 @@ import { Component, ViewEncapsulation, Input } from '@angular/core';
 })
 export class CourseControlPanelComponent {
 
+	public inputValue: string = 'find course ...';
+
 	constructor() {
+		this.inputValue = 'find course ...';
 	}
 
+	public findCourse() {
+		console.log(this.inputValue);
+	}
 }
