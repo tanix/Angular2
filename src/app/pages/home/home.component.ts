@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.isLoading = false;
 		this.courseList = this.coursesService.getCourses();
-
 	}
 
 	public ngOnDestroy() {

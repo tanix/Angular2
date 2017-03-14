@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 @Component({
 	selector: 'course-control-panel',
 	templateUrl: 'course-control-panel.component.html',
