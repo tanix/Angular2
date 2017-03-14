@@ -1,8 +1,7 @@
 <div class="home-page">
 	<course-control-panel></course-control-panel>
 	<div class="course-list">
-		<!--<course-item *ngFor="let courseItem of courseList" [todo]="courseItem"></course-item>-->
-		<course-item [init]="courseList" (change)="deleteCourseItem($event);"></course-item>
+		<course-item *ngFor="let courseItem of courseList" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
 	</div>
 	<div *ngIf="isLoading">Is loading...</div>
 </div>

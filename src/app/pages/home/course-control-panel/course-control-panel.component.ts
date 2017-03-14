@@ -1,22 +1,20 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
 	selector: 'course-control-panel',
 	templateUrl: 'course-control-panel.component.html',
-	styles: [require('./course-control-panel.component.scss')],
-	providers: [],
-	encapsulation: ViewEncapsulation.None
+	styles: [require('./course-control-panel.component.scss')]
 })
 export class CourseControlPanelComponent {
 
-	public inputValue: string = 'find course ...';
+	public courseQuery: string = '';
 
 	constructor() {
-		this.inputValue = 'find course ...';
+		this.courseQuery = '';
 	}
 
-	public findCourse() {
-		console.log(this.inputValue);
+	public findCourseQuery() {
+		console.log(this.courseQuery);
 	}
 }

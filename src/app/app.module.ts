@@ -33,11 +33,11 @@ import { PageTwoModule } from  './pages/page-two';
 
 // Services
 
-import { TodoService } from './core/services';
+import { coursesService } from './core/services';
 
 // Application wide providers
 const APP_PROVIDERS = [
-	TodoService
+	coursesService
 ];
 
 /**
