@@ -34,6 +34,7 @@ import { PageTwoModule } from  './pages/page-two';
 // Services
 
 import { coursesService } from './core/services';
+import { Course } from '../core/interfaces';
 
 // Application wide providers
 const APP_PROVIDERS = [

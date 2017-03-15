@@ -38,7 +38,7 @@ export class coursesService {
 				'title': 'Gink occaecat tempor',
 				'createDate': new Date('2013-09-25T11:38:41+00:00'),
 				'duration': '10h 38min',
-				'description': 'Maecenas nisl nisi, euismod ut nibh sit amet, molestie maximus felis. Morbi a auctor sapien, ac pretium orci.'
+				'description': 'Maecenas nisl nisi, euismod ut nibh sit amet, molestie maximus felis. Morbi a auctor sapien, ac pretium ornpm ci.'
 			},
 			{
 				'id': 3522,

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Course } from '../../../core/interfaces';
 
 @Component({
 	selector: 'course-item',
@@ -6,15 +7,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 	styles: [require('./course-item.component.scss')],
 	providers: []
 })
-
-// interface Course {
-// 	id: number;
-// 	title: string;
-// 	createDate: Date;
-// 	duration: string;
-// 	description: string;
-// }
-
 export class CourseItemComponent {
 	public id: number;
 	public title: string;
@@ -22,10 +14,7 @@ export class CourseItemComponent {
 	public duration: string;
 	public description: string;
 
-	constructor() {	}
-
-	//@Input('init') public courseItem: Course;
-	@Input('init') public courseItem;
+	@Input('init') public courseItem: Course;
 	@Output('change') public deleteCourseId = new EventEmitter();
 
 	public deleteCourse(id: number) {
