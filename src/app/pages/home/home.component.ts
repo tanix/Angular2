@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		console.log('Home page init');
 
 		this.isLoading = false;
-		this.courseList = this.coursesService.getCourses();
+		this.courseList = this.coursesService.getList();
 	}
 
 	public ngOnDestroy() {
@@ -31,5 +31,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public deleteCourseItem($event) {
 		console.log($event);
+
 	}
 }

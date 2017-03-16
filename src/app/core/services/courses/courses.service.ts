@@ -9,8 +9,7 @@ export class coursesService {
 		this.courseList = [];
 	}
 
-	public getCourses() {
-
+	public getList() {
 		this.courseList = [
 			{
 				'id': 7239,
@@ -58,5 +57,21 @@ export class coursesService {
 		];
 
 		return this.courseList;
+	}
+
+	public createCourse() {
+
+	}
+
+	public getItemById() {
+
+	}
+
+	public updateItem() {
+
+	}
+
+	public removeItem() {
+
 	}
 }

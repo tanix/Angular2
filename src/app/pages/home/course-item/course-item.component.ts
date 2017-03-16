@@ -14,7 +14,7 @@ export class CourseItemComponent {
 	public duration: string;
 	public description: string;
 
-	@Input('init') public courseItem: Course;
+	@Input('init') public courseItem:Course;
 	@Output('change') public deleteCourseId = new EventEmitter();
 
 	public deleteCourse(id: number) {

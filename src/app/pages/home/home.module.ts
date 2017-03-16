@@ -10,6 +10,7 @@ import { routes } from './home.routes';
 import { HomeComponent } from './home.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CourseControlPanelComponent } from './course-control-panel/course-control-panel.component';
+import { coursesService } from '../../core/services';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,7 @@ import { CourseControlPanelComponent } from './course-control-panel/course-contr
 		ReactiveFormsModule,
 		CommonModule
 	],
-	providers: []
+	providers: [coursesService]
 })
 export class HomeModule {
 	constructor() {
