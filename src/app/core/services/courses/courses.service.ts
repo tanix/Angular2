@@ -63,8 +63,12 @@ export class coursesService {
 
 	}
 
-	public getItemById() {
-
+	public getItemById(id: number) {
+		for (var item of this.courseList) {
+			if(id === item.id) {
+				return item;
+			}
+		}
 	}
 
 	public updateItem() {

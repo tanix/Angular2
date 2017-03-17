@@ -30,9 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 		console.log('Home page ngOnDestroy');
 	}
 
+	public ngAfterContentChecked() {
+		console.log('Home page ngAfterContentChecked');
+	}
+
 	public deleteCourseItem($event) {
 
 		this.courseItemId = $event.CourseId;
+		this.getCourseItemById(this.courseItemId);
 	}
 
 	public deleteCourseItemAction($event) {
@@ -40,5 +45,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 		if($event.delete && this.courseItemId) {
 			this.coursesService.removeItem(this.courseItemId);
 		}
+	}
+
+	public getCourseItemById(id: number) {
+		console.log(this.coursesService.getItemById(id));
 	}
 }
