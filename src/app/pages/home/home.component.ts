@@ -11,6 +11,7 @@ import { coursesService } from '../../core/services';
 
 export class HomeComponent implements OnInit, OnDestroy {
 	private isLoading: boolean = true;
+	private courseItemId: number;
 	public courseList: Array<any>;
 
 	constructor(public coursesService: coursesService) {
@@ -30,7 +31,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteCourseItem($event) {
-		console.log($event);
 
+		this.courseItemId = $event.CourseId;
+	}
+
+	public deleteCourseItemAction($event) {
+
+		if($event.delete && this.courseItemId) {
+			this.coursesService.removeItem(this.courseItemId);
+		}
 	}
 }

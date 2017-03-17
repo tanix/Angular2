@@ -19,7 +19,7 @@ export class CourseItemComponent {
 
 	public deleteCourse(id: number) {
 		this.deleteCourseId.emit({
-			value: id
+			CourseId: id
 		})
 	}
 }

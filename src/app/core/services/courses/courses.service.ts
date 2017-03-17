@@ -71,7 +71,13 @@ export class coursesService {
 
 	}
 
-	public removeItem() {
+	public removeItem(id: number) {
+		console.log("RemoveItem method: ", id);
 
+		for (var item of this.courseList) {
+			if(id === item.id) {
+				this.courseList.splice(item, 1);
+			}
+		}
 	}
 }

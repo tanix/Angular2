@@ -5,4 +5,4 @@
 	</div>
 	<div *ngIf="isLoading">Is loading...</div>
 </div>
-<modal></modal>
+<modal (change)="deleteCourseItemAction($event);"></modal>
