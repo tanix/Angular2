@@ -28,19 +28,14 @@ import { HeaderModule, FooterModule } from './core/components';
 
 // Pages
 import { HomeModule } from './pages/home';
+import { LoginModule } from './pages/login';
 import { PageOneModule } from  './pages/page-one';
 import { PageTwoModule } from  './pages/page-two';
 
 // Services
 
-import { coursesService } from './core/services';
-
-import { Course } from '../core/interfaces';
-
 // Application wide providers
-const APP_PROVIDERS = [
-	coursesService
-];
+const APP_PROVIDERS = [ ];
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -59,6 +54,7 @@ const APP_PROVIDERS = [
 		HeaderModule,
 		FooterModule,
 		HomeModule,
+		LoginModule,
 		PageOneModule,
 		PageTwoModule
 	],

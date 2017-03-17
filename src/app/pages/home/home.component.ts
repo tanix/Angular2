@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, AfterContentChecked, OnInit, OnDestroy } from '@angular/core';
 import { coursesService } from '../../core/services';
 
 @Component({
@@ -9,8 +9,9 @@ import { coursesService } from '../../core/services';
 	template: require('./home.template.html')
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
 	private isLoading: boolean = true;
+	private isLogined: boolean = false;
 	private courseItemId: number;
 	public courseList: Array<any>;
 
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		console.log('Home page init');
 
 		this.isLoading = false;
+		this.isLogined = true;
 		this.courseList = this.coursesService.getList();
 	}
 
