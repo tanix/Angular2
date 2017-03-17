@@ -11,13 +11,14 @@ import { HomeComponent } from './home.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CourseControlPanelComponent } from './course-control-panel/course-control-panel.component';
 import { coursesService } from '../../core/services';
+import { ModalComponent } from '../../core/components/modal/modal.component';
 
 @NgModule({
 	declarations: [
 		HomeComponent,
 		CourseItemComponent,
-		CourseControlPanelComponent
-	],
+		CourseControlPanelComponent,
+		ModalComponent ],
 	imports: [
 		routes,
 		FormsModule,

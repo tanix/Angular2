@@ -1,11 +1,15 @@
 <div class="control-panel">
 	<div class="row">
-		<div class="col-sm-10">
-			<input type="input" [(ngModel)]="courseQuery" placeholder="course query">
-			<button (click)="findCourseQuery()">Find</button>
+		<div class="col-sm-5">
+			<div class="form-group">
+				<input type="input" class="form-control" [(ngModel)]="courseQuery" placeholder="course query">
+			</div>
 		</div>
-		<div class="col-sm-2 text-right">
-			<button class="full-width">Add course</button>
+		<div class="col-sm-2">
+			<button class="btn full-width btn-info"(click)="findCourseQuery()">Find</button>
+		</div>
+		<div class="col-sm-2 offset-3 text-right">
+			<button class="full-width btn btn-info">Add course</button>
 		</div>
 	</div>
 </div>

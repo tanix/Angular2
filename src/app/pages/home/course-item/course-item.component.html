@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm-10">
 			<div class="row course-bref">
-				<div class="col-sm-3">{{courseItem.title}}</div>
+				<div class="col-sm-3"><strong>{{courseItem.title}}</strong></div>
 				<div class="col-sm-1">{{courseItem.id}}</div>
 				<div class="col-sm-2">{{courseItem.duration}} </div>
 				<div class="col-sm-6 text-right">{{courseItem.createDate | date: 'dd/MM/yyyy'}}</div>
@@ -14,8 +14,8 @@
 			</div>
 		</div>
 		<div class="col-sm-2 text-right">
-			<button class="margin-bottom full-width">Edit course</button><br>
-			<button class="full-width" (click)="deleteCourse(courseItem.id);">Delete</button>
+			<button type="button" class="margin-bottom full-width btn btn-info">Edit course</button><br>
+			<button type="button" class="full-width btn btn-info" (click)="deleteCourse(courseItem.id);" data-toggle="modal" data-target="#myModal">Delete</button>
 		</div>
 	</div>
 </div>
