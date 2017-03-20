@@ -25,4 +25,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 		console.log('Login page ngOnDestroy');
 	}
 
+	public authService(event) {
+		this.authorizationService.login();
+
+		event.preventDefault();
+	}
 }
