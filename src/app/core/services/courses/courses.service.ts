@@ -60,10 +60,11 @@ export class coursesService {
 	}
 
 	public createCourse() {
-
+		console.log("createCourse method");
 	}
 
 	public getItemById(id: number) {
+		console.log("getItemById method");
 		for (var item of this.courseList) {
 			if(id === item.id) {
 				return item;
@@ -72,11 +73,11 @@ export class coursesService {
 	}
 
 	public updateItem() {
-
+		console.log("updateItem method");
 	}
 
 	public removeItem(id: number) {
-		console.log("RemoveItem method: ", id);
+		console.log("removeItem method: ", id);
 
 		for (var item of this.courseList) {
 			if(id === item.id) {

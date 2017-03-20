@@ -3,11 +3,14 @@ html {
 }
 
 body {
+	margin: 0;
+	font-size: 1.4rem;
+}
+
+app {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;  /* высота веб-страницы больше или равна высоте окна браузера */
-	margin: 0;
-	font-size: 1.4rem;
 }
 
 main {
