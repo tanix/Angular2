@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class authorizationService {
 
 	public courseList: Array<any>;
+	private authenticated: boolean = false;
 
 	constructor() {
 		this.courseList = [];
@@ -19,9 +20,14 @@ export class authorizationService {
 
 	public isAuthenticated() {
 		console.log("isAuthenticated");
+
+		return this.authenticated;
 	}
 
 	public getUserInfo() {
 		console.log("getUserInfo");
+
+		this.authenticated = true;
+
 	}
 }

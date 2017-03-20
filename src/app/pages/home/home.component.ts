@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, AfterContentChecked, OnInit, OnDestroy } from '@angular/core';
 import { coursesService } from '../../core/services';
+import { authorizationService } from '../../core/services';
 
 @Component({
 	selector: 'home',
@@ -11,11 +12,10 @@ import { coursesService } from '../../core/services';
 
 export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
 	private isLoading: boolean = true;
-	private isLogined: boolean = false;
 	private courseItemId: number;
 	public courseList: Array<any>;
 
-	constructor(public coursesService: coursesService) {
+	constructor(public coursesService: coursesService, public authorizationService: authorizationService) {
 		console.log('Home page constructor');
 		this.courseList = [];
 	}
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
 		console.log('Home page init');
 
 		this.isLoading = false;
-		this.isLogined = true;
+		this.authorizationService.getUserInfo();
 		this.courseList = this.coursesService.getList();
 	}
 

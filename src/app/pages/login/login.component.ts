@@ -9,7 +9,6 @@ import { authorizationService } from '../../core/services';
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
-	private isLogined: boolean = false;
 
 	constructor(public authorizationService: authorizationService) {
 		console.log('Login page constructor');
@@ -17,8 +16,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	public ngOnInit() {
 		console.log('Login page init');
-		this.isLogined = false;
-		this.authorizationService.login();
 	}
 
 	public ngOnDestroy() {

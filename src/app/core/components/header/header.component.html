@@ -4,9 +4,9 @@
 			<div class="col-sm-10">
 				<img src="{{logoSrc}}">
 				<span class="logo">Logo</span>
-				<span>Courses</span>
+				<span *ngIf="isLogined">Courses</span>
 			</div>
-			<div class="col-sm-2 text-right">
+			<div class="col-sm-2 text-right" *ngIf="isLogined">
 				<login></login>
 			</div>
 		</div>

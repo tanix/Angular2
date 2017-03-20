@@ -11,6 +11,7 @@ import { HomeComponent } from './home.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CourseControlPanelComponent } from './course-control-panel/course-control-panel.component';
 import { coursesService } from '../../core/services';
+import { authorizationService } from '../../core/services';
 import { ModalComponent } from '../../core/components/modal/modal.component';
 
 @NgModule({
@@ -25,7 +26,7 @@ import { ModalComponent } from '../../core/components/modal/modal.component';
 		ReactiveFormsModule,
 		CommonModule
 	],
-	providers: [coursesService]
+	providers: [coursesService, authorizationService]
 })
 export class HomeModule {
 	constructor() {
