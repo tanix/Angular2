@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { authorizationService } from '../../services';
 
 @Component({
 	selector: 'login',
@@ -8,7 +9,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent {
-	constructor() {
+	private isLogined: boolean = false;
+
+	constructor(public authorizationService: authorizationService) {
+
+		this.isLogined = this.authorizationService.isAuthenticated();
 	}
 
+	public logOff() {
+
+	}
 }

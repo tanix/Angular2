@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation, AfterContentChecked, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { coursesService } from '../../core/services';
-import { authorizationService } from '../../core/services';
 
 @Component({
 	selector: 'home',
@@ -10,21 +9,20 @@ import { authorizationService } from '../../core/services';
 	template: require('./home.template.html')
 })
 
-export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
 	private isLoading: boolean = true;
 	private courseItemId: number;
 	public courseList: Array<any>;
 
-	constructor(public coursesService: coursesService, public authorizationService: authorizationService) {
+	constructor(public coursesService: coursesService) {
 		console.log('Home page constructor');
 		this.courseList = [];
 	}
 
 	public ngOnInit() {
-		console.log('Home page init');
+		console.log('Home page ngOnInit');
 
 		this.isLoading = false;
-		this.authorizationService.getUserInfo();
 		this.courseList = this.coursesService.getList();
 	}
 
@@ -32,14 +30,10 @@ export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
 		console.log('Home page ngOnDestroy');
 	}
 
-	public ngAfterContentChecked() {
-		console.log('Home page ngAfterContentChecked');
-	}
-
 	public deleteCourseItem($event) {
 
 		this.courseItemId = $event.CourseId;
-		this.getCourseItemById(this.courseItemId);
+		//this.getCourseItemById(this.courseItemId);
 	}
 
 	public deleteCourseItemAction($event) {
@@ -49,7 +43,7 @@ export class HomeComponent implements OnInit, AfterContentChecked, OnDestroy {
 		}
 	}
 
-	public getCourseItemById(id: number) {
-		console.log(this.coursesService.getItemById(id));
-	}
+	// public getCourseItemById(id: number) {
+	// 	console.log(this.coursesService.getItemById(id));
+	// }
 }
