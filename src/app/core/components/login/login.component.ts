@@ -14,9 +14,10 @@ export class LoginComponent {
 	constructor(public authorizationService: authorizationService) {
 
 		this.isLogined = this.authorizationService.isAuthenticated();
+		console.log("isAuthenticated: " + this.authorizationService.isAuthenticated());
 	}
 
-	public logOff() {
-
+	public logOut($event) {
+		this.authorizationService.logOut();
 	}
 }

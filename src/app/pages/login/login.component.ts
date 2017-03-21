@@ -3,15 +3,17 @@ import { authorizationService } from '../../core/services';
 
 @Component({
 	selector: 'login',
-	providers: [],
+	providers: [Location],
 	styles: [require('./login.styles.scss')],
 	template: require('./login.template.html')
 })
+
 
 export class LoginComponent implements OnInit, OnDestroy {
 
 	constructor(public authorizationService: authorizationService) {
 		console.log('Login page constructor');
+
 	}
 
 	public ngOnInit() {
@@ -22,9 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		console.log('Login page ngOnDestroy');
 	}
 
-	public authService(event) {
+	public login(event) {
 		this.authorizationService.login();
-
-		event.preventDefault();
+		window.location.href = '#/';
 	}
 }

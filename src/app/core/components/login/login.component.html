@@ -1,7 +1,7 @@
-<a href="#/login">login</a>
-<span>
+<a href="#/login" [style.visibility]="(isLogined == true) ? 'hidden' : 'visible' ">login</a>
+<span [style.visibility]="(isLogined == true) ? 'visible' : 'hidden' ">
 	<a href="#">user</a>
-	<a href="#/login" (click)="logOff">logoff</a>
+	<a href="#/login" (click)="logOut($event)">logoff</a>
 </span>
 
 
