@@ -19,5 +19,6 @@ export class LoginComponent {
 
 	public logOut($event) {
 		this.authorizationService.logOut();
+		this.isLogined = this.authorizationService.isAuthenticated();
 	}
 }
