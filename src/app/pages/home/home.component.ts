@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private isLoading: boolean = true;
 	private courseItemId: number;
 	public courseList: Array<any>;
+	public deletedItem = { };
 
 	constructor(public coursesService: coursesService) {
 		console.log('Home page constructor');
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public deleteCourseItem($event) {
 
 		this.courseItemId = $event.CourseId;
-		//this.getCourseItemById(this.courseItemId);
+		this.deletedItem = this.getCourseItemById($event.CourseId);
 	}
 
 	public deleteCourseItemAction($event) {
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	// public getCourseItemById(id: number) {
-	// 	console.log(this.coursesService.getItemById(id));
-	// }
+	public getCourseItemById(id: number) {
+		return this.coursesService.getItemById(id);
+	}
 }
