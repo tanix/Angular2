@@ -1,6 +1,6 @@
 <a href="#/login" [style.visibility]="(isLogined == true) ? 'hidden' : 'visible' ">login</a>
 <span [style.visibility]="(isLogined == true) ? 'visible' : 'hidden' ">
-	<span>{{userName}}</span>
+	<span>{{userInfo}}</span>
 	<a href="#/login" (click)="logOut($event)">logoff</a>
 </span>
 

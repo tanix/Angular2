@@ -4,10 +4,11 @@ import { Injectable } from '@angular/core';
 export class authorizationService {
 
 	public courseList: Array<any>;
-	private authenticated: boolean = false;
+	private userInfo: string;
 
 	constructor() {
 		this.courseList = [];
+		this.userInfo = " ";
 	}
 
 	public login(email, password) {
@@ -20,6 +21,8 @@ export class authorizationService {
 				if(email && password) {
 					localStorage.setItem("email", email);
 					localStorage.setItem("password", password);
+
+					this.userInfo = email;
 				}
 			}
 
@@ -36,6 +39,8 @@ export class authorizationService {
 			if (localStorage.getItem("email") && localStorage.getItem("password")) {
 				localStorage.removeItem("email");
 				localStorage.removeItem("password");
+
+				this.userInfo = " ";
 			}
 
 		} else {
@@ -45,6 +50,7 @@ export class authorizationService {
 
 	public isAuthenticated() {
 		console.log("isAuthenticated");
+		this.userInfo = localStorage.getItem("email");
 
 		return (localStorage.getItem("email") && localStorage.getItem("password")) ? true : false;
 	}
@@ -54,8 +60,8 @@ export class authorizationService {
 
 		if (typeof(Storage) !== "undefined") {
 
-			if (localStorage.getItem("email")) {
-				return localStorage.getItem("email");
+			if (this.userInfo) {
+				return this.userInfo;
 			}
 
 		} else {

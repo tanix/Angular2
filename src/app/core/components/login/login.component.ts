@@ -10,17 +10,14 @@ import { authorizationService } from '../../services';
 })
 export class LoginComponent {
 	private isLogined: boolean = false;
-	private userName : string;
+	private userInfo : string;
 
 	constructor(public authorizationService: authorizationService) {
-
 		this.isLogined = this.authorizationService.isAuthenticated();
-		console.log("==== ============");
-		console.log(this.isLogined);
-		this.userName = this.authorizationService.getUserInfo();
+		this.userInfo = this.authorizationService.getUserInfo();
 	}
 
-	public logOut($event) {
+	public logOut() {
 		this.authorizationService.logOut();
 		this.isLogined = this.authorizationService.isAuthenticated();
 	}
