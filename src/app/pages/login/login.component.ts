@@ -10,10 +10,13 @@ import { authorizationService } from '../../core/services';
 
 
 export class LoginComponent implements OnInit, OnDestroy {
+	public email: string;
+	private password: string;
+	public hasError: boolean = false;
+	public hasSuccess: boolean = false;
 
 	constructor(public authorizationService: authorizationService) {
 		console.log('Login page constructor');
-
 	}
 
 	public ngOnInit() {
@@ -25,7 +28,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	public login(event) {
-		this.authorizationService.login();
-		window.location.href = '#/';
+
+		if (!this.email || !this.password) {
+
+			this.hasError = true;
+			event.preventDefault();
+
+		} else {
+
+			this.hasError = false;
+			this.hasSuccess = true;
+			this.authorizationService.login(this.email, this.password);
+			window.location.href = '#/';
+		}
+
+
 	}
 }

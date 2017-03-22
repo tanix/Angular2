@@ -10,14 +10,17 @@ export class authorizationService {
 		this.courseList = [];
 	}
 
-	public login() {
+	public login(email, password) {
 		console.log("login");
 
 		if (typeof(Storage) !== "undefined") {
 
 			if (!localStorage.getItem("email") && !localStorage.getItem("password")) {
-				localStorage.setItem("email", "username@gmail.com");
-				localStorage.setItem("password", "123456");
+
+				if(email && password) {
+					localStorage.setItem("email", email);
+					localStorage.setItem("password", password);
+				}
 			}
 
 		} else {
@@ -48,6 +51,16 @@ export class authorizationService {
 
 	public getUserInfo() {
 		console.log("getUserInfo");
+
+		if (typeof(Storage) !== "undefined") {
+
+			if (localStorage.getItem("email")) {
+				return localStorage.getItem("email");
+			}
+
+		} else {
+			// Sorry! No Web Storage support..
+		}
 
 	}
 }
