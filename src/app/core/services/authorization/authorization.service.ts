@@ -27,7 +27,7 @@ export class authorizationService {
 			}
 
 		} else {
-			// Sorry! No Web Storage support..
+			console.warn("Sorry! No Web Storage support..");
 		}
 	}
 
@@ -44,7 +44,7 @@ export class authorizationService {
 			}
 
 		} else {
-			// Sorry! No Web Storage support..
+			console.warn("Sorry! No Web Storage support..");
 		}
 	}
 
@@ -65,7 +65,7 @@ export class authorizationService {
 			}
 
 		} else {
-			// Sorry! No Web Storage support..
+			console.warn("Sorry! No Web Storage support..");
 		}
 
 	}
