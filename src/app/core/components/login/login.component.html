@@ -1,5 +1,5 @@
-<a href="#/login" [style.visibility]="(isLogined == true) ? 'hidden' : 'visible' ">login</a>
-<span [style.visibility]="(isLogined == true) ? 'visible' : 'hidden' ">
+<a *ngIf="!isLogined">login</a>
+<span *ngIf="isLogined">
 	<span>{{userInfo}}</span>
 	<a href="#/login" (click)="logOut($event)">logoff</a>
 </span>
