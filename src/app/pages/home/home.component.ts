@@ -16,19 +16,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public deletedItem = { };
 
 	constructor(public coursesService: coursesService) {
-		console.log('Home page constructor');
+		console.log('Home page: constructor');
 		this.courseList = [];
 	}
 
 	public ngOnInit() {
-		console.log('Home page ngOnInit');
+		console.log('Home page: ngOnInit');
 
 		this.isLoading = false;
 		this.courseList = this.coursesService.getList();
 	}
 
 	public ngOnDestroy() {
-		console.log('Home page ngOnDestroy');
+		console.log('Home page: ngOnDestroy');
 	}
 
 	public deleteCourseItem($event) {

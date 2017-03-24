@@ -2,13 +2,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { authorizationService } from '../../services';
 
 @Component({
-	selector: 'login',
+	selector: 'login-header',
 	templateUrl: 'login.component.html',
 	styles: [require('./login.component.scss')],
 	providers: [],
 	encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent {
+export class LoginHeaderComponent {
 	private isLogined: boolean = false;
 	private userInfo : string;
 

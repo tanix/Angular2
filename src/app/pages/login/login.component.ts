@@ -16,15 +16,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public hasSuccess: boolean = false;
 
 	constructor(public authorizationService: authorizationService) {
-		console.log('Login page constructor');
+		console.log('Login page: constructor');
 	}
 
 	public ngOnInit() {
-		console.log('Login page init');
+		console.log('Login page: ngOnInit');
 	}
 
 	public ngOnDestroy() {
-		console.log('Login page ngOnDestroy');
+		console.log('Login page: ngOnDestroy');
 	}
 
 	public login(event) {

@@ -10,7 +10,7 @@ export class authorizationService {
 	}
 
 	public login(email, password) {
-		console.log("login");
+		console.log("authorizationService: login");
 
 		if (typeof(Storage) !== "undefined") {
 			localStorage.setItem("email", email);
@@ -22,13 +22,11 @@ export class authorizationService {
 	}
 
 	public logOut() {
-		console.log("logOut");
+		console.log("authorizationService: logOut");
 
 		if (typeof(Storage) !== "undefined") {
-			if (localStorage.getItem("email") && localStorage.getItem("password")) {
-				localStorage.removeItem("email");
-				localStorage.removeItem("password");
-			}
+			localStorage.removeItem("email");
+			localStorage.removeItem("password");
 
 		} else {
 			console.warn("Sorry! No Web Storage support..");
@@ -36,13 +34,13 @@ export class authorizationService {
 	}
 
 	public isAuthenticated() {
-		console.log("isAuthenticated");
+		console.log("authorizationService: isAuthenticated");
 
 		return (localStorage.getItem("email")) ? true : false;
 	}
 
 	public getUserInfo() {
-		console.log("getUserInfo");
+		console.log("authorizationService: getUserInfo");
 
 		if (typeof(Storage) !== "undefined") {
 			return localStorage.getItem("email");
