@@ -16,15 +16,10 @@ export class authorizationService {
 
 		if (typeof(Storage) !== "undefined") {
 
-			if (!localStorage.getItem("email") && !localStorage.getItem("password")) {
+			localStorage.setItem("email", email);
+			localStorage.setItem("password", password);
 
-				if(email && password) {
-					localStorage.setItem("email", email);
-					localStorage.setItem("password", password);
-
-					this.userInfo = email;
-				}
-			}
+			this.userInfo = email;
 
 		} else {
 			console.warn("Sorry! No Web Storage support..");
@@ -35,7 +30,6 @@ export class authorizationService {
 		console.log("logOut");
 
 		if (typeof(Storage) !== "undefined") {
-
 			if (localStorage.getItem("email") && localStorage.getItem("password")) {
 				localStorage.removeItem("email");
 				localStorage.removeItem("password");
