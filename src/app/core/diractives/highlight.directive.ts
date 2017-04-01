@@ -45,7 +45,7 @@ export class HighlightDirective implements AfterContentChecked {
 			this.el.nativeElement.style.borderColor = this.borderColor;
 		}
 		if(this._createdDate > this.currentDate ) {
-			this.borderColor = '#4682B4';
+			this.borderColor = '#5bc0de';
 			this.el.nativeElement.style.borderColor = this.borderColor;
 		}
 	}
