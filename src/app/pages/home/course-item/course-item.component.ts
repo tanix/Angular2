@@ -10,12 +10,13 @@ import { Course } from '../../../core/interfaces';
 export class CourseItemComponent {
 	public id: number;
 	public title: string;
-	public createDate: Date;
 	public duration: string;
 	public description: string;
 
 	@Input('init') public courseItem:Course;
 	@Output('change') public deleteCourseId = new EventEmitter();
+
+	constructor() {}
 
 	public deleteCourse(id: number) {
 		this.deleteCourseId.emit({

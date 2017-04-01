@@ -13,13 +13,15 @@ import { CourseControlPanelComponent } from './course-control-panel/course-contr
 import { coursesService } from '../../core/services';
 
 import { ModalComponent } from '../../core/components/modal/modal.component';
+import { HighlightDirective } from '../../core/diractives/highlight.directive';
 
 @NgModule({
 	declarations: [
 		HomeComponent,
 		CourseItemComponent,
 		CourseControlPanelComponent,
-		ModalComponent ],
+		ModalComponent,
+		HighlightDirective ],
 	imports: [
 		routes,
 		FormsModule,
