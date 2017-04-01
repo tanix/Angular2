@@ -1,8 +1,9 @@
 <div class="home-page">
 	<course-control-panel></course-control-panel>
-	<div class="course-list">
-		<course-item *ngFor="let courseItem of courseList" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
+	<div class="course-list" *ngIf="courseList.length > 0">
+		<course-item *ngFor="let courseItem of courseList;" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
 	</div>
+	<div *ngIf="courseList.length == 0" class="alert alert-success">No data. Feel free to add a new course.</div>
 	<div *ngIf="isLoading">Is loading...</div>
 </div>
 <modal (change)="deleteCourseItemAction($event);" [deletedItem] = "deletedItem"></modal>

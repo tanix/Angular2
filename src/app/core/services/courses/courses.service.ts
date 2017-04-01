@@ -16,7 +16,8 @@ export class coursesService {
 				'title': 'Pawnagra mollit Lorem',
 				'createDate': 'Fri Mar 31 2017 02:51:32 GMT+0300',
 				'duration': '1h 28min',
-				'description': 'Duis sollicitudin ornare vestibulum. Mauris scelerisque et sapien venenatis efficitur.'
+				'description': 'Duis sollicitudin ornare vestibulum. Mauris scelerisque et sapien venenatis efficitur.',
+				'topRated' : true
 			},
 			{
 				'id': 8832,
@@ -37,7 +38,8 @@ export class coursesService {
 				'title': 'Gink occaecat tempor',
 				'createDate': 'Mon Apr 24 2017 GMT+0300 (+03)',
 				'duration': '10h 38min',
-				'description': 'Maecenas nisl nisi, euismod ut nibh sit amet, molestie maximus felis. Morbi a auctor sapien, ac pretium ornpm ci.'
+				'description': 'Maecenas nisl nisi, euismod ut nibh sit amet, molestie maximus felis. Morbi a auctor sapien, ac pretium ornpm ci.',
+				'topRated' : true
 			},
 			{
 				'id': 3522,

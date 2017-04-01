@@ -10,3 +10,15 @@
 .course-bref {
 	margin-bottom: 10px;
 }
+
+.topRated {
+	background-color: #fafafa;
+
+	.duration {
+		background-image: url("../../../../assets/icon/asterisk.png");
+		background-position: right center;
+		background-size: 20px 20px;
+		background-repeat: no-repeat;
+		padding-right: 25px;
+	}
+}

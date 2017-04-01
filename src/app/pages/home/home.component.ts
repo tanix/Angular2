@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { coursesService } from '../../core/services';
 
 @Component({
@@ -9,7 +9,7 @@ import { coursesService } from '../../core/services';
 	template: require('./home.template.html')
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	private isLoading: boolean = true;
 	private courseItemId: number;
 	public courseList: Array<any>;
@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.isLoading = false;
 		this.courseList = this.coursesService.getList();
+	}
+
+	public ngAfterContentInit() {
+		this.checkTopRated();
 	}
 
 	public ngOnDestroy() {
@@ -46,5 +50,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public getCourseItemById(id: number) {
 		return this.coursesService.getItemById(id);
+	}
+
+	public checkTopRated() {
+		// for (let index of this.courseList) {
+		// 	this.courseList[index].push({ 'topRated' : true});
+		//
+		// }
+		// console.log(this.courseList);
 	}
 }
