@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy, Input } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy, NgZone } from '@angular/core';
 import { coursesService } from '../../core/services';
 
 @Component({
@@ -18,9 +18,10 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	public courseQuery: string = '';
 
 
-	constructor(public coursesService: coursesService) {
+	constructor(public coursesService: coursesService, private _ngZone: NgZone) {
 		console.log('Home page: constructor');
 		this.courseList = [];
+
 	}
 
 	public ngOnInit() {
@@ -40,8 +41,12 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 	public deleteCourseItem($event) {
 
-		this.courseItemId = $event.CourseId; console.log(this.courseItemId);
+		this._ngZone.onStable.subscribe(() => console.log('stable'));
+		this._ngZone.onUnstable.subscribe(() => console.log('unstable'));
+
+		this.courseItemId = $event.CourseId;
 		this.deletedItem = this.getCourseItemById($event.CourseId);
+
 	}
 
 	public deleteCourseItemAction($event) {
@@ -65,5 +70,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 	public filterCourseQuery($event) {
 		this.courseQuery = $event.courseQuery;
+	}
+
+	onStable() {
 	}
 }
