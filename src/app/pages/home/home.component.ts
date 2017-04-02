@@ -40,13 +40,12 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	}
 
 	public deleteCourseItem($event) {
-
-		this._ngZone.onStable.subscribe(() => console.log('stable'));
-		this._ngZone.onUnstable.subscribe(() => console.log('unstable'));
-
 		this.courseItemId = $event.CourseId;
 		this.deletedItem = this.getCourseItemById($event.CourseId);
 
+		this._ngZone.onStable.subscribe(() => console.log('stable'));
+		this._ngZone.onUnstable.subscribe(() => console.log('unstable'));
+		setTimeout(() => console.log('timeout handler'), 1000);
 	}
 
 	public deleteCourseItemAction($event) {

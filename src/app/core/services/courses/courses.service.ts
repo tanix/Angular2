@@ -84,8 +84,6 @@ export class coursesService {
 		for (var item of this.courseList) {
 			if(id === item.id) {
 				this.courseList.splice(this.courseList.indexOf(item), 1);
-
-				console.log(this.courseList);
 			}
 		}
 
