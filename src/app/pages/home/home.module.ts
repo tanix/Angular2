@@ -16,7 +16,7 @@ import { ModalComponent } from '../../core/components/modal/modal.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
 import { sortByCreatedDatePipe }  from '../../core/pipes/date.pipe';
 import { durationPipe }  from '../../core/pipes/duration.pipe';
-
+import { sortByInputPipe }  from '../../core/pipes/input.pipe';
 
 @NgModule({
 	declarations: [
@@ -26,7 +26,8 @@ import { durationPipe }  from '../../core/pipes/duration.pipe';
 		ModalComponent,
 		HighlightDirective,
 		sortByCreatedDatePipe,
-		durationPipe],
+		durationPipe,
+		sortByInputPipe],
 	imports: [
 		routes,
 		FormsModule,

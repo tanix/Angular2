@@ -9,7 +9,6 @@ export class sortByCreatedDatePipe implements PipeTransform {
 		{
 			return allTasks
 		}
-
 		return allTasks.filter(item => item.createDate);
 	}
 }

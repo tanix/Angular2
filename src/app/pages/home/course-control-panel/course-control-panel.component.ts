@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
 	selector: 'course-control-panel',
@@ -13,7 +13,11 @@ export class CourseControlPanelComponent {
 		this.courseQuery = '';
 	}
 
-	public findCourseQuery() {
-		console.log(this.courseQuery);
+	@Output('change') public filterQuery = new EventEmitter();
+
+	public filterCourseQuery() {
+		this.filterQuery.emit({
+			courseQuery: this.courseQuery
+		})
 	}
 }

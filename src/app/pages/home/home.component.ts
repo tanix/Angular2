@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy, Input } from '@angular/core';
 import { coursesService } from '../../core/services';
 
 @Component({
@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	private courseItemId: number;
 	public courseList: Array<any>;
 	public deletedItem = { };
+
+	public courseQuery: string = '';
+
 
 	constructor(public coursesService: coursesService) {
 		console.log('Home page: constructor');
@@ -58,5 +61,9 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 		//
 		// }
 		// console.log(this.courseList);
+	}
+
+	public filterCourseQuery($event) {
+		this.courseQuery = $event.courseQuery;
 	}
 }
