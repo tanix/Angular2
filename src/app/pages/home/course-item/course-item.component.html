@@ -4,9 +4,8 @@
 			<div class="row course-bref">
 				<div class="col-sm-3"><strong>{{courseItem.title | uppercase }}</strong></div>
 				<div class="col-sm-1">{{courseItem.id}}</div>
-				<div class="col-sm-2" class="duration">{{courseItem.duration}} </div>
-				<!--<div class="col-sm-6 text-right">{{courseItem.createDate | date: 'dd/MM/yyyy'}}</div>-->
-				<div class="col-sm-6 text-right">{{courseItem.createDate}}</div>
+				<div class="col-sm-2 duration">{{courseItem.duration | duration }} </div>
+				<div class="col-sm-6 text-right">{{courseItem.createDate | date:'longDate'}}</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">

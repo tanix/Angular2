@@ -31,7 +31,6 @@ import { HomeModule } from './pages/home';
 import { LoginModule } from './pages/login';
 import { PageOneModule } from  './pages/page-one';
 import { PageTwoModule } from  './pages/page-two';
-
 // Services
 
 // Application wide providers
@@ -44,7 +43,7 @@ const APP_PROVIDERS = [ ];
 	bootstrap: [AppComponent],
 	declarations: [
 		AppComponent,
-		NoContentComponent
+		NoContentComponent,
 	],
 	imports: [ // import Angular's modules
 		BrowserModule,
@@ -57,6 +56,7 @@ const APP_PROVIDERS = [ ];
 		LoginModule,
 		PageOneModule,
 		PageTwoModule
+
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,

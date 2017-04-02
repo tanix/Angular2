@@ -14,6 +14,9 @@ import { coursesService } from '../../core/services';
 
 import { ModalComponent } from '../../core/components/modal/modal.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
+import { sortByCreatedDatePipe }  from '../../core/pipes/date.pipe';
+import { durationPipe }  from '../../core/pipes/duration.pipe';
+
 
 @NgModule({
 	declarations: [
@@ -21,7 +24,9 @@ import { HighlightDirective } from '../../core/diractives/highlight.directive';
 		CourseItemComponent,
 		CourseControlPanelComponent,
 		ModalComponent,
-		HighlightDirective ],
+		HighlightDirective,
+		sortByCreatedDatePipe,
+		durationPipe],
 	imports: [
 		routes,
 		FormsModule,

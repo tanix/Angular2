@@ -10,7 +10,7 @@ import { Course } from '../../../core/interfaces';
 export class CourseItemComponent {
 	public id: number;
 	public title: string;
-	public duration: string;
+	public duration: any;
 	public description: string;
 
 	@Input('init') public courseItem:Course;
