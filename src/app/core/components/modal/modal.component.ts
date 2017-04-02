@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'modal',
 	templateUrl: 'modal.component.html',
-	styles: [require('./modal.component.scss')]
+	styles: [require('./modal.component.scss')],
+	changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class ModalComponent {

@@ -1,9 +1,11 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'course-control-panel',
 	templateUrl: 'course-control-panel.component.html',
-	styles: [require('./course-control-panel.component.scss')]
+	styles: [require('./course-control-panel.component.scss')],
+	changeDetection: ChangeDetectionStrategy.Default
 })
 export class CourseControlPanelComponent {
 

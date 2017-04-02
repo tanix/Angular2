@@ -1,11 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../../../core/interfaces';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'course-item',
 	templateUrl: 'course-item.component.html',
 	styles: [require('./course-item.component.scss')],
-	providers: []
+	providers: [],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemComponent {
 	public id: number;

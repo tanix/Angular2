@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 	public deleteCourseItem($event) {
 
-		this.courseItemId = $event.CourseId;
+		this.courseItemId = $event.CourseId; console.log(this.courseItemId);
 		this.deletedItem = this.getCourseItemById($event.CourseId);
 	}
 

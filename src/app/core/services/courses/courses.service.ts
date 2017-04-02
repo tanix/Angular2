@@ -23,7 +23,7 @@ export class coursesService {
 				'id': 8832,
 				'title': 'Corpulse ex labore',
 				'createDate': 'Wed Mar 29 2017 GMT+0300 (+03)',
-				'duration': '120',
+				'duration': '315',
 				'description': 'Sed varius nunc sit amet finibus mollis. Proin varius egestas turpis in semper. Quisque interdum sem metus, sed tristique tortor consequat ut.'
 			},
 			{
@@ -84,6 +84,8 @@ export class coursesService {
 		for (var item of this.courseList) {
 			if(id === item.id) {
 				this.courseList.splice(this.courseList.indexOf(item), 1);
+
+				console.log(this.courseList);
 			}
 		}
 
