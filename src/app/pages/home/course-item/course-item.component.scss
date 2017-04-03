@@ -14,11 +14,15 @@
 .topRated {
 	background-color: #fafafa;
 
-	.duration {
+	.duration:after {
+		content: " ";
+		display: inline-block;
+		width: 20px;
+		height: 20px;
 		background-image: url("../../../../assets/icon/asterisk.png");
-		background-position: right center;
+		background-position: center center;
 		background-size: 20px 20px;
 		background-repeat: no-repeat;
-		padding-right: 25px;
+		margin: -10px 0 0 0;
 	}
 }
