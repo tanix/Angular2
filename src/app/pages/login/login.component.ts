@@ -10,6 +10,7 @@ import { authorizationService } from '../../core/services';
 
 
 export class LoginComponent implements OnInit, OnDestroy {
+	private isSpinner: boolean = true;
 	public email: string;
 	private password: string;
 	public hasError: boolean = false;

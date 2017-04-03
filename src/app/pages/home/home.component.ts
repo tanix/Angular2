@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, AfterContentInit, OnDestroy, NgZone } from '@angular/core';
-import { coursesService } from '../../core/services';
+import { coursesService, myLoaderService } from '../../core/services';
+
 
 @Component({
 	selector: 'home',
@@ -11,6 +12,7 @@ import { coursesService } from '../../core/services';
 
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	private isLoading: boolean = true;
+	private isSpinner: boolean = false;
 	private courseItemId: number;
 	public courseList: Array<any>;
 	public deletedItem = { };
@@ -18,7 +20,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 	public courseQuery: string = '';
 
 
-	constructor(public coursesService: coursesService, private _ngZone: NgZone) {
+	constructor(public coursesService: coursesService, private _ngZone: NgZone, private _myLoaderService: myLoaderService) {
 		console.log('Home page: constructor');
 		this.courseList = [];
 
@@ -43,16 +45,31 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 		this.courseItemId = $event.CourseId;
 		this.deletedItem = this.getCourseItemById($event.CourseId);
 
-		this._ngZone.onStable.subscribe(() => console.log('stable'));
-		this._ngZone.onUnstable.subscribe(() => console.log('unstable'));
+		this._ngZone.onUnstable.subscribe(() => {
+			console.log('unstable');
+		});
+
 		setTimeout(() => console.log('timeout handler'), 1000);
+
+		this._ngZone.onStable.subscribe(() => {
+			console.log('stable');
+		});
 	}
 
 	public deleteCourseItemAction($event) {
 
+		this._ngZone.runOutsideAngular(() => {
+			this.isSpinner = this._myLoaderService.showLoader();
+		});
+
 		if($event.delete && this.courseItemId) {
+			setTimeout(() => console.log('timeout handler'), 5000);
 			this.coursesService.removeItem(this.courseItemId);
 		}
+
+		this._ngZone.runOutsideAngular(() => {
+			this.isSpinner = this._myLoaderService.hideLoader();
+		});
 	}
 
 	public getCourseItemById(id: number) {

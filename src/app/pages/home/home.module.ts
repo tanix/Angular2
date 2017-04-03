@@ -10,9 +10,10 @@ import { routes } from './home.routes';
 import { HomeComponent } from './home.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CourseControlPanelComponent } from './course-control-panel/course-control-panel.component';
-import { coursesService } from '../../core/services';
+import { coursesService, myLoaderService } from '../../core/services';
 
 import { ModalComponent } from '../../core/components/modal/modal.component';
+import { loaderComponent } from '../../core/components/loader/loader.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
 import { sortByCreatedDatePipe }  from '../../core/pipes/date.pipe';
 import { durationPipe }  from '../../core/pipes/duration.pipe';
@@ -24,6 +25,7 @@ import { sortByInputPipe }  from '../../core/pipes/input.pipe';
 		CourseItemComponent,
 		CourseControlPanelComponent,
 		ModalComponent,
+		loaderComponent,
 		HighlightDirective,
 		sortByCreatedDatePipe,
 		durationPipe,
@@ -34,7 +36,7 @@ import { sortByInputPipe }  from '../../core/pipes/input.pipe';
 		ReactiveFormsModule,
 		CommonModule
 	],
-	providers: [coursesService]
+	providers: [coursesService, myLoaderService]
 })
 export class HomeModule {
 	constructor() {

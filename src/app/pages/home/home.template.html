@@ -1,5 +1,7 @@
 <div class="home-page">
 	<course-control-panel (change)="filterCourseQuery($event);"></course-control-panel>
+	<loader *ngIf="isSpinner"></loader>
+
 	<div class="course-list" *ngIf="courseList.length > 0">
 		<course-item *ngFor="let courseItem of (courseList | sortByCreatedDate | sortByInput: courseQuery)" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
 	</div>

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component} from '@angular/core';
 
 @Component({
 	selector: 'loader',
@@ -7,8 +6,6 @@ import { Component } from '@angular/core';
 	styles: [require('./loader.component.scss')]
 })
 
-export class LoaderComponent {
-
+export class loaderComponent {
 	constructor() { }
-
 }
