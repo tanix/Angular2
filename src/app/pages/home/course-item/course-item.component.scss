@@ -5,6 +5,10 @@
 	padding: 10px;
 	border: 1px solid $c-tropaz;
 	@extend .margin-bottom;
+
+	&:hover {
+		box-shadow: 0 0 20px 0 #DCDCDC;
+	}
 }
 
 .course-bref {

@@ -5,17 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class sortByCreatedDatePipe implements PipeTransform {
 	transform(allTasks: any[]) {
-		if (!allTasks)
-		{
-			return allTasks
-		}
-
 		allTasks.sort((a: any, b: any) => {
 			let aDate = Number(new Date(a.createDate));
 			let bDate = Number(new Date(b.createDate));
 			return bDate - aDate;
 		});
-
 		return allTasks;
 	}
 }
