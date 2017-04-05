@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, NgZone } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { authorizationService } from '../../services';
 
 @Component({
@@ -12,11 +12,9 @@ export class LoginHeaderComponent {
 	private isLogined: boolean = false;
 	private userInfo : string;
 
-	constructor(public authorizationService: authorizationService, private _ngZone: NgZone) {
-		this._ngZone.run(() => {
-			this.isLogined = this.authorizationService.isAuthenticated();
-			this.userInfo = this.authorizationService.getUserInfo();
-		});
+	constructor(public authorizationService: authorizationService) {
+		this.isLogined = this.authorizationService.isAuthenticated();
+		this.userInfo = this.authorizationService.getUserInfo();
 	}
 
 	public logOut() {
