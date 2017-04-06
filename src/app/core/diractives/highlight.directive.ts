@@ -19,12 +19,10 @@ export class HighlightDirective implements OnInit {
 
 	private highlightBorder() {
 		let currentDate = new Date();
-		let expiredDate = new Date();
 
 		let _createdDate = new Date(this.createdDate);
-
 		let tempDate = new Date(currentDate);
-		expiredDate = new Date(tempDate.setDate(tempDate.getDate() - 14));
+		let expiredDate = new Date(tempDate.setDate(tempDate.getDate() - 14));
 
 		if((_createdDate < currentDate) && (_createdDate >= expiredDate)) {
 			this.borderColor = BORDER_GREEN;
