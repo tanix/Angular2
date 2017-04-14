@@ -8,7 +8,7 @@ const BORDER_BLUE = "#5bc0de";
 })
 
 export class HighlightDirective implements OnInit {
-	@Input() createdDate: Date;
+	@Input() createDate: Date;
 	borderColor: string;
 
 	constructor(private el: ElementRef) { }
@@ -20,15 +20,15 @@ export class HighlightDirective implements OnInit {
 	private highlightBorder() {
 		let currentDate = new Date();
 
-		let _createdDate = new Date(this.createdDate);
+		let _createDate = new Date(this.createDate);
 		let tempDate = new Date(currentDate);
 		let expiredDate = new Date(tempDate.setDate(tempDate.getDate() - 14));
 
-		if((_createdDate < currentDate) && (_createdDate >= expiredDate)) {
+		if((_createDate < currentDate) && (_createDate >= expiredDate)) {
 			this.borderColor = BORDER_GREEN;
 			this.el.nativeElement.style.borderColor = this.borderColor;
 		}
-		if(_createdDate > currentDate ) {
+		if(_createDate > currentDate ) {
 			this.borderColor = BORDER_BLUE;
 			this.el.nativeElement.style.borderColor = this.borderColor;
 		}
