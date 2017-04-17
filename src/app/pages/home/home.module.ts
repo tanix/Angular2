@@ -23,11 +23,11 @@ import { sortByInputPipe }  from '../../core/pipes/input.pipe';
 		HomeComponent,
 		CourseItemComponent,
 		CourseControlPanelComponent,
-		ModalComponent,
 		loaderComponent,
 		HighlightDirective,
 		durationPipe,
-		sortByInputPipe],
+		sortByInputPipe,
+		ModalComponent ],
 	imports: [
 		routes,
 		FormsModule,

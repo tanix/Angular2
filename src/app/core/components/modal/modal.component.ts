@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Course } from './../../interfaces/courses/courses.interface'
 
 @Component({
 	selector: 'modal',
@@ -8,13 +9,20 @@ import { ChangeDetectionStrategy } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class ModalComponent {
+export class ModalComponent implements OnChanges {
+
+	@Input('course') course: Course;
+	@Output('change') public deleteCourseItemAction = new EventEmitter();
+
+	public courseTitle: string = '';
 
 	constructor() { }
 
-	@Input('deletedItem') deletedItem;
-
-	@Output('change') public deleteCourseItemAction = new EventEmitter();
+	public ngOnChanges() {
+		if(this.course) {
+			this.courseTitle = this.course.title;
+		}
+	}
 
 	public deleteCourse() {
 		this.deleteCourseItemAction.emit({

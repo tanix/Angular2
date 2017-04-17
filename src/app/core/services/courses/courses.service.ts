@@ -8,43 +8,33 @@ import { Course } from './../../interfaces/courses/courses.interface'
 @Injectable()
 export class coursesService {
 
-	public courseList: Array<any>;
 	private url = 'http://localhost:6002/course';
+	courses: Course[];
+	course: Course;
 
-	constructor(private http: Http) {
-		this.courseList = [];
-
-	}
+	constructor(private http: Http) { }
 
 	public getList():Observable <Course[]> {
-		return this.http.get(this.url).map(res => res.json());
+		return this.http.get(this.url)
+			.map(res => res.json());
+	}
+
+	public getItemById(id: number):Observable <Course> {
+		return this.getList()
+			.map(courses => courses.find(course => course.id === id));
+	}
+
+	public removeItem(id: number):Observable <Course[]> {
+		console.log("removeItem method: ", id);
+		return this.http.delete(this.url + '/' + id)
+			.map(res => res.json());
 	}
 
 	public createCourse() {
 		console.log("createCourse method");
 	}
 
-	public getItemById(id: number) {
-		console.log("getItemById method");
-		for (var item of this.courseList) {
-			if(id === item.id) {
-				return item;
-			}
-		}
-	}
-
 	public updateItem() {
 		console.log("updateItem method");
-	}
-
-	public removeItem(id: number) {
-		console.log("removeItem method: ", id);
-
-		for (var item of this.courseList) {
-			if(id === item.id) {
-				this.courseList.splice(this.courseList.indexOf(item), 1);
-			}
-		}
-
 	}
 }
