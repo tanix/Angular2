@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import {
 	NgModule,
 	ApplicationRef
@@ -25,6 +24,7 @@ import { NoContentComponent } from './pages/no-content';
 
 // Components
 import { HeaderModule, FooterModule } from './core/components';
+//import { durationModule } from './core/pipes/duration.module';
 
 // Pages
 import { HomeModule } from './pages/home';
@@ -46,7 +46,7 @@ const APP_PROVIDERS = [ ];
 	bootstrap: [AppComponent],
 	declarations: [
 		AppComponent,
-		NoContentComponent,
+		NoContentComponent
 	],
 	imports: [ // import Angular's modules
 		BrowserModule,
@@ -59,8 +59,8 @@ const APP_PROVIDERS = [ ];
 		LoginModule,
 		PageOneModule,
 		PageTwoModule,
-		NewCourseModule
-
+		NewCourseModule,
+		//durationModule.forRoot()
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,

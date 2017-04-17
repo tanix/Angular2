@@ -1,0 +1,31 @@
+@import "../../../styles/variables/colors.scss";
+
+#date {
+	width: 50%;
+}
+
+.arrow {
+	display: block;
+	margin: 0 0 10px 0;
+	padding: 5px 15px;
+	border: 1px solid #ccc;
+	color: #ccc;
+	background-color: transparent;
+}
+
+.selected {
+	background-color: #ccc;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	height: 100px;
+	overflow: auto;
+	list-style-type: none;
+	border: 1px solid #ccc;
+}
+
+li {
+	padding: 0 5px;
+}

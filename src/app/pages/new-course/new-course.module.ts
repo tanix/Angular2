@@ -10,13 +10,15 @@ import { NewCourseComponent } from './new-course.component';
 import { authorizationService } from '../../core/services';
 import { datapickerComponent } from '../../core/components/datapicker/datapicker.component';
 import { durationComponent } from '../../core/components/duration/duration.component';
-// import { durationPipe }  from '../../core/pipes/duration.pipe';
+import { authorsComponent } from '../../core/components/authors/authors.component';
+
 
 @NgModule({
 	declarations: [
 		NewCourseComponent,
 		datapickerComponent,
 		durationComponent,
+		authorsComponent,
 		],
 	imports: [
 		routes,

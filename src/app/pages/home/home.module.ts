@@ -27,7 +27,7 @@ import { sortByInputPipe }  from '../../core/pipes/input.pipe';
 		HighlightDirective,
 		durationPipe,
 		sortByInputPipe,
-		ModalComponent ],
+		ModalComponent],
 	imports: [
 		routes,
 		FormsModule,
