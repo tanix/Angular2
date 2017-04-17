@@ -31,7 +31,10 @@ import { HomeModule } from './pages/home';
 import { LoginModule } from './pages/login';
 import { PageOneModule } from  './pages/page-one';
 import { PageTwoModule } from  './pages/page-two';
+import { NewCourseModule } from  './pages/new-course';
 // Services
+
+import { Http, HttpModule } from '@angular/http';
 
 // Application wide providers
 const APP_PROVIDERS = [ ];
@@ -55,7 +58,8 @@ const APP_PROVIDERS = [ ];
 		HomeModule,
 		LoginModule,
 		PageOneModule,
-		PageTwoModule
+		PageTwoModule,
+		NewCourseModule
 
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection

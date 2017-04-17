@@ -8,6 +8,7 @@ import { routes } from './home.routes';
 // custom components
 import { LoginComponent } from './login.component';
 import { authorizationService } from '../../core/services';
+import { ModalComponent } from '../../core/components/modal/modal.component';
 
 @NgModule({
 	declarations: [
