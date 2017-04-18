@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { coursesService } from '../../core/services/courses/courses.service';
-import { Course } from './../../core/interfaces/courses/courses.interface';
+import { Observable } from "rxjs/Observable";
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
+
+import { coursesService } from '../../core/services/courses/courses.service';
+import { Course } from './../../core/interfaces/courses/courses.interface';
 
 @Component({
 	selector: 'home',
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private courseItemId: number;
 	public courseQuery: string = '';
 
-	private courses:Course[];
+	private courses=[];
 	course: Course;
 
 	private subscription: Subscription = new Subscription();
@@ -41,13 +43,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public getAllCourses() {
-		this.subscription = this.coursesService.getList().subscribe(courses => {
-			this.courses = courses.sort((a: any, b: any) => {
-				let aDate = Number(new Date(a.createDate));
-				let bDate = Number(new Date(b.createDate));
-				return bDate - aDate;
+		let today = new Date();
+		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
+
+		this.subscription = this.coursesService.getList()
+			.concatMap(data => Observable.from(data))
+			.filter(course => new Date(course.createDate) > lastTwoWeek )
+			.subscribe((data) => {
+				this.courses.push(data);
+				this.courses.sort((a: any, b: any) => {
+					let aDate = Number(new Date(a.createDate));
+					let bDate = Number(new Date(b.createDate));
+					return aDate- bDate;
+				});
 			});
-		});
 	}
 
 	public deleteCourseItem($event) {
