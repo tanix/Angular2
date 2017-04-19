@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
+import 'rxjs/Rx';
+import {BehaviorSubject} from 'rxjs/Rx';
 
 @Injectable()
-export class authorizationService {
-
-	public courseList: Array<any>;
+export class authorizationService  {
+	public subject;
 
 	constructor() {
-		this.courseList = [];
+		this.subject = new BehaviorSubject(false);
+		this.setBehaviorSubject();
+	}
+
+	public setBehaviorSubject () {
+		return localStorage.getItem("email") ? this.subject.next(true) : this.subject.next(false);
 	}
 
 	public login(email, password) {
+
 		console.log("authorizationService: login");
 
 		if (typeof(Storage) !== "undefined") {
 			localStorage.setItem("email", email);
 			localStorage.setItem("password", password);
-
 		} else {
 			console.warn("Sorry! No Web Storage support..");
 		}
@@ -27,6 +33,7 @@ export class authorizationService {
 		if (typeof(Storage) !== "undefined") {
 			localStorage.removeItem("email");
 			localStorage.removeItem("password");
+			this.subject.next(false);
 
 		} else {
 			console.warn("Sorry! No Web Storage support..");
@@ -36,7 +43,7 @@ export class authorizationService {
 	public isAuthenticated() {
 		console.log("authorizationService: isAuthenticated");
 
-		return (localStorage.getItem("email")) ? true : false;
+		return localStorage.getItem("email") ? true : false;
 	}
 
 	public getUserInfo() {
