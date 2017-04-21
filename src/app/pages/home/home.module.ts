@@ -13,21 +13,21 @@ import { CourseControlPanelComponent } from './course-control-panel/course-contr
 import { coursesService, myLoaderService } from '../../core/services';
 
 import { ModalComponent } from '../../core/components/modal/modal.component';
-import { loaderComponent } from '../../core/components/loader/loader.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
 import { durationPipe }  from '../../core/pipes/duration.pipe';
 import { sortByInputPipe }  from '../../core/pipes/input.pipe';
+import { loaderComponent } from '../../core/components/loader/loader.component';
 
 @NgModule({
 	declarations: [
 		HomeComponent,
 		CourseItemComponent,
 		CourseControlPanelComponent,
-		loaderComponent,
 		HighlightDirective,
 		durationPipe,
 		sortByInputPipe,
-		ModalComponent],
+		ModalComponent,
+		loaderComponent ],
 	imports: [
 		routes,
 		FormsModule,

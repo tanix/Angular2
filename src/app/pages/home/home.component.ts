@@ -48,12 +48,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.subscription = this.coursesService.getList()
 			.concatMap(data => Observable.from(data))
-			.filter(course => new Date(course.createDate) > lastTwoWeek )
+			.filter(course => new Date(course.date) > lastTwoWeek )
 			.subscribe((data) => {
 				this.courses.push(data);
 				this.courses.sort((a: any, b: any) => {
-					let aDate = Number(new Date(a.createDate));
-					let bDate = Number(new Date(b.createDate));
+					let aDate = Number(new Date(a.date));
+					let bDate = Number(new Date(b.date));
 					return aDate- bDate;
 				});
 			});

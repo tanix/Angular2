@@ -8,7 +8,7 @@ const BORDER_BLUE = "#5bc0de";
 })
 
 export class HighlightDirective implements OnInit {
-	@Input() createDate: Date;
+	@Input() date: Date;
 	borderColor: string;
 
 	constructor(private el: ElementRef) { }
@@ -20,7 +20,7 @@ export class HighlightDirective implements OnInit {
 	private highlightBorder() {
 		let currentDate = new Date();
 
-		let _createDate = new Date(this.createDate);
+		let _createDate = new Date(this.date);
 		let tempDate = new Date(currentDate);
 		let expiredDate = new Date(tempDate.setDate(tempDate.getDate() - 14));
 
