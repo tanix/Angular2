@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { authorizationService } from '../../core/services';
+import { myLoaderService } from '../../core/services';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'login',
@@ -10,13 +12,15 @@ import { authorizationService } from '../../core/services';
 
 
 export class LoginComponent implements OnInit, OnDestroy {
-	private isSpinner: boolean = true;
+	private isLoader: boolean = false;
 	public email: string;
 	private password: string;
 	public hasError: boolean = false;
 	public hasSuccess: boolean = false;
 
-	constructor(public authorizationService: authorizationService) {
+	private subscription: Subscription = new Subscription();
+
+	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService) {
 		console.log('Login page: constructor');
 	}
 
@@ -26,14 +30,34 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		console.log('Login page: ngOnDestroy');
+		this.subscription.unsubscribe();
 	}
 
 	public login(event) {
+		this.myLoaderService.subject.next(true);
+
+		this.subscription = this.myLoaderService.subject.subscribe({
+			next: (data) => {
+				this.isLoader = data;
+				console.log('Loader. BehaviorSubject: ' + data)
+			}
+		});
 
 		if (!this.email || !this.password) {
 
 			this.hasError = true;
 			event.preventDefault();
+
+			this.myLoaderService.hideLoader();
+
+			this.subscription = this.myLoaderService.subject.subscribe({
+				next: (data) => {
+					this.isLoader = false;
+					console.log('Loader. BehaviorSubject: ' + data)
+				}
+			});
+
+
 
 		} else {
 

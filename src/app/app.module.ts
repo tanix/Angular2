@@ -24,7 +24,7 @@ import { NoContentComponent } from './pages/no-content';
 
 // Components
 import { HeaderModule, FooterModule } from './core/components';
-//import { durationModule } from './core/pipes/duration.module';
+import { LoaderModule } from './core/components/loader/loader.module';
 
 // Pages
 import { HomeModule } from './pages/home';
@@ -60,7 +60,7 @@ const APP_PROVIDERS = [ ];
 		PageOneModule,
 		PageTwoModule,
 		NewCourseModule,
-		//durationModule.forRoot()
+		LoaderModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,

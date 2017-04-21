@@ -8,14 +8,15 @@ import { routes } from './home.routes';
 // custom components
 import { LoginComponent } from './login.component';
 import { authorizationService } from '../../core/services';
-import { ModalComponent } from '../../core/components/modal/modal.component';
+import { LoaderModule } from '../../core/components/loader/loader.module';
 
 @NgModule({
 	declarations: [
 		LoginComponent ],
 	imports: [
 		routes,
-		CommonModule
+		CommonModule,
+		LoaderModule
 	],
 	providers: [authorizationService]
 })

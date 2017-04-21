@@ -16,7 +16,7 @@ import { ModalComponent } from '../../core/components/modal/modal.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
 import { durationPipe }  from '../../core/pipes/duration.pipe';
 import { sortByInputPipe }  from '../../core/pipes/input.pipe';
-import { loaderComponent } from '../../core/components/loader/loader.component';
+import { LoaderModule } from '../../core/components/loader/loader.module';
 
 @NgModule({
 	declarations: [
@@ -26,13 +26,14 @@ import { loaderComponent } from '../../core/components/loader/loader.component';
 		HighlightDirective,
 		durationPipe,
 		sortByInputPipe,
-		ModalComponent,
-		loaderComponent ],
+		ModalComponent
+	],
 	imports: [
 		routes,
 		FormsModule,
 		ReactiveFormsModule,
-		CommonModule
+		CommonModule,
+		LoaderModule
 	],
 	providers: [coursesService, myLoaderService]
 })

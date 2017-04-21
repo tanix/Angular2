@@ -23,6 +23,7 @@ import { AppState } from './app.service';
 	template: require('./app.template.html')
 })
 export class AppComponent implements OnInit {
+	private isLoader: boolean = false;
 
 	constructor() {
 	}
