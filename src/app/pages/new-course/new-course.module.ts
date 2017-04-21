@@ -11,6 +11,7 @@ import { authorizationService } from '../../core/services';
 import { datapickerComponent } from '../../core/components/datapicker/datapicker.component';
 import { durationComponent } from '../../core/components/duration/duration.component';
 import { authorsComponent } from '../../core/components/authors/authors.component';
+import { durationModule }  from '../../core/pipes/duration.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { authorsComponent } from '../../core/components/authors/authors.componen
 		],
 	imports: [
 		routes,
-		CommonModule
+		CommonModule,
+		durationModule
 	],
 	providers: [authorizationService]
 })

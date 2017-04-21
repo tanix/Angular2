@@ -25,6 +25,7 @@ import { NoContentComponent } from './pages/no-content';
 // Components
 import { HeaderModule, FooterModule } from './core/components';
 import { LoaderModule } from './core/components/loader/loader.module';
+import { durationModule }  from './core/pipes/duration.module';
 
 // Pages
 import { HomeModule } from './pages/home';
@@ -46,7 +47,7 @@ const APP_PROVIDERS = [ ];
 	bootstrap: [AppComponent],
 	declarations: [
 		AppComponent,
-		NoContentComponent
+		NoContentComponent,
 	],
 	imports: [ // import Angular's modules
 		BrowserModule,
@@ -60,7 +61,8 @@ const APP_PROVIDERS = [ ];
 		PageOneModule,
 		PageTwoModule,
 		NewCourseModule,
-		LoaderModule
+		LoaderModule,
+		durationModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,
