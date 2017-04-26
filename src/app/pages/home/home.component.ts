@@ -37,11 +37,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.isLoading = false;
 	}
 
-	public ngOnDestroy() {
-		console.log('Home page: ngOnDestroy');
-		this.subscription.unsubscribe();
-	}
-
 	public getAllCourses() {
 		let today = new Date();
 		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
@@ -96,5 +91,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public filterCourseQuery($event) {
 		this.courseQuery = $event.courseQuery;
+	}
+
+	public ngOnDestroy() {
+		console.log('Home page: ngOnDestroy');
+		this.subscription.unsubscribe();
 	}
 }

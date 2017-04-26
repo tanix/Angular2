@@ -28,11 +28,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		console.log('Login page: ngOnInit');
 	}
 
-	public ngOnDestroy() {
-		console.log('Login page: ngOnDestroy');
-		this.subscription.unsubscribe();
-	}
-
 	public login(event) {
 		this.myLoaderService.subject.next(true);
 
@@ -67,5 +62,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 			window.location.href = '#/';
 		}
 
+	}
+
+	public ngOnDestroy() {
+		console.log('Login page: ngOnDestroy');
+		this.subscription.unsubscribe();
 	}
 }

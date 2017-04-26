@@ -27,17 +27,16 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 		console.log('Login page: ngOnInit');
 	}
 
-	public ngOnDestroy() {
-		console.log('Login page: ngOnDestroy');
-	}
-
 	public save($event) {
 		$event.preventDefault();
 	}
 
-
 	public cancel($event) {
 		$event.preventDefault();
+	}
+
+	public ngOnDestroy() {
+		console.log('Login page: ngOnDestroy');
 	}
 
 }
