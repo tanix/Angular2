@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { authorizationService } from '../../core/services';
 
 @Component({
-	selector: 'new-course',
+	selector: 'add-edit-course',
 	providers: [Location],
-	styles: [require('./new-course.styles.scss')],
-	template: require('./new-course.template.html')
+	styles: [require('./add-edit-course.styles.scss')],
+	template: require('./add-edit-course.template.html')
 })
 
 

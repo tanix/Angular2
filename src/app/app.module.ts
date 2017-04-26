@@ -32,7 +32,7 @@ import { HomeModule } from './pages/home';
 import { LoginModule } from './pages/login';
 import { PageOneModule } from  './pages/page-one';
 import { PageTwoModule } from  './pages/page-two';
-import { NewCourseModule } from  './pages/new-course';
+import { NewCourseModule } from  './pages/add-edit-course';
 // Services
 
 import { Http, HttpModule } from '@angular/http';
