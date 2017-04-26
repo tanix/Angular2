@@ -29,12 +29,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	public login(event) {
-		this.myLoaderService.subject.next(true);
+		this.myLoaderService.showLoader();
 
 		this.subscription = this.myLoaderService.subject.subscribe({
 			next: (data) => {
-				this.isLoader = data;
-				console.log('Loader. BehaviorSubject: ' + data)
+				this.isLoader = data.isLoader;
+				console.log('Loader. BehaviorSubject: ' + data.isLoader)
 			}
 		});
 
@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 			this.subscription = this.myLoaderService.subject.subscribe({
 				next: (data) => {
-					this.isLoader = false;
-					console.log('Loader. BehaviorSubject: ' + data)
+					this.isLoader = data.isLoader;
+					console.log('Loader. BehaviorSubject: ' + data.isLoader)
 				}
 			});
 

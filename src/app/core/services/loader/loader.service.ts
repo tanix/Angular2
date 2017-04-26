@@ -11,11 +11,11 @@ export class myLoaderService {
 	}
 
 	public showLoader() {
-		this.subject.next(true);
+		this.subject.next({isLoader: true});
 	}
 
 	public hideLoader() {
-		this.subject.next(false)
+		this.subject.next({isLoader: false})
 	}
 
 }

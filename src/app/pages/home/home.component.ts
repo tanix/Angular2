@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 
 import { coursesService } from '../../core/services/courses/courses.service';
+import { myLoaderService } from '../../core/services';
+
 import { Course } from './../../core/interfaces/courses/courses.interface';
 import { orderByDatePipe }  from '../../core/pipes/orderPipe.pipe';
 
@@ -26,9 +28,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 	course: Course;
 
 	private subscription: Subscription = new Subscription();
+	private subscriptionLoader: Subscription = new Subscription();
 
 
-	constructor(public coursesService: coursesService, private _ngZone: NgZone, private orderPipe: orderByDatePipe) {
+	constructor(public coursesService: coursesService, private _ngZone: NgZone, private orderPipe: orderByDatePipe, public myLoaderService: myLoaderService) {
 		console.log('Home page: constructor');
 	}
 
@@ -69,12 +72,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteCourseItemAction($event) {
-		this.isLoader = true;
+		this.myLoaderService.showLoader();
+
+		this.subscriptionLoader = this.myLoaderService.subject.subscribe({
+			next: (data) => {
+				this.isLoader = data.isLoader;
+				console.log('Loader. BehaviorSubject: ' + data.isLoader)
+			}
+		});
 
 		if($event.delete && this.courseItemId) {
 			this.coursesService.removeItem(this.courseItemId).subscribe(() => {
-				//this.isLoader = false;
-				setTimeout(() => { this.isLoader = false;}, 100);
+				setTimeout(() => {
+					this.myLoaderService.hideLoader();
+
+					this.subscriptionLoader = this.myLoaderService.subject.subscribe({
+						next: (data) => {
+							this.isLoader = data.isLoader;
+							console.log('Loader. BehaviorSubject: ' + data.isLoader)
+						}
+					});
+
+				}, 100);
 			});
 		}
 
@@ -93,5 +112,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public ngOnDestroy() {
 		console.log('Home page: ngOnDestroy');
 		this.subscription.unsubscribe();
+		this.subscriptionLoader.unsubscribe();
 	}
 }
