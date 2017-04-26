@@ -5,6 +5,7 @@ import {BehaviorSubject} from 'rxjs/Rx';
 @Injectable()
 export class authorizationService  {
 	public subject;
+	public  email;
 
 	constructor() {
 		this.subject = new BehaviorSubject(false);
@@ -12,7 +13,8 @@ export class authorizationService  {
 	}
 
 	public setBehaviorSubject () {
-		return localStorage.getItem("email") ? this.subject.next(true) : this.subject.next(false);
+		this.email = localStorage.getItem("email");
+		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false});
 	}
 
 	public login(email, password) {
@@ -33,27 +35,27 @@ export class authorizationService  {
 		if (typeof(Storage) !== "undefined") {
 			localStorage.removeItem("email");
 			localStorage.removeItem("password");
-			this.subject.next(false);
+			this.subject.next({login: false});
 
 		} else {
 			console.warn("Sorry! No Web Storage support..");
 		}
 	}
 
-	public isAuthenticated() {
-		console.log("authorizationService: isAuthenticated");
-
-		return localStorage.getItem("email") ? true : false;
-	}
-
-	public getUserInfo() {
-		console.log("authorizationService: getUserInfo");
-
-		if (typeof(Storage) !== "undefined") {
-			return localStorage.getItem("email");
-
-		} else {
-			console.warn("Sorry! No Web Storage support..");
-		}
-	}
+	// public isAuthenticated() {
+	// 	console.log("authorizationService: isAuthenticated");
+	//
+	// 	return localStorage.getItem("email") ? true : false;
+	// }
+	//
+	// public getUserInfo() {
+	// 	console.log("authorizationService: getUserInfo");
+	//
+	// 	if (typeof(Storage) !== "undefined") {
+	// 		return localStorage.getItem("email");
+	//
+	// 	} else {
+	// 		console.warn("Sorry! No Web Storage support..");
+	// 	}
+	// }
 }

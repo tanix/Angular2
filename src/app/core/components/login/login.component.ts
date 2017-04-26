@@ -18,22 +18,25 @@ export class LoginHeaderComponent implements OnDestroy {
 
 		this.subscription = authorizationService.subject.subscribe({
 			next: (data) => {
-				if(data) {
-					this.isLogined = this.authorizationService.isAuthenticated();
-					this.userInfo = this.authorizationService.getUserInfo();
+				console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
+
+				if(data.email) {
+					this.isLogined = data.login; //this.authorizationService.isAuthenticated();
+					this.userInfo = data.email; //this.authorizationService.getUserInfo();
+
+					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + data.email);
 				}
-				console.log('Constructor LoginHeaderComponent. BehaviorSubject: ' + data)
 			}
 		});
 	}
 
 	public logOut() {
 		this.authorizationService.logOut();
-		this.isLogined = this.authorizationService.isAuthenticated();
 
 		this.subscription = this.authorizationService.subject.subscribe({
 			next: (data) => {
-				console.log('LogOut BehaviorSubject: ' + data)
+				this.isLogined = data.login;
+				console.log('LogOut BehaviorSubject: ' + data.login)
 			}
 		});
 	}
