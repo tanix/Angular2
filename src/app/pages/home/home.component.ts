@@ -6,13 +6,14 @@ import 'rxjs/add/operator/map';
 
 import { coursesService } from '../../core/services/courses/courses.service';
 import { Course } from './../../core/interfaces/courses/courses.interface';
+import { orderByDatePipe }  from '../../core/pipes/orderPipe.pipe';
 
 @Component({
 	selector: 'home',
 	encapsulation: ViewEncapsulation.None,
 	providers: [coursesService, HttpModule],
 	styles: [require('./home.styles.scss')],
-	template: require('./home.template.html')
+	template: require('./home.template.html'),
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private subscription: Subscription = new Subscription();
 
 
-	constructor(public coursesService: coursesService, private _ngZone: NgZone) {
+	constructor(public coursesService: coursesService, private _ngZone: NgZone, private orderPipe: orderByDatePipe) {
 		console.log('Home page: constructor');
 	}
 
@@ -46,11 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 			.filter(course => new Date(course.date) > lastTwoWeek )
 			.subscribe((data) => {
 				this.courses.push(data);
-				this.courses.sort((a: any, b: any) => {
-					let aDate = Number(new Date(a.date));
-					let bDate = Number(new Date(b.date));
-					return aDate- bDate;
-				});
+				this.orderPipe.transform(this.courses);
 			});
 	}
 

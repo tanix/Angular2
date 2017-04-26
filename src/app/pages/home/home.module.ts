@@ -16,6 +16,7 @@ import { ModalComponent } from '../../core/components/modal/modal.component';
 import { HighlightDirective } from '../../core/diractives/highlight.directive';
 
 import { sortByInputPipe }  from '../../core/pipes/input.pipe';
+import { orderByDatePipe }  from '../../core/pipes/orderPipe.pipe';
 import { LoaderModule } from '../../core/components/loader/loader.module';
 import { durationModule }  from '../../core/pipes/duration.module';
 
@@ -25,8 +26,8 @@ import { durationModule }  from '../../core/pipes/duration.module';
 		CourseItemComponent,
 		CourseControlPanelComponent,
 		HighlightDirective,
-
 		sortByInputPipe,
+		orderByDatePipe,
 		ModalComponent
 	],
 	imports: [
@@ -37,7 +38,7 @@ import { durationModule }  from '../../core/pipes/duration.module';
 		LoaderModule,
 		durationModule
 	],
-	providers: [coursesService, myLoaderService]
+	providers: [coursesService, myLoaderService, orderByDatePipe]
 })
 export class HomeModule {
 	constructor() {
