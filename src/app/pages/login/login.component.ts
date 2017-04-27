@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public hasSuccess: boolean = false;
 
 	private subscription: Subscription = new Subscription();
+	private subscriptionLogin: Subscription = new Subscription();
 
 	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService) {
 		console.log('Login page: constructor');
@@ -39,9 +40,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 		});
 
 		if (!this.email || !this.password) {
-
 			this.hasError = true;
 			event.preventDefault();
+
+		} else {
 
 			this.myLoaderService.hideLoader();
 
@@ -52,20 +54,18 @@ export class LoginComponent implements OnInit, OnDestroy {
 				}
 			});
 
-
-
-		} else {
-
 			this.hasError = false;
 			this.hasSuccess = true;
-			this.authorizationService.login(this.email, this.password);
-			window.location.href = '#/';
-		}
 
+			this.subscriptionLogin  = this.authorizationService.login(this.email, this.password).subscribe((data) => data);
+			///window.location.href = '#/';
+		}
 	}
 
 	public ngOnDestroy() {
 		console.log('Login page: ngOnDestroy');
+
 		this.subscription.unsubscribe();
+		this.subscriptionLogin.unsubscribe();
 	}
 }

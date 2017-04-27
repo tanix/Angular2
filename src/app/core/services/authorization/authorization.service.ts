@@ -1,45 +1,68 @@
 import { Injectable } from '@angular/core';
+import { Http, HttpModule } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
-import {BehaviorSubject} from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class authorizationService  {
 	public subject;
 	public  email;
 
-	constructor() {
+	private urlCreds = 'http://localhost:6002/creds';
+	private headers;
+	private options;
+
+	constructor(private http: Http) {
 		this.subject = new BehaviorSubject(false);
 		this.setBehaviorSubject();
+
+		this.headers = new Headers({ 'Content-Type': 'application/json' });
+		this.options = new RequestOptions({ headers: this.headers, withCredentials: false });
 	}
 
 	public setBehaviorSubject () {
 		this.email = localStorage.getItem("email");
+
+		console.log("setBehaviorSubject: localStorage email " + this.email);
 		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false});
 	}
 
-	public login(email, password) {
+	public login(email, password): Observable<any> {
 
 		console.log("authorizationService: login");
+		return this.http.post(this.urlCreds, JSON.stringify({ username: email, password: password }), this.options)
+			.map(res => {
+				if (typeof(Storage) !== "undefined") {
+					console.log("authorizationService: email" + res.json().username);
+					localStorage.setItem("email", res.json().username);
 
-		if (typeof(Storage) !== "undefined") {
-			localStorage.setItem("email", email);
-			localStorage.setItem("password", password);
-		} else {
-			console.warn("Sorry! No Web Storage support..");
-		}
+				} else {
+					console.warn("Sorry! No Web Storage support..");
+				}
+			})
+			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
 	}
 
-	public logOut() {
+	public logOut(): Observable<any>  {
 		console.log("authorizationService: logOut");
 
-		if (typeof(Storage) !== "undefined") {
-			localStorage.removeItem("email");
-			localStorage.removeItem("password");
-			this.subject.next({login: false});
+		this.subject.next({login: false});
 
-		} else {
-			console.warn("Sorry! No Web Storage support..");
-		}
+		return this.http.post(this.urlCreds, JSON.stringify({ username: '', password: '' }), this.options)
+			.map(res => {
+				if (typeof(Storage) !== "undefined") {
+					localStorage.removeItem("email");
+
+				} else {
+					console.warn("Sorry! No Web Storage support..");
+				}
+
+				console.log(res.json());
+			})
+			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	// public isAuthenticated() {

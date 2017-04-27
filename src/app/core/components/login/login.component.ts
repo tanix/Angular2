@@ -12,7 +12,9 @@ import { Subscription } from 'rxjs/Subscription';
 export class LoginHeaderComponent implements OnDestroy {
 	private isLogined: boolean = false;
 	private userInfo : string;
+
 	private subscription: Subscription = new Subscription();
+	private subscriptionLogin: Subscription = new Subscription();
 
 	constructor(public authorizationService: authorizationService) {
 
@@ -31,7 +33,7 @@ export class LoginHeaderComponent implements OnDestroy {
 	}
 
 	public logOut() {
-		this.authorizationService.logOut();
+		this.subscriptionLogin  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
 
 		this.subscription = this.authorizationService.subject.subscribe({
 			next: (data) => {
@@ -44,5 +46,6 @@ export class LoginHeaderComponent implements OnDestroy {
 	public ngOnDestroy() {
 		console.log('Home page: ngOnDestroy');
 		this.subscription.unsubscribe();
+		this.subscriptionLogin.unsubscribe();
 	}
 }

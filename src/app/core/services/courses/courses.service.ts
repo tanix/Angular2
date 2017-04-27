@@ -29,7 +29,7 @@ export class coursesService {
 		console.log("removeItem method: ", id);
 		return this.http.delete(this.url + '/' + id)
 			.map(res => res.json())
-			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));;
+			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	public createCourse() {
