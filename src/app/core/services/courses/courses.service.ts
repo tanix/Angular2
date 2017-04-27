@@ -12,10 +12,15 @@ export class coursesService {
 	courses: Course[];
 	course: Course;
 
+	private queryTitle: string;
+
 	constructor(private http: Http) { }
 
-	public getList(start?: number, end?: number):Observable <Course[]> {
-		return this.http.get(this.url + '?_start='+start+'&_end='+end)
+	public getList(start?: number, end?: number, query?: string):Observable <Course[]> {
+		if(query) {
+			this.queryTitle = '&title='+ query;
+		}
+		return this.http.get(this.url +'?_start='+start+'&_end='+end + this.queryTitle)
 			.map(res => res.json());
 	}
 
