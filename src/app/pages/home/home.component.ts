@@ -30,9 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private subscription: Subscription = new Subscription();
 	private subscriptionLoader: Subscription = new Subscription();
 
+	private startPasition: number;
+	private endPasition: number;
 
 	constructor(public coursesService: coursesService, private _ngZone: NgZone, private orderPipe: orderByDatePipe, public myLoaderService: myLoaderService) {
 		console.log('Home page: constructor');
+
+		this.startPasition = 0;
+		this.endPasition = 10;
 	}
 
 	public ngOnInit() {
@@ -45,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		let today = new Date();
 		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 
-		this.subscription = this.coursesService.getList()
+		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
 			.concatMap(data => Observable.from(data))
 			.filter(course => new Date(course.date) > lastTwoWeek )
 			.subscribe((data) => {
@@ -107,6 +112,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public filterCourseQuery($event) {
 		this.courseQuery = $event.courseQuery;
+	}
+
+	public addMoreCourses() {
+		this.endPasition = this.endPasition + 5;
+		this.getAllCourses();
 	}
 
 	public ngOnDestroy() {

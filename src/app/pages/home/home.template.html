@@ -8,23 +8,9 @@
 	<div *ngIf="(courses)?.length==0" class="alert alert-success">No data. Feel free to add a new course.</div>
 	<div *ngIf="isLoading">Is loading...</div>
 
-	<!--<nav aria-label="pagination">-->
-		<!--<ul class="pagination">-->
-			<!--<li class="page-item">-->
-				<!--<a class="page-link" href="#" aria-label="Previous">-->
-					<!--<span aria-hidden="true">&laquo;</span>-->
-				<!--</a>-->
-			<!--</li>-->
-			<!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-			<!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-			<!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-			<!--<li class="page-item">-->
-				<!--<a class="page-link" href="#" aria-label="Next">-->
-					<!--<span aria-hidden="true">&raquo;</span>-->
-				<!--</a>-->
-			<!--</li>-->
-		<!--</ul>-->
-	<!--</nav>-->
+	<div class="row">
+		<div class="col-sm-2"><button class="add-more-btn full-width btn btn-info" style="margin-bottom: 20px" (click)="addMoreCourses()">ADD MORE</button></div>
+	</div>
 
 </div>
 <modal (change)="deleteCourseItemAction($event);" [course] = "course"></modal>

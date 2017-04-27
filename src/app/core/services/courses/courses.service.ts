@@ -14,8 +14,8 @@ export class coursesService {
 
 	constructor(private http: Http) { }
 
-	public getList():Observable <Course[]> {
-		return this.http.get(this.url)
+	public getList(start?: number, end?: number):Observable <Course[]> {
+		return this.http.get(this.url + '?_start='+start+'&_end='+end)
 			.map(res => res.json());
 	}
 
