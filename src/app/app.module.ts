@@ -26,6 +26,9 @@ import { NoContentComponent } from './pages/no-content';
 import { HeaderModule, FooterModule } from './core/components';
 import { LoaderModule } from './core/components/loader/loader.module';
 import { durationModule }  from './core/pipes/duration.module';
+import { RequestOptions, XHRBackend } from '@angular/http';
+import { HttpService } from './services/http.service';
+
 
 // Pages
 import { HomeModule } from './pages/home';
@@ -66,7 +69,14 @@ const APP_PROVIDERS = [ ];
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,
-		APP_PROVIDERS
+		APP_PROVIDERS,
+		{
+			provide: HttpService,
+			useFactory: (backend: XHRBackend, options: RequestOptions) => {
+				return new HttpService(backend, options);
+			},
+			deps: [XHRBackend, RequestOptions]
+		}
 	]
 })
 export class AppModule {

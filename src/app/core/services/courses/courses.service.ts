@@ -18,7 +18,7 @@ export class coursesService {
 
 	public getList(start?: number, end?: number, query?: string):Observable <Course[]> {
 		if(query) {
-			this.queryTitle = '&title='+ query;
+			this.queryTitle = '&q='+ query;
 		}
 		return this.http.get(this.url +'?_start='+start+'&_end='+end + this.queryTitle)
 			.map(res => res.json());

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private isLoading: boolean = true;
 	private isLoader: boolean = false;
 	private courseItemId: number;
-	public courseQuery: string = '';
+	public courseQuery: string;
 
 	private courses=[];
 	course: Course;
@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.startPasition = 0;
 		this.endPasition = 10;
+		this.courseQuery = '';
 	}
 
 	public ngOnInit() {
@@ -54,10 +55,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 			.concatMap(data => Observable.from(data))
 			.filter(course => new Date(course.date) > lastTwoWeek )
 			.subscribe((data) => {
-				if(!this.courseQuery) {
-					this.courses.push(data);
-				}
+				// this.courses.splice(0, this.courses.length);
 
+				// for (let course of this.courses) {
+				// 	if(course.id === data.id) {
+				// 		this.courses.splice(this.courses.indexOf(course), 1);
+				// 	}
+				// }
+
+				this.courses.push(data);
 				this.orderPipe.transform(this.courses);
 			});
 	}
@@ -115,12 +121,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public filterCourseQuery($event) {
 		this.courseQuery = ($event.courseQuery);
-
-		 if(this.courseQuery) {
-		 	this.getAllCourses();
-			this.courses = this.courses.filter(course => course.title === this.courseQuery);
-			console.log(this.courses);
-		}
+		this.getAllCourses();
 	}
 
 	public addMoreCourses() {

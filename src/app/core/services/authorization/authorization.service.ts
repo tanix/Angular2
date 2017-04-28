@@ -43,7 +43,6 @@ export class authorizationService  {
 				}
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-
 	}
 
 	public logOut(): Observable<any>  {
