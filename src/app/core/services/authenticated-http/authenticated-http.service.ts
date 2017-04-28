@@ -10,12 +10,12 @@ export class SecureHttpService extends Http {
 	}
 
 	request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('My new request...');
+		console.log('Extends Http request');
 		return super.request(url, options);
 	}
 
 	get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('My new get...');
+		console.log('EExtends Http get');
 		return super.get(url, options);
 	}
 }
