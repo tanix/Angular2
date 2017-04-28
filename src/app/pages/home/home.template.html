@@ -3,8 +3,8 @@
 	<loader *ngIf="isLoader"></loader>
 
 	<div class="course-list">
-		<!--<course-item *ngFor="let courseItem of (courses | sortByInput: courseQuery)" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>-->
-		<course-item *ngFor="let courseItem of courses" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
+		<course-item *ngFor="let courseItem of (courses | sortByInput: courseQuery)" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>
+		<!--<course-item *ngFor="let courseItem of courses" [init]="courseItem" (change)="deleteCourseItem($event);"></course-item>-->
 	</div>
 	<div *ngIf="(courses)?.length==0" class="alert alert-success">No data. Feel free to add a new course.</div>
 	<div *ngIf="isLoading">Is loading...</div>

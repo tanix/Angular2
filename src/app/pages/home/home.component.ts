@@ -51,18 +51,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		let today = new Date();
 		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 
-		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
+		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
+		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
 			.concatMap(data => Observable.from(data))
 			.filter(course => new Date(course.date) > lastTwoWeek )
 			.subscribe((data) => {
-				// this.courses.splice(0, this.courses.length);
-
-				// for (let course of this.courses) {
-				// 	if(course.id === data.id) {
-				// 		this.courses.splice(this.courses.indexOf(course), 1);
-				// 	}
-				// }
-
+				//this.courses.splice(0, this.courses.length);
 				this.courses.push(data);
 				this.orderPipe.transform(this.courses);
 			});
@@ -120,8 +114,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public filterCourseQuery($event) {
-		this.courseQuery = ($event.courseQuery);
-		this.getAllCourses();
+		this.courseQuery = $event.courseQuery;
+		//this.getAllCourses();
 	}
 
 	public addMoreCourses() {
