@@ -26,9 +26,9 @@ import { NoContentComponent } from './pages/no-content';
 import { HeaderModule, FooterModule } from './core/components';
 import { LoaderModule } from './core/components/loader/loader.module';
 import { durationModule }  from './core/pipes/duration.module';
-import { RequestOptions, XHRBackend } from '@angular/http';
-import { HttpService } from './services/http.service';
 
+import { XHRBackend, RequestOptions, Http, HttpModule } from '@angular/http';
+import { SecureHttpService}  from './core/services/authenticated-http/authenticated-http.service';
 
 // Pages
 import { HomeModule } from './pages/home';
@@ -37,8 +37,6 @@ import { PageOneModule } from  './pages/page-one';
 import { PageTwoModule } from  './pages/page-two';
 import { NewCourseModule } from  './pages/add-edit-course';
 // Services
-
-import { Http, HttpModule } from '@angular/http';
 
 // Application wide providers
 const APP_PROVIDERS = [ ];
@@ -67,17 +65,13 @@ const APP_PROVIDERS = [ ];
 		LoaderModule,
 		durationModule
 	],
-	providers: [ // expose our Services and Providers into Angular's dependency injection
-		ENV_PROVIDERS,
-		APP_PROVIDERS,
-		{
-			provide: HttpService,
-			useFactory: (backend: XHRBackend, options: RequestOptions) => {
-				return new HttpService(backend, options);
-			},
-			deps: [XHRBackend, RequestOptions]
-		}
-	]
+	providers: [{
+		provide: Http,
+		useFactory: (backend:XHRBackend, defaultOptions:RequestOptions) => {
+			return new SecureHttpService(backend, defaultOptions);
+		},
+		deps: [XHRBackend, RequestOptions]
+	}],
 })
 export class AppModule {
 
