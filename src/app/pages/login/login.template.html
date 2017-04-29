@@ -4,24 +4,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-2">
-				<form class="form-horizontal">
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
+				<form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="form-horizontal">
+					<div class="form-group has-feedback">
 						<label class="control-label col-sm-2" for="email">Email:</label>
 						<div class="col-sm-10">
-							<input type="email" class="form-control" id="email" placeholder="Enter email" (input)="email=$event.target.value">
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+							<input type="email" id="email" class="form-control" placeholder="Enter email" [(ngModel)]="model.email" name="email" #email="ngModel" required>
+							<div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required </div>
 						</div>
 					</div>
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}">
+					<div class="form-group has-feedback">
 						<label class="control-label col-sm-2" for="pwd">Password:</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="pwd" placeholder="Enter password" (input)="password=$event.target.value">
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+							<input type="password" class="form-control" id="pwd" placeholder="Enter password" [(ngModel)]="model.password" name="password" #password="ngModel" required>
+							<div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required </div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-primary" (click)="login($event);">Submit</button>
+							<button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Submit</button>
 						</div>
 					</div>
 				</form>

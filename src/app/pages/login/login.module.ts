@@ -10,13 +10,16 @@ import { LoginComponent } from './login.component';
 import { authorizationService } from '../../core/services';
 import { LoaderModule } from '../../core/components/loader/loader.module';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
 	declarations: [
 		LoginComponent ],
 	imports: [
 		routes,
 		CommonModule,
-		LoaderModule
+		LoaderModule,
+		FormsModule
 	],
 	providers: [authorizationService]
 })

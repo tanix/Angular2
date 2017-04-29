@@ -3,6 +3,8 @@ import { authorizationService } from '../../core/services';
 import { myLoaderService } from '../../core/services';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Login } from '../../core/interfaces/login/login.interface';
+
 @Component({
 	selector: 'login',
 	providers: [Location],
@@ -15,11 +17,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 	private isLoader: boolean = false;
 	public email: string;
 	private password: string;
-	public hasError: boolean = false;
-	public hasSuccess: boolean = false;
 
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogin: Subscription = new Subscription();
+
+	submitted = false;
+	model = new Login(this.email, this.password);
 
 	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService) {
 		console.log('Login page: constructor');
@@ -29,9 +32,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 		console.log('Login page: ngOnInit');
 	}
 
-	public login(event) {
-		this.myLoaderService.showLoader();
+	public onSubmit() {
+		this.submitted = true;
 
+		this.myLoaderService.showLoader();
 		this.subscription = this.myLoaderService.subject.subscribe({
 			next: (data) => {
 				this.isLoader = data.isLoader;
@@ -39,27 +43,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		if (!this.email || !this.password) {
-			this.hasError = true;
-			event.preventDefault();
+		this.subscriptionLogin  = this.authorizationService.login(this.email, this.password).subscribe((data) => data);
 
-		} else {
-
-			this.myLoaderService.hideLoader();
-
-			this.subscription = this.myLoaderService.subject.subscribe({
-				next: (data) => {
-					this.isLoader = data.isLoader;
-					console.log('Loader. BehaviorSubject: ' + data.isLoader)
-				}
-			});
-
-			this.hasError = false;
-			this.hasSuccess = true;
-
-			this.subscriptionLogin  = this.authorizationService.login(this.email, this.password).subscribe((data) => data);
-			///window.location.href = '#/';
-		}
+		this.myLoaderService.hideLoader();
+		this.subscription = this.myLoaderService.subject.subscribe({
+			next: (data) => {
+				this.isLoader = data.isLoader;
+				console.log('Loader. BehaviorSubject: ' + data.isLoader)
+			}
+		});
 	}
 
 	public ngOnDestroy() {
