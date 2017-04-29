@@ -1,50 +1,48 @@
 <div class="new-course-page">
 	<div class="container">
-		<div class="row">
+		<div class="row" [hidden]="submitted">
 			<div class="col-md-6 col-md-offset-2">
-				<form class="form-horizontal">
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
-						<label class="control-label col-sm-2" for="title">Title:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="title" placeholder="Enter title" (input)="title=$event.target.value">
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+				<form (ngSubmit)="onSubmit()" #courseForm="ngForm" class="form-horizontal">
+					<div class="form-group has-feedback"  >
+						<label class="control-label col-sm-3" for="title">Title:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="title" placeholder="Enter title" [(ngModel)]="model.title" name="title" #title="ngModel" required>
+							<div [hidden]="title.valid || title.pristine" class="alert alert-danger">Title is required </div>
 						</div>
 					</div>
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
-						<label class="control-label col-sm-2" for="description">Description:</label>
-						<div class="col-sm-10">
-							<textarea type="text" class="form-control" id="description" placeholder="Enter description" (input)="description=$event.target.value"></textarea>
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+					<div class="form-group has-feedback">
+						<label class="control-label col-sm-3" for="description">Description:</label>
+						<div class="col-sm-9">
+							<textarea type="text" class="form-control" id="description" placeholder="Enter description" [(ngModel)]="model.description" name="description" #description="ngModel" required></textarea>
+							<div [hidden]="description.valid || description.pristine" class="alert alert-danger">Description is required </div>
 						</div>
 					</div>
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
-						<label class="control-label col-sm-2" for="date">Date:</label>
-						<div class="col-sm-10">
-							<datapicker-component></datapicker-component>
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+					<div class="form-group has-feedback">
+						<label class="control-label col-sm-3" for="date">Date:</label>
+						<div class="col-sm-9">
+							<datapicker-component></datapicker-component >
 						</div>
 					</div>
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
-						<label class="control-label col-sm-2" for="duration">Duration:</label>
+					<div class="form-group has-feedback">
+						<label class="control-label col-sm-3" for="duration">Duration:</label>
 						<div class="col-sm-3">
-							<input type="number" min="0" class="form-control" id="duration" placeholder="186" (input)="date=$event.target.value">
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
+							<input type="number" min="0" class="form-control" id="duration" [(ngModel)]="model.duration" name="duration" #duration="ngModel" required>
+							<div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">Email is required </div>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<duration-component></duration-component>
 						</div>
 					</div>
-					<div class="form-group has-feedback" [ngClass]="{'has-error': hasError, 'has-success': hasSuccess}" >
-						<label class="control-label col-sm-2" for="authors">Authors:</label>
-						<div class="col-sm-10">
+					<div class="form-group has-feedback">
+						<label class="control-label col-sm-3" for="authors">Authors:</label>
+						<div class="col-sm-9">
 							<authors-component></authors-component>
-							<span class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-remove': hasError, 'glyphicon-ok': hasSuccess}"></span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-primary" (click)="save($event);">Save</button>
+						<div class="col-sm-offset-3 col-sm-10">
+							<button type="submit" class="btn btn-primary" [disabled]="!courseForm.form.valid">Save</button>
 							<button type="submit" class="btn btn-primary" (click)="cancel($event);">Cancel</button>
 						</div>
 					</div>

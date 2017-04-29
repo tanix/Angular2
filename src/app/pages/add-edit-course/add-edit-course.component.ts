@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { authorizationService } from '../../core/services';
 
+import { Course } from '../../core/interfaces/course/course.interface';
+
 @Component({
 	selector: 'add-edit-course',
 	providers: [Location],
@@ -17,7 +19,10 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 	public description: string = "";
 	public date: Date;
 	public duration: number;
-	public authors: string = "";
+	public authors: any;
+
+	submitted = false;
+	model = new Course(this.title, this.description, this.date, this.duration, this.authors);
 
 	constructor(public authorizationService: authorizationService) {
 		console.log('Login page: constructor');
@@ -27,8 +32,8 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 		console.log('Login page: ngOnInit');
 	}
 
-	public save($event) {
-		$event.preventDefault();
+	public onSubmit() {
+		this.submitted = true;
 	}
 
 	public cancel($event) {

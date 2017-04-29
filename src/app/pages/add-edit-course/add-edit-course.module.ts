@@ -12,7 +12,7 @@ import { datapickerComponent } from '../../core/components/datapicker/datapicker
 import { durationComponent } from '../../core/components/duration/duration.component';
 import { authorsComponent } from '../../core/components/authors/authors.component';
 import { durationModule }  from '../../core/pipes/duration.module';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -24,7 +24,8 @@ import { durationModule }  from '../../core/pipes/duration.module';
 	imports: [
 		routes,
 		CommonModule,
-		durationModule
+		durationModule,
+		FormsModule
 	],
 	providers: [authorizationService]
 })
