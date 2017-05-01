@@ -15,6 +15,7 @@ import { durationModule }  from '../../core/pipes/duration.module';
 import { FormsModule } from '@angular/forms';
 
 import { NumberValidator } from '../../core/diractives/number.validator.deractives';
+import { DateValidator } from '../../core/diractives/date.validator.diractives';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { NumberValidator } from '../../core/diractives/number.validator.deractiv
 		datapickerComponent,
 		durationComponent,
 		authorsComponent,
-		NumberValidator
+		NumberValidator,
+		DateValidator
 		],
 	imports: [
 		routes,

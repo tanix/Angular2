@@ -20,7 +20,8 @@
 					<div class="form-group has-feedback">
 						<label class="control-label col-sm-3" for="date">Date:</label>
 						<div class="col-sm-9">
-							<datapicker-component></datapicker-component>
+							<input type="text" class="form-control" id="date" placeholder="Enter description" [(ngModel)]="model.date" name="date" #date="ngModel" required validateDate>
+							<div [hidden]="date.valid || date.pristine" class="alert alert-danger">date is required </div>
 						</div>
 					</div>
 					<div class="form-group has-feedback">
