@@ -45,7 +45,9 @@
 					<div class="form-group has-feedback">
 						<label class="control-label col-sm-3" for="authors">Authors:</label>
 						<div class="col-sm-9">
-							<authors-component></authors-component>
+							<!--<input type="text" [(ngModel)]="model.authors" name="authors" #authors="ngModel" required>-->
+							<textarea-component [(ngModel)]="model.authors" [items]="model.authors" name="authors" #authors="ngModel"></textarea-component>
+							<div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">Authors is required</div>
 						</div>
 					</div>
 

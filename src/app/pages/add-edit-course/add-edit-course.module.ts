@@ -7,9 +7,9 @@ import { routes } from './add-edit-course.routes';
 
 // custom components
 import { NewCourseComponent } from './add-edit-course.component';
-import { authorizationService } from '../../core/services';
+import { authorsService } from '../../core/services';
 import { durationComponent } from '../../core/components/duration/duration.component';
-import { authorsComponent } from '../../core/components/authors/authors.component';
+import { textareaComponent } from '../../core/components/authors/authors.component';
 import { durationModule }  from '../../core/pipes/duration.module';
 import { FormsModule } from '@angular/forms';
 
@@ -20,7 +20,7 @@ import { DateValidator } from '../../core/diractives/date.validator.diractives';
 	declarations: [
 		NewCourseComponent,
 		durationComponent,
-		authorsComponent,
+		textareaComponent,
 		NumberValidator,
 		DateValidator
 		],
@@ -30,7 +30,7 @@ import { DateValidator } from '../../core/diractives/date.validator.diractives';
 		durationModule,
 		FormsModule
 	],
-	providers: [authorizationService]
+	providers: [authorsService]
 })
 export class NewCourseModule {
 	constructor() {

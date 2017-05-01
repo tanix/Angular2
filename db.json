@@ -2206,5 +2206,8 @@
       ]
     }
   ],
-  "creds": {}
+  "creds": {
+    "username": "",
+    "password": ""
+  }
 }
