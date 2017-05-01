@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { authorizationService } from '../../core/services';
 
 import { Course } from '../../core/interfaces/course/course.interface';
+import { validateEmail } from '../../core/validators/email.validator';
 
 @Component({
 	selector: 'add-edit-course',
@@ -12,9 +13,6 @@ import { Course } from '../../core/interfaces/course/course.interface';
 
 
 export class NewCourseComponent implements OnInit, OnDestroy {
-	public hasError: boolean = false;
-	public hasSuccess: boolean = false;
-
 	public title: string = "";
 	public description: string = "";
 	public date: Date;

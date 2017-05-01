@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
 	selector: 'duration-component',
@@ -8,4 +8,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.Default,
 })
 
-export class durationComponent { }
+export class durationComponent {
+	@Input('init') public InputDuration;
+}

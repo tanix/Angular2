@@ -25,12 +25,20 @@
 					</div>
 					<div class="form-group has-feedback">
 						<label class="control-label col-sm-3" for="duration">Duration:</label>
-						<div class="col-sm-3">
-							<input type="number" min="0" class="form-control" id="duration" [(ngModel)]="model.duration" name="duration" #duration="ngModel" required>
-							<div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">Email is required </div>
-						</div>
-						<div class="col-sm-3">
-							<duration-component></duration-component>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-4">
+									<input type="text" min="0" class="form-control" id="duration" [(ngModel)]="model.duration" name="duration" #duration="ngModel" required validateNumber>
+								</div>
+								<div class="col-sm-4" [hidden]="!duration.valid">
+									<duration-component [init]="model.duration"></duration-component>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">Duration is required by numeric</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group has-feedback">

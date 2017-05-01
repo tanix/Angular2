@@ -11,10 +11,12 @@ import { authorizationService } from '../../core/services';
 import { LoaderModule } from '../../core/components/loader/loader.module';
 
 import { FormsModule } from '@angular/forms';
+import { EmailValidator } from '../../core/diractives/email.validator.diractives';
 
 @NgModule({
 	declarations: [
-		LoginComponent ],
+		LoginComponent,
+		EmailValidator ],
 	imports: [
 		routes,
 		CommonModule,

@@ -14,12 +14,15 @@ import { authorsComponent } from '../../core/components/authors/authors.componen
 import { durationModule }  from '../../core/pipes/duration.module';
 import { FormsModule } from '@angular/forms';
 
+import { NumberValidator } from '../../core/diractives/number.validator.deractives';
+
 @NgModule({
 	declarations: [
 		NewCourseComponent,
 		datapickerComponent,
 		durationComponent,
 		authorsComponent,
+		NumberValidator
 		],
 	imports: [
 		routes,
