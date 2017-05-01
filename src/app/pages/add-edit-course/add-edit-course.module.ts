@@ -8,7 +8,6 @@ import { routes } from './add-edit-course.routes';
 // custom components
 import { NewCourseComponent } from './add-edit-course.component';
 import { authorizationService } from '../../core/services';
-import { datapickerComponent } from '../../core/components/datapicker/datapicker.component';
 import { durationComponent } from '../../core/components/duration/duration.component';
 import { authorsComponent } from '../../core/components/authors/authors.component';
 import { durationModule }  from '../../core/pipes/duration.module';
@@ -20,7 +19,6 @@ import { DateValidator } from '../../core/diractives/date.validator.diractives';
 @NgModule({
 	declarations: [
 		NewCourseComponent,
-		datapickerComponent,
 		durationComponent,
 		authorsComponent,
 		NumberValidator,
