@@ -9,6 +9,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Va
             <label><input type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item}}</label>
        </div>
     </div>`,
+	styles: [require('./authors.component.scss')],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -23,7 +24,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Va
 })
 export class authorsComponent implements ControlValueAccessor, Validator {
 	private items = [];
-	private isError: boolean;
+	private isError: boolean = true;
 	private data: any;
 
 	// this is the initial value set to the component

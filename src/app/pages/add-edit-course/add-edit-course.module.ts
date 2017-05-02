@@ -17,6 +17,8 @@ import { NumberValidator } from '../../core/diractives/number.validator.deractiv
 import { DateValidator } from '../../core/diractives/date.validator.diractives';
 
 import { authorsComponent }   from '../../core/components/authors/authors.component';
+import { dateComponent }   from '../../core/components/date/date.component';
+
 
 @NgModule({
 	declarations: [
@@ -24,7 +26,8 @@ import { authorsComponent }   from '../../core/components/authors/authors.compon
 		durationComponent,
 		NumberValidator,
 		DateValidator,
-		authorsComponent
+		authorsComponent,
+		dateComponent
 		],
 	imports: [
 		routes,

@@ -46,7 +46,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
-		alert(this.model);
+		alert(this.model.date);
 	}
 
 	public cancel($event) {
