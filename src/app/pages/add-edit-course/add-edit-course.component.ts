@@ -5,6 +5,8 @@ import { authorsService } from '../../core/services';
 
 import { Course } from '../../core/interfaces/course/course.interface';
 
+import { FormGroup, FormBuilder } from '@angular/forms';
+
 
 @Component({
 	selector: 'add-edit-course',
@@ -19,13 +21,14 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 	public description: string = "";
 	public date: Date;
 	public duration: number;
-	public authors: string [] = [];
+	public authors = [];
 
 	submitted = false;
 	model = new Course(this.title, this.description, this.date, this.duration, this.authors);
 	private subscription: Subscription = new Subscription();
 
 	public authorsObj : any;
+
 
 	constructor(public authorsService: authorsService) {
 		console.log('Course page: constructor');
@@ -43,6 +46,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
+		alert(this.model);
 	}
 
 	public cancel($event) {

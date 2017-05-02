@@ -1,44 +1,87 @@
-import {Component, Input, forwardRef} from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-
-const CUSTOM_RADIO_VALUE_ACCESSOR = {
-	provide: NG_VALUE_ACCESSOR,
-	useExisting: forwardRef(() => textareaComponent),
-	multi: true
-};
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator } from '@angular/forms';
 
 @Component({
-	selector: 'textarea-component',
-	templateUrl: 'authors.component.html',
-	providers: [CUSTOM_RADIO_VALUE_ACCESSOR]
+	selector: 'authors-component',
+	template:`
+	<div id="authors">
+       <div *ngFor="let item of data">
+            <label><input type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item}}</label>
+       </div>
+    </div>`,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => authorsComponent),
+			multi: true,
+		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: forwardRef(() => authorsComponent),
+			multi: true,
+		}]
 })
-export class textareaComponent implements ControlValueAccessor {
-	@Input() items: string[];
-	currentValue: any;
+export class authorsComponent implements ControlValueAccessor, Validator {
+	private items = [];
+	private isError: boolean;
+	private data: any;
 
-
-
-	setValue(item) {
-		this.currentValue = item.target.value;
-		this.writeValue(this.currentValue);
-	}
-
-	onChange = (_) => {};
-	onTouched = () => {};
-
-	writeValue(value: any) {
-		if (value !== undefined) {
-			this.currentValue = value;
-			console.log(this.currentValue);
+	// this is the initial value set to the component
+	public writeValue(obj: any) {
+		if (obj) {
+			this.data = obj;
 		}
 	}
 
-	registerOnChange(fn: any) {
-		this.onChange = fn;
+	// registers 'fn' that will be fired when changes are made
+	// this is how we emit the changes back to the form
+	public registerOnChange(fn: any) {
+		this.propagateChange = fn;
 	}
 
-	registerOnTouched(fn: any) {
-		this.onTouched = fn;
+	// validates the form, returns null when valid else the validation object
+	public validate(c: FormControl) {
+		return (!this.isError) ? null : {
+				isError: {
+					valid: false,
+				},
+			};
 	}
 
+	// not used, used for touch input
+	public registerOnTouched() { }
+
+	// change events from the inputs
+	private onChange(event) {
+
+		let target = event.target.parentNode;
+		let parent = target.parentNode.parentNode;
+
+		let inputs = parent.getElementsByTagName("input");
+
+		for (let i = 0; i < inputs.length; i++) {
+			let status = inputs[i];
+
+			if (status.checked) {
+				this.isError = false; break;
+			} else {
+				this.isError = true;
+			}
+		}
+
+		this.items = [];
+		for (let i = 0; i < inputs.length; i++) {
+			let status = inputs[i];
+
+			console.log(inputs[i]);
+			if (status.checked) {
+				this.items.push(inputs[i].value);
+			}
+		}
+
+		this.propagateChange(this.items);
+	}
+
+	// the method set in registerOnChange to emit changes back to the form
+	private propagateChange = (_: any) => { };
 }

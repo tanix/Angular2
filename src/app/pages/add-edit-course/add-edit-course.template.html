@@ -20,7 +20,7 @@
 					<div class="form-group has-feedback">
 						<label class="control-label col-sm-3" for="date">Date:</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="date" placeholder="Enter description" [(ngModel)]="model.date" name="date" #date="ngModel" required validateDate>
+							<input type="text" class="form-control" id="date" placeholder="Enter description" [(ngModel)]="model.date" name="date" #date="ngModel" required >
 							<div [hidden]="date.valid || date.pristine" class="alert alert-danger">date is required </div>
 						</div>
 					</div>
@@ -43,11 +43,10 @@
 						</div>
 					</div>
 					<div class="form-group has-feedback">
-						<label class="control-label col-sm-3" for="authors">Authors:</label>
+						<div class="control-label col-sm-3">Authors:</div>
 						<div class="col-sm-9">
-							<!--<input type="text" [(ngModel)]="model.authors" name="authors" #authors="ngModel" required>-->
-							<textarea-component [(ngModel)]="model.authors" [items]="model.authors" name="authors" #authors="ngModel"></textarea-component>
-							<div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">Authors is required</div>
+							<authors-component [(ngModel)]="model.authors" name="authors" #authors="ngModel" required></authors-component>
+							<div [hidden]="authors.valid || authors.pristine" class="alert alert-danger">Duration is required by numeric</div>
 						</div>
 					</div>
 
