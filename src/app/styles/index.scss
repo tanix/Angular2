@@ -1,2 +1,35 @@
 @import "./variables/colors.scss";
 @import "./components/_base.scss";
+
+date-component {
+	border-left: none !important;
+}
+
+date-component.ng-invalid > input {
+	border-left: 5px solid #a94442;
+}
+
+date-component.ng-valid > input {
+	border-left: 5px solid #42A948;
+}
+
+date-component > input.form-control:focus {
+	border-left-color: #a94442;
+}
+
+authors-component {
+	border-left: none !important;
+}
+
+authors-component.ng-invalid > div {
+	border-left: 5px solid #a94442;
+}
+
+authors-component.ng-valid > div {
+	border-left: 5px solid #42A948;
+}
+
+authors-component label {
+	margin: 0 0 5px 15px;
+}
+
