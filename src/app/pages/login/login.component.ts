@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { authorizationService } from '../../core/services';
-import { myLoaderService } from '../../core/services';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Login } from '../../core/interfaces/login/login.interface';
+
+import { authorizationService } from '../../core/services';
+import { myLoaderService } from '../../core/services';
 
 @Component({
 	selector: 'login',

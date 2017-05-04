@@ -74,7 +74,7 @@ export class authorsComponent implements ControlValueAccessor, Validator {
 		for (let i = 0; i < inputs.length; i++) {
 			let status = inputs[i];
 
-			console.log(inputs[i]);
+			//console.log(inputs[i]);
 			if (status.checked) {
 				this.items.push(inputs[i].value);
 			}

@@ -1,16 +1,15 @@
-﻿// angular modules
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// routes
 import { routes } from './login.routes';
 
-// custom components
 import { LoginComponent } from './login.component';
-import { authorizationService } from '../../core/services';
+
 import { LoaderModule } from '../../core/components/loader/loader.module';
 
-import { FormsModule } from '@angular/forms';
+import { authorizationService } from '../../core/services';
+
 import { EmailValidator } from '../../core/diractives/email.validator.diractives';
 
 @NgModule({
@@ -23,7 +22,7 @@ import { EmailValidator } from '../../core/diractives/email.validator.diractives
 		LoaderModule,
 		FormsModule
 	],
-	providers: [authorizationService]
+	providers: [ authorizationService ]
 })
 export class LoginModule {
 	constructor() {
