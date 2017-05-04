@@ -11,7 +11,7 @@ import { RouterModule, PreloadAllModules } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-import { NoContentComponent } from './pages/no-content';
+import { redirectComponent } from './pages/redirect';
 import { HeaderModule, FooterModule } from './core/components';
 
 import { LoaderModule } from './core/components/loader/loader.module';
@@ -33,13 +33,13 @@ const APP_PROVIDERS = [ ];
 	bootstrap: [AppComponent],
 	declarations: [
 		AppComponent,
-		NoContentComponent,
+		redirectComponent,
 	],
 	imports: [ // import Angular's modules
 		BrowserModule,
 		FormsModule,
 		HttpModule,
-		RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
+		RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules} ),
 		HeaderModule,
 		FooterModule,
 		HomeModule,

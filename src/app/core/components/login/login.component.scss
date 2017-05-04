@@ -1,3 +1,10 @@
 @import "../../../styles/variables/colors.scss";
 
+.breadcrumb {
+	display: inline-block;
+	margin: 17px 0;
+}
 
+.breadcrumb > a.active {
+	background-color: transparent;
+}

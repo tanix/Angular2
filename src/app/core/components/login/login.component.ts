@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 	encapsulation: ViewEncapsulation.None
 })
 export class LoginHeaderComponent implements OnDestroy {
-	private isLogined: boolean = false;
+	public isLogined: boolean = false;
 	private userInfo : string;
 
 	private subscription: Subscription = new Subscription();
