@@ -5,8 +5,6 @@ import { authorsService } from '../../core/services';
 
 import { Course } from '../../core/interfaces/course/course.interface';
 
-import { FormGroup, FormBuilder } from '@angular/forms';
-
 
 @Component({
 	selector: 'add-edit-course',
@@ -29,6 +27,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public authorsObj : any;
 
+	public canLeave: boolean = false;
 
 	constructor(public authorsService: authorsService) {
 		console.log('Course page: constructor');

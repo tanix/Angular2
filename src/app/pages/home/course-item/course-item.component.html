@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<div class="col-sm-2 text-right">
-			<button type="button" class="margin-bottom full-width btn btn-info">Edit course</button><br>
+			<button type="button" class="margin-bottom full-width btn btn-info" [routerLink]="['./course', courseItem.id]">Edit course</button><br>
 			<button type="button" class="full-width btn btn-info" (click)="deleteCourse(courseItem.id);" data-toggle="modal" data-target="#myModal">Delete</button>
 		</div>
 	</div>

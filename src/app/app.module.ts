@@ -22,9 +22,10 @@ import { NewCourseModule } from  './pages/add-edit-course';
 
 import { SecureHttpService}  from './core/services/authenticated-http/authenticated-http.service';
 
+import { canActivateGuard, canDeactivateGuard }  from './core/services/routes-guard';
 
 // Application wide providers
-const APP_PROVIDERS = [ ];
+const APP_PROVIDERS = [canActivateGuard, canDeactivateGuard ];
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -54,7 +55,7 @@ const APP_PROVIDERS = [ ];
 			return new SecureHttpService(backend, defaultOptions);
 		},
 		deps: [XHRBackend, RequestOptions]
-	}],
+	}, APP_PROVIDERS],
 })
 export class AppModule {
 

@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
+import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
 import { authorizationService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'login-header',
@@ -9,14 +10,17 @@ import { Subscription } from 'rxjs/Subscription';
 	providers: [],
 	encapsulation: ViewEncapsulation.None
 })
-export class LoginHeaderComponent implements OnDestroy {
+export class LoginHeaderComponent implements OnDestroy, OnInit {
 	public isLogined: boolean = false;
 	private userInfo : string;
+
+	id: number;
+	private sub: any;
 
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogin: Subscription = new Subscription();
 
-	constructor(public authorizationService: authorizationService) {
+	constructor(public authorizationService: authorizationService, private route: ActivatedRoute) {
 
 		this.subscription = authorizationService.subject.subscribe({
 			next: (data) => {
@@ -29,6 +33,18 @@ export class LoginHeaderComponent implements OnDestroy {
 					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + data.email);
 				}
 			}
+		});
+	}
+
+	ngOnInit() {
+		this.sub = this.route.params.subscribe(params => {
+			this.id = +params['id']; // (+) converts string 'id' to a number
+
+			// In a real app: dispatch action to load the details here.
+
+			console.log("==========");
+			console.log(this.id);
+			console.log("==========");
 		});
 	}
 
@@ -47,5 +63,6 @@ export class LoginHeaderComponent implements OnDestroy {
 		console.log('Home page: ngOnDestroy');
 		this.subscription.unsubscribe();
 		this.subscriptionLogin.unsubscribe();
+		this.sub.unsubscribe();
 	}
 }
