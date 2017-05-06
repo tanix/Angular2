@@ -6,6 +6,8 @@ import { Login } from '../../core/interfaces/login/login.interface';
 import { authorizationService } from '../../core/services';
 import { myLoaderService } from '../../core/services';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
 	selector: 'login',
 	providers: [Location],
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	submitted = false;
 	model = new Login(this.email, this.password);
 
-	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService) {
+	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService, public router: Router) {
 		console.log('Login page: constructor');
 	}
 
@@ -53,6 +55,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 				console.log('Loader. BehaviorSubject: ' + data.isLoader)
 			}
 		});
+
+		this.router.navigate(['/courses']);
 	}
 
 	public ngOnDestroy() {
