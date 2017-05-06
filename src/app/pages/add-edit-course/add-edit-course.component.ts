@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { authorsService } from '../../core/services';
 
 import { Course } from '../../core/interfaces/course/course.interface';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
 	selector: 'add-edit-course',
@@ -29,7 +29,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public canLeave: boolean = false;
 
-	constructor(public authorsService: authorsService) {
+	constructor(public authorsService: authorsService, private router: Router) {
 		console.log('Course page: constructor');
 	}
 
@@ -48,8 +48,8 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 		alert(this.model.date);
 	}
 
-	public cancel($event) {
-		$event.preventDefault();
+	public cancel() {
+		this.router.navigate(['/courses']);
 	}
 
 	public ngOnDestroy() {
