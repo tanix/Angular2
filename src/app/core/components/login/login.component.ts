@@ -13,13 +13,13 @@ import 'rxjs/add/operator/switchMap';
 })
 export class LoginHeaderComponent implements OnDestroy, OnInit {
 	public isLogined: boolean = false;
-	private userInfo : string;
+	private userName : string;
 
 	id: number;
 	private sub: any;
 
 	private subscription: Subscription = new Subscription();
-	private subscriptionLogin: Subscription = new Subscription();
+	private subscriptionLogOut: Subscription = new Subscription();
 
 	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router) {
 
@@ -29,9 +29,9 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 
 				if(data.email) {
 					this.isLogined = data.login; //this.authorizationService.isAuthenticated();
-					this.userInfo = data.email; //this.authorizationService.getUserInfo();
+					this.userName = data.email; //this.authorizationService.getUserInfo();
 
-					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + data.email);
+					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
 				}
 			}
 		});
@@ -39,10 +39,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 
 	ngOnInit() {
 		this.sub = this.route.params.subscribe(params => {
-			this.id = +params['id']; // (+) converts string 'id' to a number
-
-			// In a real app: dispatch action to load the details here.
-
+			this.id = +params['id'];
 			console.log("==========");
 			console.log(this.id);
 			console.log("==========");
@@ -50,7 +47,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 	}
 
 	public logOut() {
-		this.subscriptionLogin  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
+		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
 
 		this.subscription = this.authorizationService.subject.subscribe({
 			next: (data) => {
@@ -65,7 +62,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 	public ngOnDestroy() {
 		console.log('Home page: ngOnDestroy');
 		this.subscription.unsubscribe();
-		this.subscriptionLogin.unsubscribe();
+		this.subscriptionLogOut.unsubscribe();
 		this.sub.unsubscribe();
 	}
 }

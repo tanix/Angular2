@@ -25,38 +25,48 @@ export class authorizationService  {
 		this.email = localStorage.getItem("email");
 
 		console.log("setBehaviorSubject: localStorage email " + this.email);
-		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false});
+		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false, email: false});
 	}
 
-	public login(email, password): Observable<any> {
+	public login(email?, password?): Observable<any> {
+
+		if (typeof(Storage) !== "undefined") {
+			console.log("authorizationService: email" + email);
+			localStorage.setItem("email", email);
+			localStorage.setItem("email", email);
+
+		} else {
+			console.warn("Sorry! No Web Storage support..");
+		}
 
 		console.log("authorizationService: login");
 		return this.http.post(this.urlCreds, JSON.stringify({ username: email, password: password }), this.options)
 			.map(res => {
-				if (typeof(Storage) !== "undefined") {
-					console.log("authorizationService: email" + res.json().username);
-					localStorage.setItem("email", res.json().username);
-
-				} else {
-					console.warn("Sorry! No Web Storage support..");
-				}
+				// if (typeof(Storage) !== "undefined") {
+				// 	console.log("authorizationService: email" + res.json().username);
+				// 	localStorage.setItem("email", res.json().username);
+				//
+				// } else {
+				// 	console.warn("Sorry! No Web Storage support..");
+				// }
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	public logOut(): Observable<any>  {
 		console.log("authorizationService: logOut");
+		localStorage.removeItem("email");
 
 		this.subject.next({login: false});
 
 		return this.http.post(this.urlCreds, JSON.stringify({ username: '', password: '' }), this.options)
 			.map(res => {
-				if (typeof(Storage) !== "undefined") {
-					localStorage.removeItem("email");
-
-				} else {
-					console.warn("Sorry! No Web Storage support..");
-				}
+				// if (typeof(Storage) !== "undefined") {
+				// 	localStorage.removeItem("email");
+				//
+				// } else {
+				// 	console.warn("Sorry! No Web Storage support..");
+				// }
 
 				console.log(res.json());
 			})

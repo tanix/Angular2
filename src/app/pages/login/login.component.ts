@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		this.subscriptionLogin  = this.authorizationService.login(this.email, this.password).subscribe((data) => data);
+		this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => data);
 
 		this.myLoaderService.hideLoader();
 		this.subscription = this.myLoaderService.subject.subscribe({
