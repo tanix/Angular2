@@ -58,6 +58,8 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 				console.log('LogOut BehaviorSubject: ' + data.login)
 			}
 		});
+
+		this.router.navigate(['/login']);
 	}
 
 	public ngOnDestroy() {

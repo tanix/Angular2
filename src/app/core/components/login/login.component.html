@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-sm-2 text-right">
 		<span>{{userInfo}}</span>
-		<a href="#/login" (click)="logOut($event)">logoff</a>
+		<a (click)="logOut()" title="logoff">logoff</a>
 	</div>
 </div>
 <a *ngIf="!isLogined">login</a>
