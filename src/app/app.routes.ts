@@ -1,4 +1,4 @@
-import {Routes, CanActivateChild} from '@angular/router';
+import { Routes, CanActivateChild, RouterModule } from '@angular/router';
 import { LoginComponent} from './pages/login';
 import { HomeComponent } from './pages/home';
 import { NewCourseComponent } from './pages/add-edit-course';
@@ -16,15 +16,6 @@ export const ROUTES: Routes = [
 		// 	{ path: 'course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
 		// ]
 	},
-
-
-	// { path: 'courses/new', component: NewCourseComponent , canActivate: [ canActivateGuard ], canDeactivate: [canDeactivateGuard]},
-	 { path: 'courses/new', component: NewCourseComponent },
-	 { path: 'courses/course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
-
-	// Redirect to
-	{ path: 'courses/course/:id', redirectTo: 'course/:id', pathMatch: 'full' },
-	{ path: 'courses/new', redirectTo: 'new', pathMatch: 'full' },
 
 	{ path: '**', component: redirectComponent },
 ];

@@ -56,6 +56,9 @@ const APP_PROVIDERS = [canActivateGuard, canDeactivateGuard ];
 		},
 		deps: [XHRBackend, RequestOptions]
 	}, APP_PROVIDERS],
+	exports: [
+		RouterModule
+	]
 })
 export class AppModule {
 

@@ -1,7 +1,8 @@
 import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
 import { authorizationService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
 	selector: 'login-header',
@@ -20,7 +21,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogin: Subscription = new Subscription();
 
-	constructor(public authorizationService: authorizationService, private route: ActivatedRoute) {
+	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router) {
 
 		this.subscription = authorizationService.subject.subscribe({
 			next: (data) => {
