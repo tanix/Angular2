@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private courseItemId: number;
 	public courseQuery: string;
 
-	private courses=[];
+	public courses=[];
 	course: Course;
 
 	private subscription: Subscription = new Subscription();
@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 				this.courses.push(data);
 				this.orderPipe.transform(this.courses);
 			});
+
 	}
 
 	public deleteCourseItem($event) {

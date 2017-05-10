@@ -21,7 +21,8 @@
 						<label class="control-label col-sm-3" for="date">Date:</label>
 						<div class="col-sm-9">
 							<!--<input type="text" class="form-control" id="date" placeholder="DD/MM/YYYY" [(ngModel)]="model.date" name="date" #date="ngModel" required validateDate>-->
-							<date-component [(ngModel)]="model.date" name="date" #date="ngModel" required></date-component>
+							<date-component [ngModel]="model.date | date: 'dd/MM/yyyy'" (ngModelChange)='model.date=$event' name="date" #date="ngModel" required></date-component>
+							<!--<date-component [(ngModel)]="model.date" name="date" #date="ngModel" required></date-component>-->
 							<div [hidden]="date.valid || date.pristine" class="alert alert-danger">Date is required by DD/MM/YYYY</div>
 						</div>
 					</div>
