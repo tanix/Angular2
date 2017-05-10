@@ -10,15 +10,12 @@ export const ROUTES: Routes = [
 	{ path: '', redirectTo: 'courses', pathMatch: 'full'},
 
 	{ path: 'login', component: LoginComponent },
-	{ path: 'courses', component: HomeComponent, pathMatch: 'full'
+	{ path: 'courses', component: HomeComponent, pathMatch: 'full', canActivate: [canActivateGuard]
 		// children: [
 		// 	{ path: 'new', component: NewCourseComponent },
 		// 	{ path: 'course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
 		// ]
 	},
 
-	{ path: 'courses/new', component: NewCourseComponent },
-	{ path: 'courses/course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
-
-	{ path: '**', component: redirectComponent },
+	{ path: '**', component: redirectComponent, canActivate: [canActivateGuard]},
 ];

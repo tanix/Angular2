@@ -9,7 +9,7 @@ export class canDeactivateGuard implements CanDeactivate<Observable<boolean>> {
 
 	canDeactivate(course: NewCourseComponent) {
 		console.log("canActivate method called");
-		return Observable.of(course.canLeave);
+		return Observable.of(course);
 	}
 
 }
