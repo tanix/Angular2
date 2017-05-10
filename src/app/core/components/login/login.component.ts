@@ -1,27 +1,30 @@
-import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnDestroy, DoCheck} from '@angular/core';
 import { authorizationService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+
+import { routeParamsService } from '../../services';
 
 @Component({
 	selector: 'login-header',
 	templateUrl: 'login.component.html',
 	styles: [require('./login.component.scss')],
-	providers: [],
+	providers: [ routeParamsService ],
 	encapsulation: ViewEncapsulation.None
 })
-export class LoginHeaderComponent implements OnDestroy, OnInit {
+export class LoginHeaderComponent implements OnDestroy, DoCheck {
 	public isLogined: boolean = false;
 	private userName : string;
 
-	id: number;
-	private sub: any;
+	public id: number;
+
 
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogOut: Subscription = new Subscription();
+	private subscriptionId: Subscription = new Subscription();
 
-	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router) {
+	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router, public routeID : routeParamsService) {
 
 		this.subscription = authorizationService.subject.subscribe({
 			next: (data) => {
@@ -37,18 +40,17 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 		});
 	}
 
-	ngOnInit() {
-		this.sub = this.route.params.subscribe(params => {
-			this.id = +params['id'];
-			console.log("==========");
-			console.log(this.id);
-			console.log("==========");
+	ngDoCheck() {
+		this.subscriptionId = this.routeID.subject.subscribe({
+			next: (id) => {
+				console.log('ID : ' + id);
+				this.id = id;
+			}
 		});
 	}
 
 	public logOut() {
 		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
-
 		this.subscription = this.authorizationService.subject.subscribe({
 			next: (data) => {
 				this.isLogined = data.login;
@@ -63,6 +65,6 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 		console.log('Home page: ngOnDestroy');
 		this.subscription.unsubscribe();
 		this.subscriptionLogOut.unsubscribe();
-		this.sub.unsubscribe();
+		this.subscriptionId.unsubscribe();
 	}
 }

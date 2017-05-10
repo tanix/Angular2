@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from "rxjs/Observable";
 import { Subscription } from 'rxjs/Subscription';
 import { authorsService } from '../../core/services';
+import { routeParamsService } from '../../core/services';
 
 import { Course } from '../../core/interfaces/course/course.interface';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 
 @Component({
 	selector: 'add-edit-course',
@@ -12,7 +12,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 	styles: [require('./add-edit-course.styles.scss')],
 	template: require('./add-edit-course.template.html')
 })
-
 
 export class NewCourseComponent implements OnInit, OnDestroy {
 	public title: string = "";
@@ -23,13 +22,12 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	submitted = false;
 	model = new Course(this.title, this.description, this.date, this.duration, this.authors);
-	private subscription: Subscription = new Subscription();
+
+	public subscriptionId: Subscription = new Subscription();
 
 	public authorsObj : any;
 
-	public canLeave: boolean = false;
-
-	constructor(public authorsService: authorsService, private router: Router) {
+	constructor(public authorsService: authorsService, private route: ActivatedRoute, private router: Router, public routeID: routeParamsService) {
 		console.log('Course page: constructor');
 	}
 
@@ -41,6 +39,12 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 		for (let course of this.authorsObj) {
 			this.authors.push(course.name);
 		}
+
+		this.subscriptionId = this.route.params.map(params => params['id'])
+			.subscribe((id) => {
+				console.log("ID:", id);
+				this.routeID.setRouteId(id);
+		});
 	}
 
 	public onSubmit() {
@@ -54,7 +58,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		console.log('Course page: ngOnDestroy');
-		this.subscription.unsubscribe();
+		this.subscriptionId.unsubscribe();
 	}
 
 }

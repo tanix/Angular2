@@ -17,5 +17,8 @@ export const ROUTES: Routes = [
 		// ]
 	},
 
+	{ path: 'courses/new', component: NewCourseComponent },
+	{ path: 'courses/course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
+
 	{ path: '**', component: redirectComponent },
 ];
