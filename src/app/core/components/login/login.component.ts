@@ -27,16 +27,14 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router, public routeID : routeParamsService) {
 
 		this.subscription = authorizationService.subject.subscribe((data) => {
-			//next: (data) => {
-				console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
+			console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
 
-				if(data.email) {
-					this.isLogined = data.login; //this.authorizationService.isAuthenticated();
-					this.userName = data.email; //this.authorizationService.getUserInfo();
+			if(data.email) {
+				this.isLogined = data.login; //this.authorizationService.isAuthenticated();
+				this.userName = data.email; //this.authorizationService.getUserInfo();
 
-					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
-				}
-			//}
+				console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
+			}
 		});
 	}
 
