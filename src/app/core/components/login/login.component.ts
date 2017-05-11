@@ -26,8 +26,8 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 
 	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router, public routeID : routeParamsService) {
 
-		this.subscription = authorizationService.subject.subscribe({
-			next: (data) => {
+		this.subscription = authorizationService.subject.subscribe((data) => {
+			//next: (data) => {
 				console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
 
 				if(data.email) {
@@ -36,26 +36,22 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 
 					console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
 				}
-			}
+			//}
 		});
 	}
 
 	ngDoCheck() {
-		this.subscriptionId = this.routeID.subject.subscribe({
-			next: (id) => {
-				console.log('ID : ' + id);
-				this.id = id;
-			}
+		this.subscriptionId = this.routeID.subject.subscribe((id) => {
+			console.log('Login component course ID : ' + id);
+			this.id = id;
 		});
 	}
 
 	public logOut() {
 		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
-		this.subscription = this.authorizationService.subject.subscribe({
-			next: (data) => {
-				this.isLogined = data.login;
-				console.log('LogOut BehaviorSubject: ' + data.login)
-			}
+		this.subscription = this.authorizationService.subject.subscribe((data) => {
+			this.isLogined = data.login;
+			console.log('LogOut BehaviorSubject: ' + data.login);
 		});
 
 		this.router.navigate(['/login']);

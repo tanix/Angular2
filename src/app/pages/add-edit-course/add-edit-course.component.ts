@@ -17,7 +17,7 @@ import { coursesService } from '../../core/services/courses/courses.service';
 })
 
 export class NewCourseComponent implements OnInit, OnDestroy {
-	public title: string = ""; public title2: string = "";
+	public title: string = "";
 	public description: string = "";
 	public date: Date;
 	public duration: number;
@@ -32,9 +32,9 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 	public authorsObj : any;
 	public id: number;
 
-	constructor(public authorsService: authorsService, private route: ActivatedRoute, private router: Router, public routeID: routeParamsService,
-	            public coursesService: coursesService) {
-		console.log('Course page: constructor');
+	constructor(public authorsService: authorsService, private route: ActivatedRoute, private router: Router,
+			public routeID: routeParamsService,	public coursesService: coursesService) {
+			console.log('Course page: constructor');
 	}
 
 	public ngOnInit() {
@@ -69,7 +69,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
-		alert(this.model.date);
+		//alert(this.model.date);
 
 		if(this.id) {
 			this.subscription = this.coursesService.updateCourse(this.id, this.model).subscribe();

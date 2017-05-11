@@ -3,13 +3,14 @@ import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { authorizationService } from '../authorization/authorization.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Injectable()
 export class canActivateGuard implements CanActivate, OnDestroy  {
 	private subscription: Subscription = new Subscription();
 	private isLogined : boolean = false;
 
-	constructor(public authorizationService: authorizationService) {
+	constructor(public authorizationService: authorizationService, public router: Router) {
 		console.log("canActivateGuard constructor");
 	}
 
@@ -20,6 +21,10 @@ export class canActivateGuard implements CanActivate, OnDestroy  {
 			next: (data) => {
 				console.log('canActivateGuard. BehaviorSubject Login: ' + data.login);
 				this.isLogined = data.login;
+
+				if(!this.isLogined) {
+					this.router.navigate(['/login']);
+				}
 			}
 		});
 

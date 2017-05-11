@@ -21,6 +21,7 @@ import { LoginModule } from './pages/login';
 import { NewCourseModule } from  './pages/add-edit-course';
 
 import { SecureHttpService}  from './core/services/authenticated-http/authenticated-http.service';
+import { routeParamsService } from './core/services';
 
 import { canActivateGuard, canDeactivateGuard }  from './core/services/routes-guard';
 
@@ -55,7 +56,7 @@ const APP_PROVIDERS = [canActivateGuard, canDeactivateGuard ];
 			return new SecureHttpService(backend, defaultOptions);
 		},
 		deps: [XHRBackend, RequestOptions]
-	}, APP_PROVIDERS],
+	}, APP_PROVIDERS, routeParamsService],
 	exports: [
 		RouterModule
 	]

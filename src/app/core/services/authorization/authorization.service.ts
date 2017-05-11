@@ -29,6 +29,7 @@ export class authorizationService  {
 	}
 
 	public login(email?, password?): Observable<any> {
+		console.log("authorizationService: login");
 
 		if (typeof(Storage) !== "undefined") {
 			console.log("authorizationService: email" + email);
@@ -39,12 +40,14 @@ export class authorizationService  {
 			console.warn("Sorry! No Web Storage support..");
 		}
 
-		console.log("authorizationService: login");
+		this.setBehaviorSubject();
+
 		return this.http.post(this.urlCreds, JSON.stringify({ username: email, password: password }), this.options)
 			.map(res => {
 				// if (typeof(Storage) !== "undefined") {
-				// 	console.log("authorizationService: email" + res.json().username);
-				// 	localStorage.setItem("email", res.json().username);
+				// 	console.log("authorizationService: email" + email);
+				// 	localStorage.setItem("email", email);
+				// 	localStorage.setItem("email", email);
 				//
 				// } else {
 				// 	console.warn("Sorry! No Web Storage support..");
@@ -55,8 +58,8 @@ export class authorizationService  {
 
 	public logOut(): Observable<any>  {
 		console.log("authorizationService: logOut");
-		localStorage.removeItem("email");
 
+		localStorage.removeItem("email");
 		this.subject.next({login: false});
 
 		return this.http.post(this.urlCreds, JSON.stringify({ username: '', password: '' }), this.options)

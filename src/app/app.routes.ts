@@ -12,10 +12,10 @@ export const ROUTES: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'courses', component: HomeComponent, pathMatch: 'full', canActivate: [canActivateGuard]
 		// children: [
-		// 	{ path: 'new', component: NewCourseComponent },
-		// 	{ path: 'course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'} },
+		// 	{ path: 'new', component: NewCourseComponent, canActivate: [canActivateGuard] },
+		// 	{ path: 'course/:id', component: NewCourseComponent , data: { 'security_key' : 'key_here'}, canActivate: [canActivateGuard] },
 		// ]
 	},
 
-	{ path: '**', component: redirectComponent, canActivate: [canActivateGuard]},
+	{ path: '**', component: redirectComponent, canActivate: [canActivateGuard]}
 ];

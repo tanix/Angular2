@@ -7,7 +7,7 @@ export class myLoaderService {
 	public subject;
 
 	constructor() {
-		this.subject = new BehaviorSubject(false);
+		this.subject = new BehaviorSubject({isLoader: false});
 	}
 
 	public showLoader() {
