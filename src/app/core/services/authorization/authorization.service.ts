@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, HttpModule, Headers, RequestOptions } from '@angular/http';
+import { Http, HttpModule, Headers, RequestOptions, RequestMethod, Request } from '@angular/http';
 import 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from "rxjs/Observable";
@@ -10,15 +10,10 @@ export class authorizationService  {
 	public  email;
 
 	private urlCreds = 'http://localhost:6002/creds';
-	private headers;
-	private options;
 
 	constructor(private http: Http) {
 		this.subject = new BehaviorSubject(false);
 		this.setBehaviorSubject();
-
-		this.headers = new Headers({ 'Content-Type': 'application/json' });
-		this.options = new RequestOptions({ headers: this.headers, withCredentials: false });
 	}
 
 	public setBehaviorSubject () {
@@ -42,7 +37,7 @@ export class authorizationService  {
 
 		this.setBehaviorSubject();
 
-		return this.http.post(this.urlCreds, JSON.stringify({ username: email, password: password }), this.options)
+		return this.http.post(this.urlCreds,JSON.stringify({"email": email, "password": password}))
 			.map(res => {
 				// if (typeof(Storage) !== "undefined") {
 				// 	console.log("authorizationService: email" + email);
@@ -52,6 +47,8 @@ export class authorizationService  {
 				// } else {
 				// 	console.warn("Sorry! No Web Storage support..");
 				// }
+				console.log(" ---- this.http.post ---- ");
+				console.log(res);
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
@@ -62,7 +59,7 @@ export class authorizationService  {
 		localStorage.removeItem("email");
 		this.subject.next({login: false});
 
-		return this.http.post(this.urlCreds, JSON.stringify({ username: '', password: '' }), this.options)
+		return this.http.post(this.urlCreds, JSON.stringify({ "email": "", "password": "" }))
 			.map(res => {
 				// if (typeof(Storage) !== "undefined") {
 				// 	localStorage.removeItem("email");

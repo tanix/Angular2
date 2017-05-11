@@ -44,7 +44,7 @@ export class coursesService {
 
 	public createCourse(course):Observable <Course>  {
 		console.log("createCourse method");
-		return this.http.put(this.url, course )
+		return this.http.put(this.url, JSON.stringify(course))
 			.map(res => res.json())
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
@@ -52,7 +52,7 @@ export class coursesService {
 	public updateCourse(id, course):Observable <Course>  {
 		console.log("updateItem method");
 
-		return this.http.put(this.url + '/' + id, course )
+		return this.http.put(this.url + '/' + id, JSON.stringify(course))
 			.map(res => res.json())
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}

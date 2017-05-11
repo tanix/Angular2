@@ -19,7 +19,6 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 
 	public id: number;
 
-
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogOut: Subscription = new Subscription();
 	private subscriptionId: Subscription = new Subscription();

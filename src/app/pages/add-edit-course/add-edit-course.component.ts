@@ -70,7 +70,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
-		//alert(this.model.date);
+		alert(this.model.date);
 
 		if(this.id) {
 			this.subscription = this.coursesService.updateCourse(this.id, this.model).subscribe();

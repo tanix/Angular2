@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SecureHttpService extends Http {
+	headers = new Headers({	'Accept': 'application/json', 'Content-Type': 'application/json'});
 
 	constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
 		super(backend, defaultOptions);
@@ -11,11 +12,19 @@ export class SecureHttpService extends Http {
 
 	request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
 		console.log('Extends Http request');
+		options = new RequestOptions({ headers: this.headers, withCredentials: false });
 		return super.request(url, options);
 	}
 
 	get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('EExtends Http get');
+		console.log('Extends Http get');
+		options = new RequestOptions({ headers: this.headers, withCredentials: false });
 		return super.get(url, options);
+	}
+
+	post(url: string, options?: RequestOptionsArgs): Observable<Response> {
+		console.log('Extends Http post');
+		options = new RequestOptions({ headers: this.headers, withCredentials: false });
+		return super.post(url, options);
 	}
 }
