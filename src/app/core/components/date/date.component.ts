@@ -36,10 +36,15 @@ export class dateComponent implements ControlValueAccessor, Validator {
 
 	// validates the form, returns null when valid else the validation object
 	public validate(c: FormControl) {
+		if(this.date) {
+			let inputDate = this.date.split('/');
+			let day = inputDate[0], mounth = inputDate[1], year = inputDate[2];
 
-		let pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
-		//alert(pattern.test(this.date));
-		return pattern.test(this.date) ? null : { invalidDate: true };
+			let date = new Date(year + '/' + mounth + '/' + day), today = new Date();
+
+			let pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+			return pattern.test(this.date) && (today.getTime() >= date.getTime()) ? null : { invalidDate: true };
+		}
 	}
 
 	// not used, used for touch input
