@@ -30,10 +30,10 @@
 						<label class="control-label col-sm-3" for="duration">Duration:</label>
 						<div class="col-sm-9">
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="text" min="0" class="form-control" id="duration" [(ngModel)]="model.duration" name="duration" #duration="ngModel" required validateNumber>
 								</div>
-								<div class="col-sm-4" [hidden]="!duration.valid">
+								<div class="col-sm-6" [hidden]="!duration.valid">
 									<duration-component [init]="model.duration"></duration-component>
 								</div>
 							</div>
