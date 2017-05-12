@@ -42,8 +42,8 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 		this.authorsObj = this.authorsService.getAuthors();
 
-		for (let course of this.authorsObj) {
-			this.authors.push(course.name);
+		for (let author of this.authorsObj) {
+			this.authors.push(author);
 		}
 
 		this.subscriptionId = this.route.params.map(params => params['id'])
@@ -61,7 +61,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 				this.authors.length = 0;
 
 				for (let author of data.authors) {
-					this.authors.push(author.firstName + " " + author.lastName);
+					this.authors.push(author);
 				}
 
 				this.model = new Course(data.title, data.description, data.date, data.duration, this.authors);

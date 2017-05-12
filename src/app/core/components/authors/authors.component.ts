@@ -1,12 +1,13 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator } from '@angular/forms';
+import { Authors } from '../../interfaces/authors/authors.interface';
 
 @Component({
 	selector: 'authors-component',
 	template:`
 	<div id="authors">
        <div *ngFor="let item of data">
-            <label><input type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item}}</label>
+            <label><input type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item.firstName}} {{item.lastName}} </label>
        </div>
     </div>`,
 	styles: [require('./authors.component.scss')],
@@ -25,10 +26,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Va
 export class authorsComponent implements ControlValueAccessor, Validator {
 	private items = [];
 	private isError: boolean = true;
-	private data: any;
+	private data: Authors;
 
 	// this is the initial value set to the component
-	public writeValue(obj: any) {
+	public writeValue(obj: Authors) {
 		if (obj) {
 			this.data = obj;
 		}
@@ -74,7 +75,6 @@ export class authorsComponent implements ControlValueAccessor, Validator {
 		for (let i = 0; i < inputs.length; i++) {
 			let status = inputs[i];
 
-			//console.log(inputs[i]);
 			if (status.checked) {
 				this.items.push(inputs[i].value);
 			}

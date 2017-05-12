@@ -7,11 +7,36 @@ export class authorsService  {
 
 	constructor() {
 		this.authors = [
-			{ 'name' : 'Jim'},
-			{ 'name' : 'Alice'},
-			{ 'name' : 'Tom'},
-			{ 'name' : 'Max'},
-			{ 'name' : 'Alex'},
+			{
+				"id": 9935,
+				"firstName": "Karla",
+				"lastName": "Carr"
+			},
+			{
+				"id": 771,
+				"firstName": "Harriett",
+				"lastName": "Norman"
+			},
+			{
+				"id": 4007,
+				"firstName": "Rochelle",
+				"lastName": "Adams"
+			},
+			{
+				"id": 1492,
+				"firstName": "Rosemarie",
+				"lastName": "Boyd"
+			},
+			{
+				"id": 4664,
+				"firstName": "Ellison",
+				"lastName": "Love"
+			},
+			{
+				"id": 363,
+				"firstName": "Acevedo",
+				"lastName": "Kane"
+			}
 		]
 	}
 
