@@ -27,17 +27,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		this.subscription = this.authorizationService.subject.subscribe((data) => {
-			console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
-
-			if(data.email) {
-				this.isLogined = data.login; //this.authorizationService.isAuthenticated();
-				this.userName = data.email; //this.authorizationService.getUserInfo();
-
-				console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
-			}
-		});
-
+		this.getLoginedState();
 		this.subscriptionId = this.routeID.subject.subscribe((id) => {
 			console.log('Login component course ID : ' + id);
 			this.id = id;
@@ -46,12 +36,19 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 
 	public logOut() {
 		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
-		this.subscription = this.authorizationService.subject.subscribe((data) => {
-			this.isLogined = data.login;
-			console.log('LogOut BehaviorSubject: ' + data.login);
-		});
+		this.getLoginedState();
 
 		this.router.navigate(['/login']);
+	}
+
+	public getLoginedState() {
+		this.subscription = this.authorizationService.subject.subscribe((data) => {
+			this.isLogined = data.login; //this.authorizationService.isAuthenticated();
+
+			if(data.email) {
+				this.userName = data.email; //this.authorizationService.getUserInfo();
+			}
+		});
 	}
 
 	public ngOnDestroy() {
