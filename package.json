@@ -67,7 +67,7 @@
     "webpack-dev-server": "webpack-dev-server",
     "webpack": "webpack",
     "i18n": "ng-xi18n",
-    "servers": "concurrently --kill-others 'json-server --port 6002 db.json' 'npm run server:dev'"
+    "servers": "concurrently --kill-others \"json-server --port 6002 db.json\" \"npm run server:dev\""
   },
   "dependencies": {
     "@angular/common": "2.4.6",
