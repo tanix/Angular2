@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { authorizationService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router} from '@angular/router';
@@ -39,6 +39,7 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 		});
 
 		this.subscriptionId = this.routeID.subject.subscribe((id) => {
+			console.log('Login component course ID : ' + id);
 			this.id = id;
 		});
 	}

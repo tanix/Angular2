@@ -48,7 +48,12 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 		this.subscriptionId = this.route.params.map(params => params['id'])
 			.subscribe((id) => {
-				this.id = +id;
+				if(id) {
+					this.id = +id;
+				} else {
+					this.id = 0;
+				}
+
 				this.routeID.setRouteId(this.id);
 		});
 
@@ -87,6 +92,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 		console.log('Course page: ngOnDestroy');
 		this.subscriptionId.unsubscribe();
 		this.subscription.unsubscribe();
+		this.routeID.resetRouteId();
 	}
 
 }

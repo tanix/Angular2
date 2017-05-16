@@ -9,4 +9,8 @@ export class routeParamsService {
 	public setRouteId(id) {
 		this.subject.next(id);
 	}
+
+	public resetRouteId() {
+		this.subject.next(0);
+	}
 }
