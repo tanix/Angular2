@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnDestroy, DoCheck} from '@angular/core';
+import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
 import { authorizationService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,7 @@ import { routeParamsService } from '../../services';
 	providers: [],
 	encapsulation: ViewEncapsulation.None
 })
-export class LoginHeaderComponent implements OnDestroy, DoCheck {
+export class LoginHeaderComponent implements OnDestroy, OnInit {
 	public isLogined: boolean = false;
 	private userName : string;
 
@@ -24,8 +24,10 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 	private subscriptionId: Subscription = new Subscription();
 
 	constructor(public authorizationService: authorizationService, private route: ActivatedRoute, private router: Router, public routeID : routeParamsService) {
+	}
 
-		this.subscription = authorizationService.subject.subscribe((data) => {
+	ngOnInit() {
+		this.subscription = this.authorizationService.subject.subscribe((data) => {
 			console.log('Constructor LoginHeaderComponent. BehaviorSubject Login: ' + data.login);
 
 			if(data.email) {
@@ -35,9 +37,7 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 				console.log('Constructor LoginHeaderComponent. BehaviorSubject Email: ' + this.userName);
 			}
 		});
-	}
 
-	ngDoCheck() {
 		this.subscriptionId = this.routeID.subject.subscribe((id) => {
 			this.id = id;
 		});
