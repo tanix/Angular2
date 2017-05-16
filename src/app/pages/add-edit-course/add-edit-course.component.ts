@@ -48,10 +48,8 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 		this.subscriptionId = this.route.params.map(params => params['id'])
 			.subscribe((id) => {
-				console.log("ID:", id);
 				this.id = +id;
 				this.routeID.setRouteId(this.id);
-
 		});
 
 		this.subscription = this.coursesService.getList()

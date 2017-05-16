@@ -10,7 +10,7 @@ import { routeParamsService } from '../../services';
 	selector: 'login-header',
 	templateUrl: 'login.component.html',
 	styles: [require('./login.component.scss')],
-	providers: [ routeParamsService ],
+	providers: [],
 	encapsulation: ViewEncapsulation.None
 })
 export class LoginHeaderComponent implements OnDestroy, DoCheck {
@@ -39,7 +39,6 @@ export class LoginHeaderComponent implements OnDestroy, DoCheck {
 
 	ngDoCheck() {
 		this.subscriptionId = this.routeID.subject.subscribe((id) => {
-			console.log('Login component course ID : ' + id);
 			this.id = id;
 		});
 	}

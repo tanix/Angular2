@@ -12,7 +12,6 @@ import { dateComponent }   from '../../core/components/date/date.component';
 import { durationModule }  from '../../core/pipes/duration.module';
 
 import { authorsService } from '../../core/services';
-import { routeParamsService } from '../../core/services';
 
 import { NumberValidator } from '../../core/diractives/number.validator.deractives';
 import { DateValidator } from '../../core/diractives/date.validator.diractives';
@@ -33,7 +32,7 @@ import { DateValidator } from '../../core/diractives/date.validator.diractives';
 		durationModule,
 		FormsModule
 	],
-	providers: [authorsService, routeParamsService]
+	providers: [authorsService]
 })
 export class NewCourseModule {
 	constructor() {
