@@ -57,9 +57,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 				this.routeID.setRouteId(this.id);
 		});
 
-		this.subscription = this.coursesService.getList()
-			.concatMap(data => Observable.from(data))
-			.filter(course => course.id == this.id )
+		this.subscription = this.coursesService.getCourseById(this.id)
 			.subscribe((data) => {
 				this.authors.length = 0;
 
@@ -67,7 +65,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 					this.authors.push(author);
 				}
 
-				this.model = new Course(data.title, data.description, data.date, data.duration, this.authors);
+				this.model = new Course(data.title, data.description, data.date, +data.duration, this.authors);
 			});
 	}
 

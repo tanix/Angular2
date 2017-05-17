@@ -57,4 +57,12 @@ export class coursesService {
 			.map(res => res.json())
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
+
+	public getCourseById(id):Observable <Course>  {
+		console.log("getCourse method");
+
+		return this.http.get(this.url + '/' + id)
+			.map(res => res.json())
+			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+	}
 }
