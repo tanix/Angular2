@@ -73,18 +73,20 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
-		alert(this.model.date);
 
 		if(this.id) {
-			this.subscription = this.coursesService.updateCourse(this.id, this.model).subscribe();
-		} else {
-			this.subscription = this.coursesService.createCourse(this.model).subscribe();
-		}
+			this.subscription = this.coursesService.updateCourse(this.id, this.model).subscribe((data) => {
+				this.router.navigate(['/courses']);
+			});
 
-		this.router.navigate(['/courses']);
+		} else {
+			this.subscription = this.coursesService.createCourse(this.model).subscribe((data) => {
+				this.router.navigate(['/courses']);
+			});
+		}
 	}
 
-	public cancel() {
+	public cancel($event) {
 		this.router.navigate(['/courses']);
 	}
 

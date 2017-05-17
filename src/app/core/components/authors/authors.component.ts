@@ -1,13 +1,14 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator } from '@angular/forms';
 import { Authors } from '../../interfaces/authors/authors.interface';
+import {stringDistance} from "codelyzer/util/utils";
 
 @Component({
 	selector: 'authors-component',
 	template:`
 	<div id="authors">
-       <div *ngFor="let item of data">
-            <label><input type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item.firstName}} {{item.lastName}} </label>
+       <div *ngFor="let item of data; let i = index">
+            <label for="{{i}}"><input id="{{i}}" type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item.firstName}} {{item.lastName}} </label>
        </div>
     </div>`,
 	styles: [require('./authors.component.scss')],
@@ -27,6 +28,7 @@ export class authorsComponent implements ControlValueAccessor, Validator {
 	private items = [];
 	private isError: boolean = true;
 	private data: Authors;
+	private itemValue: string;
 
 	// this is the initial value set to the component
 	public writeValue(obj: Authors) {
@@ -76,7 +78,8 @@ export class authorsComponent implements ControlValueAccessor, Validator {
 			let status = inputs[i];
 
 			if (status.checked) {
-				this.items.push(inputs[i].value);
+				this.itemValue = inputs[i].parentNode.textContent.split(" ");
+				this.items.push({"id": i, "firstName": this.itemValue[1], "lastName": this.itemValue[2]});
 			}
 		}
 

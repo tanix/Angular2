@@ -54,7 +54,15 @@ export class dateComponent implements ControlValueAccessor, Validator {
 	private onChange(event) {
 		this.date = event.target.value;
 
-		this.propagateChange(this.date);
+		let inputDate = this.date.split('/');
+		let day = inputDate[0], mounth = inputDate[1], year = inputDate[2];
+
+		// let d = new Date();
+		// d.setDate(+day)
+		// d.setMonth(+mounth);
+		// d.setFullYear(+year);
+
+		this.propagateChange(new Date(this.date));
 	}
 
 	// the method set in registerOnChange to emit changes back to the form

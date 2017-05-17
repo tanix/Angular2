@@ -22,9 +22,9 @@ export class SecureHttpService extends Http {
 		return super.get(url, options);
 	}
 
-	post(url: string, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('Extends Http post');
-		options = new RequestOptions({ headers: this.headers, withCredentials: false });
-		return super.post(url, options);
-	}
+	// post(url: string, options?: RequestOptionsArgs): Observable<Response> {
+	// 	console.log('Extends Http post');
+	// 	options = new RequestOptions({ headers: this.headers, withCredentials: false });
+	// 	return super.post(url, options);
+	// }
 }

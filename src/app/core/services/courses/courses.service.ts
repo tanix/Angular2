@@ -44,15 +44,16 @@ export class coursesService {
 
 	public createCourse(course):Observable <Course>  {
 		console.log("createCourse method");
-		return this.http.put(this.url, JSON.stringify(course))
+		return this.http.post(this.url, course)
 			.map(res => res.json())
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	public updateCourse(id, course):Observable <Course>  {
 		console.log("updateItem method");
+		console.log(course);
 
-		return this.http.put(this.url + '/' + id, JSON.stringify(course))
+		return this.http.put(this.url + '/' + id, course)
 			.map(res => res.json())
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
