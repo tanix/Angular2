@@ -41,12 +41,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		this.myLoaderService.showLoader();
 
-		this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => data);
-
-		this.myLoaderService.hideLoader();
-
-
-		this.router.navigate(['/courses']);
+		this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => {
+			this.myLoaderService.hideLoader();
+			this.router.navigate(['/courses']);
+		});
 	}
 
 	public getLoader() {
