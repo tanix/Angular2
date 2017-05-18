@@ -35,10 +35,10 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 	}
 
 	public logOut() {
-		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => console.log(data));
-		this.getLoginedState();
-
-		this.router.navigate(['/login']);
+		this.subscriptionLogOut  =  this.authorizationService.logOut().subscribe((data) => {
+			this.getLoginedState();
+			this.router.navigate(['/login']);
+		});
 	}
 
 	public getLoginedState() {

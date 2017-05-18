@@ -7,7 +7,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Injectable()
 export class canActivateGuard implements CanActivate, OnDestroy  {
-	private subscription: Subscription = new Subscription();
 	private isLogined : boolean = false;
 
 	constructor(public authorizationService: authorizationService, public router: Router) {
@@ -17,21 +16,16 @@ export class canActivateGuard implements CanActivate, OnDestroy  {
 	canActivate(): boolean | Observable<boolean> {
 		console.log("canActivate method called");
 
-		this.subscription = this.authorizationService.subject.subscribe({
-			next: (data) => {
-				console.log('canActivateGuard. BehaviorSubject Login: ' + data.login);
-				this.isLogined = data.login;
+		console.log(localStorage.getItem("email"));
 
-				if(!this.isLogined) {
-					this.router.navigate(['/login']);
-				}
-			}
-		});
-
+		if(localStorage.getItem("email")) {
+			this.isLogined = true;
+		} else {
+			this.isLogined = false;
+		}
 		return Observable.of(this.isLogined);
 	}
 
-	public ngOnDestroy() {
-		this.subscription.unsubscribe();
-	}
+	public ngOnDestroy() {	}
+
 }

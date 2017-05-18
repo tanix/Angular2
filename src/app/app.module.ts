@@ -23,10 +23,10 @@ import { NewCourseModule } from  './pages/add-edit-course';
 import { SecureHttpService}  from './core/services/authenticated-http/authenticated-http.service';
 import { routeParamsService } from './core/services';
 
-import { canActivateGuard, canDeactivateGuard }  from './core/services/routes-guard';
+import { canActivateGuard }  from './core/services/routes-guard';
 
 // Application wide providers
-const APP_PROVIDERS = [canActivateGuard, canDeactivateGuard ];
+const APP_PROVIDERS = [canActivateGuard];
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
