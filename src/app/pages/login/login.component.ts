@@ -33,28 +33,28 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	public ngOnInit() {
 		console.log('Login page: ngOnInit');
+		this.getLoader();
 	}
 
 	public onSubmit() {
 		this.submitted = true;
 
 		this.myLoaderService.showLoader();
-		this.subscription = this.myLoaderService.subject.subscribe((data) => {
-			this.isLoader = data.isLoader;
-			console.log('Loader. BehaviorSubject: ' + data.isLoader);
-		});
 
 		this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => data);
 
 		this.myLoaderService.hideLoader();
-		this.subscription = this.myLoaderService.subject.subscribe((data) => {
-			this.isLoader = data.isLoader;
-			console.log('Loader. BehaviorSubject: ' + data.isLoader)
-		});
+
 
 		this.router.navigate(['/courses']);
 	}
 
+	public getLoader() {
+		this.subscription = this.myLoaderService.subject.subscribe((data) => {
+			this.isLoader = data.isLoader;
+			console.log('Loader. BehaviorSubject: ' + data.isLoader);
+		});
+	}
 	public ngOnDestroy() {
 		console.log('Login page: ngOnDestroy');
 
