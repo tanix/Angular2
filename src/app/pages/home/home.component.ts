@@ -19,7 +19,6 @@ import { orderByDatePipe }  from '../../core/pipes/orderPipe.pipe';
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
-	private isLoading: boolean = true;
 	private isLoader: boolean = false;
 	private courseItemId: number;
 	public courseQuery: string;
@@ -43,15 +42,30 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public ngOnInit() {
 		console.log('Home page: ngOnInit');
-		this.getAllCourses();
-		this.isLoading = false;
+		this.subscriptionOnAllCourses();
+		this.getLoader();
+	}
+
+	public subscriptionOnAllCourses() {
+		let today = new Date();
+		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
+
+		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
+		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
+			.concatMap(data => Observable.from(data))
+			.filter(course => new Date(course.date) > lastTwoWeek )
+			.subscribe((data) => {
+				//this.courses.splice(0, this.courses.length);
+				this.courses.push(data);
+				this.orderPipe.transform(this.courses);
+			});
 	}
 
 	public getAllCourses() {
 		let today = new Date();
 		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 
-		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
+		this.coursesService.getList(this.startPasition, this.endPasition)
 		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
 			.concatMap(data => Observable.from(data))
 			.filter(course => new Date(course.date) > lastTwoWeek )
@@ -65,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	public deleteCourseItem($event) {
 		this.courseItemId = $event.CourseId;
-		this.coursesService.getItemById(this.courseItemId).subscribe((course) => {
+		this.coursesService.getCourseById(this.courseItemId).subscribe((course) => {
 			this.course = course;
 		});
 
@@ -81,26 +95,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteCourseItemAction($event) {
-		this.myLoaderService.showLoader();
 
-		this.subscriptionLoader = this.myLoaderService.subject.subscribe({
-			next: (data) => {
-				this.isLoader = data.isLoader;
-				console.log('Loader. BehaviorSubject: ' + data.isLoader)
-			}
-		});
+		this.myLoaderService.showLoader();
 
 		if($event.delete && this.courseItemId) {
 			this.coursesService.removeItem(this.courseItemId).subscribe(() => {
 				setTimeout(() => {
 					this.myLoaderService.hideLoader();
-
-					this.subscriptionLoader = this.myLoaderService.subject.subscribe({
-						next: (data) => {
-							this.isLoader = data.isLoader;
-							console.log('Loader. BehaviorSubject: ' + data.isLoader)
-						}
-					});
 
 				}, 100);
 			});
@@ -122,6 +123,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public addMoreCourses() {
 		this.endPasition = this.endPasition + 5;
 		this.getAllCourses();
+	}
+
+	public getLoader() {
+		this.subscriptionLoader = this.myLoaderService.subject.subscribe((data) => {
+			this.isLoader = data.isLoader;
+			console.log('Loader. BehaviorSubject: ' + data.isLoader);
+		});
 	}
 
 	public ngOnDestroy() {

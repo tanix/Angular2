@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			console.log('Loader. BehaviorSubject: ' + data.isLoader);
 		});
 	}
+
 	public ngOnDestroy() {
 		console.log('Login page: ngOnDestroy');
 

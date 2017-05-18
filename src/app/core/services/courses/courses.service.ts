@@ -29,12 +29,6 @@ export class coursesService {
 		}
 	}
 
-	public getItemById(id: number):Observable <Course> {
-		return this.getList()
-			.map(courses => courses.find(course => course.id === id))
-			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-	}
-
 	public removeItem(id: number):Observable <Course[]> {
 		console.log("removeItem method: ", id);
 		return this.http.delete(this.url + '/' + id)

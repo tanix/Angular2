@@ -61,9 +61,9 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 			.subscribe((data) => {
 				this.authors.length = 0;
 
-				// for (let author of data.authors) {
-				// 	this.authors.push(author);
-				// }
+				for (let author of data.authors) {
+					this.authors.push(author);
+				}
 
 				this.model = new Course(data.title, data.description, data.date, +data.duration, this.authors);
 			});
