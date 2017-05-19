@@ -53,11 +53,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
 		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
 			.concatMap(data => Observable.from(data))
-			.filter(course => new Date(course.date) > lastTwoWeek )
+			/*.filter(course => new Date(course.date) > lastTwoWeek )*/
 			.subscribe((data) => {
-				//this.courses.splice(0, this.courses.length);
-				this.courses.push(data);
-				this.orderPipe.transform(this.courses);
+				if(data) {
+					this.courses.push(data);
+					this.orderPipe.transform(this.courses);
+				}
 			});
 	}
 
@@ -68,11 +69,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.coursesService.getList(this.startPasition, this.endPasition)
 		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
 			.concatMap(data => Observable.from(data))
-			.filter(course => new Date(course.date) > lastTwoWeek )
+			/*.filter(course => new Date(course.date) > lastTwoWeek )*/
 			.subscribe((data) => {
-				//this.courses.splice(0, this.courses.length);
-				this.courses.push(data);
-				this.orderPipe.transform(this.courses);
+				if(data) {
+					this.courses.push(data);
+					this.orderPipe.transform(this.courses);
+				}
 			});
 
 	}
@@ -121,7 +123,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	public addMoreCourses() {
-		this.endPasition = this.endPasition + 5;
+		this.startPasition = this.endPasition;
+		this.endPasition = this.startPasition + 5;
 		this.getAllCourses();
 	}
 

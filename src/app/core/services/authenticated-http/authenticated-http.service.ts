@@ -16,11 +16,11 @@ export class SecureHttpService extends Http {
 		return super.request(url, options);
 	}
 
-	get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('Extends Http get');
-		options = new RequestOptions({ headers: this.headers, withCredentials: false });
-		return super.get(url, options);
-	}
+	// get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+	// 	console.log('Extends Http get');
+	// 	options = new RequestOptions({ headers: this.headers, withCredentials: false });
+	// 	return super.get(url, options);
+	// }
 
 	// post(url: string, options?: RequestOptionsArgs, body?:any): Observable<Response> {
 	// 	console.log('Extends Http post');
