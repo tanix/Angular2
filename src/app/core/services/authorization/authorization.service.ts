@@ -25,52 +25,34 @@ export class authorizationService  {
 	}
 
 	public login(email?, password?): Observable<any> {
-		return this.http.post(this.urlCreds, {"email": email, "password": password})
+		return this.http.post(this.urlCreds, {"email": email, "password": password, "token": email+password})
 			.map(res => {
-				console.log("authorizationService: login");
-
-				if (typeof(Storage) !== "undefined") {
-					console.log("authorizationService: email" + email);
-					localStorage.setItem("email", email);
-
-				} else {
-					console.warn("Sorry! No Web Storage support..");
-				}
-
+				localStorage.setItem("email", email);
+				localStorage.setItem("token", email+password);
 				this.getBehaviorSubject();
-				console.log(" ---- this.http.post ---- ");
-				console.log(res._body);
+
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	public logOut(): Observable<any>  {
-		return this.http.delete(this.urlCreds + '/' + this.userID)
+		return this.http.delete(this.urlCreds + '?token='+localStorage.getItem("token"))
 			.map(res => {
-				console.log("authorizationService: logOut");
-
+				localStorage.removeItem("token");
 				localStorage.removeItem("email");
 				this.subject.next({login: false});
 
-				console.log(res.json());
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
-	// public isAuthenticated() {
-	// 	console.log("authorizationService: isAuthenticated");
-	//
-	// 	return localStorage.getItem("email") ? true : false;
-	// }
-	//
-	// public getUserInfo() {
-	// 	console.log("authorizationService: getUserInfo");
-	//
-	// 	if (typeof(Storage) !== "undefined") {
-	// 		return localStorage.getItem("email");
-	//
-	// 	} else {
-	// 		console.warn("Sorry! No Web Storage support..");
-	// 	}
-	// }
+	public isAuthenticated() {
+		return localStorage.getItem("token") ? true : false;
+	}
+
+
+	public getUserInfo() {
+		return this.http.get(this.urlCreds+'?email='+localStorage.getItem("email"))
+			.map(res => res.json());
+	}
 }

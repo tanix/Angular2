@@ -14,7 +14,7 @@ export class canActivateGuard implements CanActivate, OnDestroy  {
 	canActivate(): boolean | Observable<boolean> {
 		console.log("canActivate method called");
 
-		if(localStorage.getItem("email")) {
+		if(localStorage.getItem("token")) {
 			this.isLogined = true;
 		} else {
 			this.isLogined = false;

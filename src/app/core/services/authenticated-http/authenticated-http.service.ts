@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SecureHttpService extends Http {
-	headers = new Headers({	'Accept': 'application/json', 'Content-Type': 'application/json'});
+	headers = new Headers({	'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': '123456789'});
 
 	constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
 		super(backend, defaultOptions);
