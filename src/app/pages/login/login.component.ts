@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from "rxjs/Observable";
 
 import { Login } from '../../core/interfaces/login/login.interface';
 
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	private subscription: Subscription = new Subscription();
 	private subscriptionLogin: Subscription = new Subscription();
+	private subscriptionGetUserInfo: Subscription = new Subscription();
+	private subscriptionAuthorization: Subscription = new Subscription();
 
 	submitted = false;
 	model = new Login(this.email, this.password);
@@ -38,12 +41,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	public onSubmit() {
 		this.submitted = true;
-
 		this.myLoaderService.showLoader();
 
-		this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => {
-			this.myLoaderService.hideLoader();
-			this.router.navigate(['/courses']);
+		this.subscriptionGetUserInfo  = this.authorizationService.getUserInfo(this.model.email, this.model.password)
+			.subscribe((data) => {
+				if(data.length > 0) {
+					this.subscriptionAuthorization = this.authorizationService.isAuthenticated(data).subscribe((token) => {
+						if(token) {
+							this.myLoaderService.hideLoader();
+							this.router.navigate(['/courses']);
+						}
+					});
+
+				} else {
+					this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => {
+						this.myLoaderService.hideLoader();
+						this.router.navigate(['/courses']);
+					});
+				}
 		});
 	}
 
@@ -58,6 +73,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		console.log('Login page: ngOnDestroy');
 
 		this.subscription.unsubscribe();
+		this.subscriptionGetUserInfo.unsubscribe();
+		this.subscriptionAuthorization.unsubscribe();
 		this.subscriptionLogin.unsubscribe();
 	}
 }

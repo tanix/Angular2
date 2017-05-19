@@ -17,13 +17,6 @@ export class authorizationService  {
 		this.getBehaviorSubject();
 	}
 
-	public getBehaviorSubject () {
-		this.email = localStorage.getItem("email");
-
-		console.log("getBehaviorSubject: localStorage email " + this.email);
-		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false, email: false});
-	}
-
 	public login(email?, password?): Observable<any> {
 		return this.http.post(this.urlCreds, {"email": email, "password": password, "token": email+password})
 			.map(res => {
@@ -36,7 +29,7 @@ export class authorizationService  {
 	}
 
 	public logOut(): Observable<any>  {
-		return this.http.delete(this.urlCreds + '?token='+localStorage.getItem("token"))
+		return this.http.get(this.urlCreds + '?token='+localStorage.getItem("token"))
 			.map(res => {
 				localStorage.removeItem("token");
 				localStorage.removeItem("email");
@@ -46,13 +39,28 @@ export class authorizationService  {
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
-	public isAuthenticated() {
-		return localStorage.getItem("token") ? true : false;
+	public isAuthenticated(data): Observable<any>  {
+		data.map(function(a) {
+			if (a.token !== localStorage.getItem("token")) {
+				localStorage.setItem("token", a.token);
+				localStorage.setItem("email", a.email);
+			}
+		});
+
+		this.getBehaviorSubject();
+		return Observable.of(true);
 	}
 
 
-	public getUserInfo() {
-		return this.http.get(this.urlCreds+'?email='+localStorage.getItem("email"))
+	public getUserInfo(email?, password?): Observable<any>  {
+		return this.http.get(this.urlCreds+'?email='+email+'&password='+password)
 			.map(res => res.json());
+	}
+
+	public getBehaviorSubject () {
+		this.email = localStorage.getItem("email");
+
+		console.log("getBehaviorSubject: localStorage email " + this.email);
+		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false, email: false});
 	}
 }

@@ -344,36 +344,6 @@
       "id": 6593
     },
     {
-      "id": 8335,
-      "title": "fugiat duis elit ex",
-      "date": "Fri Oct 13 2017 00:01:14 GMT+0000",
-      "duration": 63,
-      "description": "Duis minim mollit in ipsum veniam labore nulla commodo anim excepteur. Ullamco proident veniam fugiat aliqua proident sint. Reprehenderit qui excepteur et labore commodo nisi officia id.",
-      "isTopRated": false,
-      "authors": [
-        {
-          "id": 4823,
-          "firstName": "Lina",
-          "lastName": "Robles"
-        },
-        {
-          "id": 2634,
-          "firstName": "Kane",
-          "lastName": "Key"
-        },
-        {
-          "id": 3714,
-          "firstName": "Janet",
-          "lastName": "Hyde"
-        },
-        {
-          "id": 8654,
-          "firstName": "Carmen",
-          "lastName": "Pena"
-        }
-      ]
-    },
-    {
       "id": 4634,
       "title": "duis id eiusmod consectetur",
       "date": "Thu May 19 2016 04:25:46 GMT+0000",
@@ -2003,155 +1973,15 @@
   ],
   "creds": [
     {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
+      "email": "Tatsiana_Tratsinnikava@epam.com",
+      "password": "ttt",
       "id": 1
     },
     {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
+      "email": "t.tretinnikova@gmail.com",
+      "password": "ttt",
+      "token": "t.tretinnikova@gmail.comttt",
       "id": 2
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 3
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 4
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 5
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 6
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 7
-    },
-    {
-      "method": null,
-      "headers": {
-        "Accept": [
-          "application/json"
-        ],
-        "Content-Type": [
-          "application/json"
-        ]
-      },
-      "body": null,
-      "url": null,
-      "search": null,
-      "withCredentials": false,
-      "responseType": null,
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
-    },
-    {
-      "id": 11
-    },
-    {
-      "id": 12
-    },
-    {
-      "id": 13
     }
   ]
 }
