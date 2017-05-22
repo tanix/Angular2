@@ -43,10 +43,10 @@ export class LoginHeaderComponent implements OnDestroy, OnInit {
 
 	public getLoginedState() {
 		this.subscription = this.authorizationService.subject.subscribe((data) => {
-			this.isLogined = data.login; //this.authorizationService.isAuthenticated();
+			this.isLogined = data.login;
 
 			if(data.email) {
-				this.userName = data.email; //this.authorizationService.getUserInfo();
+				this.userName = data.email;
 			}
 		});
 	}

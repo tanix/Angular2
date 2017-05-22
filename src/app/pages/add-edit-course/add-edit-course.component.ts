@@ -51,7 +51,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 				if(id) {
 					this.id = +id;
 				} else {
-					this.id = 0;
+					this.id = -1;
 				}
 
 				this.routeID.setRouteId(this.id);

@@ -2,7 +2,8 @@
 	<div class="col-sm-10 text-left">
 		<div class="router-links breadcrumb">
 			<a [routerLinkActive]="['active']" [routerLink]="['./courses']" title="Courses">Courses</a>
-			<a *ngIf="id" title="Course">&#47; Course {{id}}</a>
+			<a *ngIf="id > 0" title="Course">&#47; Course {{id}}</a>
+			<a *ngIf="id == -1" title="Course">&#47; Course New</a>
 		</div>
 	</div>
 	<div class="col-sm-2 text-right">
