@@ -74,17 +74,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public deleteCourseItemAction($event) {
 
 		this.myLoaderService.showLoader();
+		this.courses = [];
 
 		if($event.delete && this.courseItemId) {
 			this.coursesService.removeItem(this.courseItemId).subscribe(() => {
-				this.myLoaderService.hideLoader();
+				this.coursesService.getList(this.startPasition, this.endPasition)
+					.concatMap(data => Observable.from(data))
+					/*.filter(course => new Date(course.date) > lastTwoWeek )*/
+					.subscribe((data) => {
+						this.myLoaderService.hideLoader();
+						if(data) {
+							this.courses.push(data);
+							this.orderPipe.transform(this.courses);
+						}
+					});
 			});
-		}
-
-		for (let course of this.courses) {
-			if(this.courseItemId === course.id) {
-				this.courses.splice(this.courses.indexOf(course), 1);
-			}
 		}
 	}
 
@@ -92,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.courseQuery =$event.courseQuery;
 		this.courses = [];
 
-		if(this.courseQuery !== "" || this.courseQuery !== undefined) {
+		if($event.query) {
 			this.coursesService.getListByQuery(this.startPasition, this.endPasition, this.courseQuery)
 				.concatMap(data => Observable.from(data))
 				/*.filter(course => new Date(course.date) > lastTwoWeek )*/

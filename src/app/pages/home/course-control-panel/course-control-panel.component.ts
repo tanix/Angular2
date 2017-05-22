@@ -20,6 +20,7 @@ export class CourseControlPanelComponent {
 		$event.preventDefault();
 
 		this.filterQuery.emit({
+			query: true,
 			courseQuery: this.courseQuery
 		});
 	}
