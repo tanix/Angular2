@@ -76,11 +76,13 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 
 		if(this.id > 0) {
 			this.coursesService.updateCourse(this.id, this.model).subscribe((data) => {
+				console.log("= updateCourse =");
 				this.router.navigate(['/courses']);
 			});
 
 		} else {
 			this.coursesService.createCourse(this.model).subscribe((data) => {
+				console.log("= createCourse =");
 				this.router.navigate(['/courses']);
 			});
 		}
