@@ -51,28 +51,30 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 				if(id) {
 					this.id = +id;
 				} else {
-					this.id = -1;
+					this.id = 0;
 				}
 
 				this.routeID.setRouteId(this.id);
 		});
 
-		this.subscription = this.coursesService.getCourseById(this.id)
-			.subscribe((data) => {
-				this.authors.length = 0;
+		if(this.id > 0) {
+			this.subscription = this.coursesService.getCourseById(this.id)
+				.subscribe((data) => {
+					this.authors.length = 0;
 
-				for (let author of data.authors) {
-					this.authors.push(author);
-				}
+					for (let author of data.authors) {
+						this.authors.push(author);
+					}
 
-				this.model = new Course(data.title, data.description, data.date, +data.duration, this.authors);
-			});
+					this.model = new Course(data.title, data.description, data.date, +data.duration, this.authors);
+				});
+		}
 	}
 
 	public onSubmit() {
 		this.submitted = true;
 
-		if(this.id) {
+		if(this.id > 0) {
 			this.coursesService.updateCourse(this.id, this.model).subscribe((data) => {
 				this.router.navigate(['/courses']);
 			});

@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Va
 
 @Component({
 	selector: 'date-component',
-	template:`<input type="text" class="form-control" id="date" value="{{date}}" (keyup)="onChange($event)" placeholder="DD/MM/YYYY">`,
+	template:`<input type="text" class="form-control" id="date" value="{{date}}" (keyup)="onChange($event)" placeholder="M/D/YYYY">`,
 	styles: [require('./date.component.scss')],
 	providers: [
 		{
@@ -37,12 +37,10 @@ export class dateComponent implements ControlValueAccessor, Validator {
 	// validates the form, returns null when valid else the validation object
 	public validate(c: FormControl) {
 		if(this.date) {
-			let inputDate = this.date.split('/');
-			let day = inputDate[0], mounth = inputDate[1], year = inputDate[2];
+			let date = new Date(this.date),
+				today = new Date();
 
-			let date = new Date(year + '/' + mounth + '/' + day), today = new Date();
-
-			let pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+			let pattern =/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 			return pattern.test(this.date) && (today.getTime() >= date.getTime()) ? null : { invalidDate: true };
 		}
 	}
@@ -53,15 +51,6 @@ export class dateComponent implements ControlValueAccessor, Validator {
 	// change events from the inputs
 	private onChange(event) {
 		this.date = event.target.value;
-
-		let inputDate = this.date.split('/');
-		let day = inputDate[0], mounth = inputDate[1], year = inputDate[2];
-
-		// let d = new Date();
-		// d.setDate(+day)
-		// d.setMonth(+mounth);
-		// d.setFullYear(+year);
-
 		this.propagateChange(new Date(this.date));
 	}
 
