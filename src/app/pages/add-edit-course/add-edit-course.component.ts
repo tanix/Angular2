@@ -30,7 +30,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 	public subscription: Subscription = new Subscription();
 
 	public authorsObj : any;
-	public id: number;
+	public id: number = 0;
 
 	constructor(public authorsService: authorsService, private route: ActivatedRoute, private router: Router,
 			public routeID: routeParamsService,	public coursesService: coursesService) {
@@ -51,7 +51,7 @@ export class NewCourseComponent implements OnInit, OnDestroy {
 				if(id) {
 					this.id = +id;
 				} else {
-					this.id = 0;
+					this.id = -1;
 				}
 
 				this.routeID.setRouteId(this.id);
