@@ -32,26 +32,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private startPasition: number;
 	private endPasition: number;
 
+	private today = new Date();
+	private lastTwoWeek = new Date();
+
 	constructor(public coursesService: coursesService, private _ngZone: NgZone, private orderPipe: orderByDatePipe, public myLoaderService: myLoaderService) {
 		console.log('Home page: constructor');
 
 		this.startPasition = 0;
 		this.endPasition = 10;
-		this.courseQuery = '';
+		this.courseQuery = "";
 	}
 
 	public ngOnInit() {
 		console.log('Home page: ngOnInit');
+
+		this.lastTwoWeek = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 14);
 		this.subscriptionOnAllCourses();
 		this.getLoader();
 	}
 
 	public subscriptionOnAllCourses() {
-		let today = new Date();
-		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 
 		this.subscription = this.coursesService.getList(this.startPasition, this.endPasition)
-		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
 			.concatMap(data => Observable.from(data))
 			/*.filter(course => new Date(course.date) > lastTwoWeek )*/
 			.subscribe((data) => {
@@ -60,39 +62,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 					this.orderPipe.transform(this.courses);
 				}
 			});
-	}
-
-	public getAllCourses() {
-		let today = new Date();
-		let lastTwoWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
-
-		this.coursesService.getList(this.startPasition, this.endPasition)
-		//this.subscription = this.coursesService.getList(this.startPasition, this.endPasition, this.courseQuery)
-			.concatMap(data => Observable.from(data))
-			/*.filter(course => new Date(course.date) > lastTwoWeek )*/
-			.subscribe((data) => {
-				if(data) {
-					this.courses.push(data);
-					this.orderPipe.transform(this.courses);
-				}
-			});
-
 	}
 
 	public deleteCourseItem($event) {
 		this.courseItemId = $event.CourseId;
 		this.coursesService.getCourseById(this.courseItemId).subscribe((course) => {
 			this.course = course;
-		});
-
-		this._ngZone.onUnstable.subscribe(() => {
-			//console.log('unstable');
-		});
-
-		//setTimeout(() => console.log('timeout handler'), 1000);
-
-		this._ngZone.onStable.subscribe(() => {
-			//console.log('stable');
 		});
 	}
 
@@ -102,10 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		if($event.delete && this.courseItemId) {
 			this.coursesService.removeItem(this.courseItemId).subscribe(() => {
-				setTimeout(() => {
-					this.myLoaderService.hideLoader();
-
-				}, 100);
+				this.myLoaderService.hideLoader();
 			});
 		}
 
@@ -114,18 +86,38 @@ export class HomeComponent implements OnInit, OnDestroy {
 				this.courses.splice(this.courses.indexOf(course), 1);
 			}
 		}
-
 	}
 
 	public filterCourseQuery($event) {
-		this.courseQuery = $event.courseQuery;
-		//this.getAllCourses();
+		this.courseQuery =$event.courseQuery;
+		this.courses = [];
+
+		if(this.courseQuery !== "" || this.courseQuery !== undefined) {
+			this.coursesService.getListByQuery(this.startPasition, this.endPasition, this.courseQuery)
+				.concatMap(data => Observable.from(data))
+				/*.filter(course => new Date(course.date) > lastTwoWeek )*/
+				.subscribe((data) => {
+					if(data) {
+						this.courses.push(data);
+						this.orderPipe.transform(this.courses);
+					}
+				});
+		}
 	}
 
 	public addMoreCourses() {
 		this.startPasition = this.endPasition;
 		this.endPasition = this.startPasition + 5;
-		this.getAllCourses();
+
+		this.coursesService.getList(this.startPasition, this.endPasition)
+			.concatMap(data => Observable.from(data))
+			/*.filter(course => new Date(course.date) > lastTwoWeek )*/
+			.subscribe((data) => {
+				if(data) {
+					this.courses.push(data);
+					this.orderPipe.transform(this.courses);
+				}
+			});
 	}
 
 	public getLoader() {

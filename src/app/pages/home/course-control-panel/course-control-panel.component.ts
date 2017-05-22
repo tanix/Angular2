@@ -16,9 +16,11 @@ export class CourseControlPanelComponent {
 
 	@Output('change') public filterQuery = new EventEmitter();
 
-	public filterCourseQuery() {
+	public filterCourseQuery($event) {
+		$event.preventDefault();
+
 		this.filterQuery.emit({
 			courseQuery: this.courseQuery
-		})
+		});
 	}
 }

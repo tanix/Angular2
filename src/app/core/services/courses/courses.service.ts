@@ -16,15 +16,14 @@ export class coursesService {
 
 	constructor(private http: Http) { }
 
-	public getList(start: number, end: number, query?: string):Observable <Course[]> {
-		if(query) {
-			this.queryTitle = '&q='+ query;
-		}
-
-		//return this.http.get(this.url +'?_start='+start+'&_end='+end + this.queryTitle)
+	public getList(start: number, end: number):Observable <Course[]> {
 		return this.http.get(this.url +'?_start='+start+'&_end='+end)
 			.map(res => res.json());
+	}
 
+	public getListByQuery(start: number, end: number, query: string):Observable <Course[]> {
+		return this.http.get(this.url +'?_start='+start+'&_end='+end + '&q='+ query)
+			.map(res => res.json());
 	}
 
 	public removeItem(id: number):Observable <Course[]> {
