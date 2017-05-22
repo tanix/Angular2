@@ -8,7 +8,7 @@ import {stringDistance} from "codelyzer/util/utils";
 	template:`
 	<div id="authors">
        <div *ngFor="let item of data; let i = index">
-            <label for="{{i}}"><input id="{{i}}" type="checkbox" value="{{item}}" (change)="onChange($event)"> {{item.firstName}} {{item.lastName}} </label>
+            <label for="{{i}}"><input id="{{i}}" type="checkbox" value="{{item}}" (change)="onChange($event)" checked="checked"> {{item.firstName}} {{item.lastName}} </label>
        </div>
     </div>`,
 	styles: [require('./authors.component.scss')],
@@ -34,6 +34,7 @@ export class authorsComponent implements ControlValueAccessor, Validator {
 	public writeValue(obj: Authors) {
 		if (obj) {
 			this.data = obj;
+			this.isError = false;
 		}
 	}
 
