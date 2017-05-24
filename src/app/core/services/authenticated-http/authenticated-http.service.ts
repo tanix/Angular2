@@ -4,17 +4,17 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SecureHttpService extends Http {
-	headers = new Headers({	'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': localStorage.getItem("token")});
-
-	constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
-		super(backend, defaultOptions);
-	}
-
-	request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-		console.log('Extends Http request');
-		options = new RequestOptions({ headers: this.headers, withCredentials: false });
-		return super.request(url, options);
-	}
+	// headers = new Headers({	'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': localStorage.getItem("token")});
+	//
+	// constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
+	// 	super(backend, defaultOptions);
+	// }
+	//
+	// request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
+	// 	console.log('Extends Http request');
+	// 	options = new RequestOptions({ headers: this.headers, withCredentials: false });
+	// 	return super.request(url, options);
+	// }
 
 	// get(url: string, options?: RequestOptionsArgs): Observable<Response> {
 	// 	console.log('Extends Http get');

@@ -4,26 +4,30 @@ import 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from "rxjs/Observable";
 
+import { Store } from '@ngrx/store';
+import { UPDATESTORAGE, REMOVESTORAGE } from '../../reducers/authorization';
+
+interface AppState {
+	payload?: any;
+}
+
 @Injectable()
 export class authorizationService  {
 	public subject;
-	public  email;
-
+	public email = "";
 	private urlCreds = 'http://localhost:6002/creds';
-	private userID = 1;
 
-	constructor(private http: Http) {
+	constructor(private http: Http, private store: Store<AppState>) {
+		store.select('authorization');
 		this.subject = new BehaviorSubject(false);
 		this.getBehaviorSubject();
 	}
 
 	public login(email?, password?): Observable<any> {
-		return this.http.post(this.urlCreds, {"email": email, "password": password, "token": email+password})
+		return this.http.post(this.urlCreds, { "email": email, "password": password, "token": email+password })
 			.map(res => {
-				localStorage.setItem("email", email);
-				localStorage.setItem("token", email+password);
+				this.store.dispatch({ type: UPDATESTORAGE,  payload: { token: email+password, email: email }});
 				this.getBehaviorSubject();
-
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
@@ -31,26 +35,22 @@ export class authorizationService  {
 	public logOut(): Observable<any>  {
 		return this.http.get(this.urlCreds + '?token='+localStorage.getItem("token"))
 			.map(res => {
-				localStorage.removeItem("token");
-				localStorage.removeItem("email");
-				this.subject.next({login: false});
-
+				this.store.dispatch({ type: REMOVESTORAGE });
+				this.subject.next({ login: false });
 			})
 			.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	public isAuthenticated(data): Observable<any>  {
+		let store = this.store;
+
 		data.map(function(a) {
-			if (a.token !== localStorage.getItem("token")) {
-				localStorage.setItem("token", a.token);
-				localStorage.setItem("email", a.email);
-			}
+			store.dispatch({ type: UPDATESTORAGE,  payload: { token: a.token, email: a.email }});
 		});
 
 		this.getBehaviorSubject();
 		return Observable.of(true);
 	}
-
 
 	public getUserInfo(email?, password?): Observable<any>  {
 		return this.http.get(this.urlCreds+'?email='+email+'&password='+password)
