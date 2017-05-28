@@ -1,22 +1,10 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-export const UPDATESTORAGE = 'UPDATESTORAGE';
-export const REMOVESTORAGE = 'REMOVESTORAGE';
+export const USER_SIGN_IN = 'USER_SIGN_IN';
 
-export function authorizationReducer(item, action: Action) {
-	switch (action.type) {
-		case UPDATESTORAGE:
-				if (action.payload.token !== localStorage.getItem("token")) {
-					localStorage.setItem("token", action.payload.token);
-					localStorage.setItem("email", action.payload.email);
-				}
-				break;
-
-		case REMOVESTORAGE:
-
-			localStorage.removeItem("token");
-			localStorage.removeItem("email");
-
-			break;
+export function userSingIn(payload: T) {
+	return {
+	    type: 'USER_SIGN_IN',
+	    payload: payload
 	}
 }

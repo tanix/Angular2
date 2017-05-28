@@ -28,7 +28,7 @@ import { canActivateGuard }  from './core/services/routes-guard';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './core/reducers/counter';
-import { authorizationReducer } from './core/reducers/authorization';
+import { userSingIn } from './core/reducers/authorization';
 
 // Application wide providers
 const APP_PROVIDERS = [canActivateGuard];
@@ -54,7 +54,7 @@ const APP_PROVIDERS = [canActivateGuard];
 		NewCourseModule,
 		LoaderModule,
 		durationModule,
-		StoreModule.provideStore({ authorization : authorizationReducer }),
+		StoreModule.provideStore({ user : userSingIn }),
 		StoreDevtoolsModule.instrumentOnlyWithExtension()
 	],
 	providers: [{

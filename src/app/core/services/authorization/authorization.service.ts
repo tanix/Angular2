@@ -5,20 +5,15 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from "rxjs/Observable";
 
 import { Store } from '@ngrx/store';
-//import { UPDATESTORAGE, REMOVESTORAGE } from '../../reducers/authorization';
-
-interface AppState {
-	payload?: any;
-}
 
 @Injectable()
 export class authorizationService  {
 	public subject;
 	public email = "";
 	private urlCreds = 'http://localhost:6002/creds';
+	authorization: Observable<any>;
 
-	constructor(private http: Http, private store: Store<AppState>) {
-		store.select('authorization');
+	constructor(private http: Http, public store: Store<>) {		
 		this.subject = new BehaviorSubject(false);
 		this.getBehaviorSubject();
 	}
@@ -26,11 +21,8 @@ export class authorizationService  {
 	public login(email?, password?): Observable<any> {
 		return this.http.post(this.urlCreds, { "email": email, "password": password, "token": email+password })
 			.map(res => {
-				//this.store.dispatch({ type: UPDATESTORAGE,  payload: { token: email+password, email: email }});
-
 				localStorage.setItem("token", email+password);
 				localStorage.setItem("email", email);
-			
 
 				this.getBehaviorSubject();
 			})
@@ -40,8 +32,6 @@ export class authorizationService  {
 	public logOut(): Observable<any>  {
 		return this.http.get(this.urlCreds + '?token='+localStorage.getItem("token"))
 			.map(res => {
-				//this.store.dispatch({ type: REMOVESTORAGE });
-				
 				localStorage.removeItem("token");
 				localStorage.removeItem("email");
 				this.subject.next({ login: false });
@@ -50,11 +40,13 @@ export class authorizationService  {
 	}
 
 	public isAuthenticated(data): Observable<any>  {
-		let store = this.store;
+		console.log(this.store);
+
+		 this.store.select(state => state.user).subscribe((user)=> {
+		 	console.log('user:', user);
+		 });
 
 		data.map(function(a) {
-			// store.dispatch({ type: UPDATESTORAGE,  payload: { token: a.token, email: a.email }});
-
 			localStorage.setItem("token", a.token);
 			localStorage.setItem("email", a.email);
 		});

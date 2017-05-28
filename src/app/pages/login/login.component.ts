@@ -8,6 +8,8 @@ import { authorizationService } from '../../core/services';
 import { myLoaderService } from '../../core/services';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { USER_SIGN_IN } from '../../core/reducers/authorization';
 
 @Component({
 	selector: 'login',
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	submitted = false;
 	model = new Login(this.email, this.password);
 
-	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService, public router: Router) {
+	constructor(public authorizationService: authorizationService, public myLoaderService: myLoaderService, public router: Router, public store: Store<>) {
 		console.log('Login page: constructor');
 	}
 
@@ -45,6 +47,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		this.subscriptionGetUserInfo  = this.authorizationService.getUserInfo(this.model.email, this.model.password)
 			.subscribe((data) => {
+
+				this.store.dispatch({ type: USER_SIGN_IN,  payload: { data: data[0] }});
+
 				if(data.length > 0) {
 					this.subscriptionAuthorization = this.authorizationService.isAuthenticated(data).subscribe((token) => {
 						if(token) {
