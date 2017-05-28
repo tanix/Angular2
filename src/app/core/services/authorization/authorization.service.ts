@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Http, HttpModule, Headers, RequestOptions, RequestMethod, Request } from '@angular/http';
 import 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
@@ -7,22 +9,31 @@ import { Observable } from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
 @Injectable()
-export class authorizationService  {
+export class authorizationService implements OnInit, OnDestroy {
 	public subject;
 	public email = "";
+	public token = "";
+	public password = "";
 	private urlCreds = 'http://localhost:6002/creds';
-	authorization: Observable<any>;
+
+	private subscriptionStore: Subscription = new Subscription();
 
 	constructor(private http: Http, public store: Store<>) {		
 		this.subject = new BehaviorSubject(false);
 		this.getBehaviorSubject();
 	}
 
-	public login(email?, password?): Observable<any> {
-		return this.http.post(this.urlCreds, { "email": email, "password": password, "token": email+password })
-			.map(res => {
-				localStorage.setItem("token", email+password);
-				localStorage.setItem("email", email);
+	public ngOnInit() {
+		this.subscriptionStore = this.store.select(state => state.user).subscribe();
+	}
+
+	public login(): Observable<any> {
+		this.getStoreData();
+		let email = this.email, password = this.password, token = this.token;
+		return this.http.post(this.urlCreds, { "email": email, "password": password, "token": token })
+			.map(res => {			
+				localStorage.setItem("token", this.token);
+				localStorage.setItem("email", this.email);
 
 				this.getBehaviorSubject();
 			})
@@ -41,15 +52,12 @@ export class authorizationService  {
 
 	public isAuthenticated(data): Observable<any>  {
 		console.log(this.store);
+		this.getStoreData();
 
-		 this.store.select(state => state.user).subscribe((user)=> {
-		 	console.log('user:', user);
-		 });
-
-		data.map(function(a) {
-			localStorage.setItem("token", a.token);
-			localStorage.setItem("email", a.email);
-		});
+		//data.map(function(a) {
+			localStorage.setItem("token", this.token);
+			localStorage.setItem("email", this.email);
+		//});
 
 		this.getBehaviorSubject();
 		return Observable.of(true);
@@ -65,5 +73,17 @@ export class authorizationService  {
 
 		console.log("getBehaviorSubject: localStorage email " + this.email);
 		return this.email ? this.subject.next({login: true, email: this.email}) : this.subject.next({login: false, email: false});
+	}
+
+	public getStoreData() {
+		this.store.select(state => state.user).subscribe((user)=> {		 	
+		 	this.email = user.payload.email;
+		 	this.token = user.payload.token;
+		 	this.password = user.payload.password;
+		});
+	}
+
+	public ngOnDestroy() {
+		this.subscriptionStore.unsubscribe();
 	}
 }

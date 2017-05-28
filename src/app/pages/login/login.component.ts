@@ -47,10 +47,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		this.subscriptionGetUserInfo  = this.authorizationService.getUserInfo(this.model.email, this.model.password)
 			.subscribe((data) => {
-
-				this.store.dispatch({ type: USER_SIGN_IN,  payload: { data: data[0] }});
-
 				if(data.length > 0) {
+					this.store.dispatch({ type: USER_SIGN_IN,  payload: { email: data[0].email, password: data[0].password, token: data[0].token }});
+
 					this.subscriptionAuthorization = this.authorizationService.isAuthenticated(data).subscribe((token) => {
 						if(token) {
 							this.myLoaderService.hideLoader();
@@ -59,7 +58,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 					});
 
 				} else {
-					this.subscriptionLogin  = this.authorizationService.login(this.model.email, this.model.password).subscribe((data) => {
+					this.store.dispatch({ type: USER_SIGN_IN,  payload: { email: this.model.email, password: this.model.password, token: this.model.email + this.model.password }});
+
+					this.subscriptionLogin  = this.authorizationService.login().subscribe((data) => {
 						this.myLoaderService.hideLoader();
 						this.router.navigate(['/courses']);
 					});
